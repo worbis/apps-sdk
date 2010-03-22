@@ -39,6 +39,7 @@ btapp.fn = btapp.prototype = {
      */
     return this._response({ settings: this._settings });
   },
+  _settings_value_index: 2,
   setSettings: function(settings) {
     /*
      * Set the client's current settings. This takes an object of { k: v } and
@@ -55,12 +56,17 @@ btapp.fn = btapp.prototype = {
         throw self._error_constructor(
           'Invalid Setting',
           'The requested setting "'+k+'" cannot be set.');
-      self._settings[i][2] = v;
+      self._settings[i][self._settings_value_index] = v;
     });
     return self._response({});
   },
   list: function() {
-    return {}
+    return this._response({
+      label: this._label,
+      torrents: this._torrents,
+      rssfeeds: this._rssfeeds,
+      rssfilters: this._rssfilters
+    });
   },
   torrent: {
     start: function(hash, force) {
