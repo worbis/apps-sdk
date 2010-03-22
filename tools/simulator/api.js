@@ -11,16 +11,53 @@
  * License: ************
  */
 
+/* XXX - Dependencies
+ * underscore.js
+ */
+
 var btapp = new btapp.fn.init();
 
 btapp.fn = btapp.prototype = {
   init: function() {
     return this;
   },
+  _response: function(json_obj) {
+    return _({ build: 1337 }).extend(json_obj);
+  },
+  _error_constructor: function(name, descr) {
+    var err = new Error(descr);
+    err.name = name;
+    return err;
+  },
   getSettings: function() {
-    return {}
+    /*
+     * Get the client's current settings.
+     *
+     * To use this method in the simulator, you must include the _settings
+     * object in btapp. There is a sample that can be used in
+     * simulator/fixtures/settings.js
+     */
+    return this._response({ settings: this._settings });
   },
   setSettings: function(settings) {
+    /*
+     * Set the client's current settings. This takes an object of { k: v } and
+     * sets the k setting to the v value.
+     *
+     * To use this method in the simulator, you must include the _settings
+     * object in btapp. There is a sample that can be used in
+     * simulator/fixtures/settings.js
+     */
+    var self = this;
+    _(settings).each(function(v, k) {
+      var i = _(self._settings).pluck(0).indexOf(k);
+      if (i == -1)
+        throw self._error_constructor(
+          'Invalid Setting',
+          'The requested setting "'+k+'" cannot be set.');
+      self._settings[i][2] = v;
+    });
+    return self._response({});
   },
   list: function() {
     return {}
@@ -95,6 +132,17 @@ btapp.fn = btapp.prototype = {
          */
         return {}
       }
+    }
+  },
+  events: {
+    list: function() {
+    },
+    // XXX - Should multiple callbacks be bindable to the same event?
+    register: function(event, callback) {
+    },
+    // XXX - If multiple callbacks can be bound to the same event, should this
+    // remove all of them at once?
+    unregister: function(event) {
     }
   }
 }

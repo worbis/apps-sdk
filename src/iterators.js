@@ -27,6 +27,16 @@ iterator.fn = iterator.prototype = {
     if (self.i >= self.iterable.length)
       throw self.stop_iteration;
     return self.iterable[self.i++];
+  },
+  cycle: function() {
+    try {
+      return this.next();
+    } catch (e) {
+      if (e != this.stop_iteration)
+        throw e;
+      this.i = 0;
+      return this.next();
+    }
   }
 }
 
