@@ -228,12 +228,16 @@ btapp.fn = btapp.prototype = {
     /*
      * Access the client's settings.
      *
-     * settings() -> list of all the available settings
+     * settings() -> dictionary of key/value pairs
      * settings(name) -> get a specific setting
      * settings(name, value) -> set a specific setting
      */
+     // peer-id
     return {}           
   },
+  /*
+   * settings.get / settings.all / settings.set
+   */
   torrents: function() {
     /*
      * Get all the current torrents.
@@ -242,6 +246,7 @@ btapp.fn = btapp.prototype = {
   },
   torrent: function(hash) {
     return {
+      // XXX - Document the properties to be returned.
       start: function(force) {},
       stop: function() {},
       pause: function() {},
@@ -257,6 +262,7 @@ btapp.fn = btapp.prototype = {
          * properties(name, value) -> set a specific property
          */
       },
+      // properties.get / properties.set / properties.all
       files: function() {
         /*
          * Get all the torrent's files.
@@ -272,6 +278,7 @@ btapp.fn = btapp.prototype = {
              * priority(p) -> set the file's priority
              */
           },
+	  // priority.get / priority.set
           get: function() {
             /*
              * Get a file's complete binary data.
@@ -289,6 +296,7 @@ btapp.fn = btapp.prototype = {
   rss_feed: function(id) {
     return {
       remove: function() {},
+      // For options, they will all be properties that get/set themselves.
       options: function(name, value) {
         /*
          * Access all the options associated with an rss_feed.
@@ -309,6 +317,7 @@ btapp.fn = btapp.prototype = {
   rss_filter: function(id) {
     return {
       remove: function() {},
+      // For options, they will all be properties that get/set themselves.
       options: function(name, value) {
         /*
          * Access all the options associated with an rss_feed.
@@ -325,11 +334,13 @@ btapp.fn = btapp.prototype = {
     /*
      * Access the available events for this client.
      *
-     * events() -> list of all the registered events.
+     * events() -> full dictionary of all possible events with values for the 
+     *             bound ones.
      * events(name) -> get a specific event.
      * events(name, callback) -> register a callback for a specific event.
      */
   },
+  // events.get / events.set / events.all 
   store: function(name, value) {
     /*
      * Access the application's data store.
@@ -338,5 +349,17 @@ btapp.fn = btapp.prototype = {
      * store(name) -> get a specific stored value.
      * store(name, value) -> set a specific store value.
      */
+  }
+  // store.get / store.set / store.all
+  peers: function() {
+  },
+  peer: function(id) {
+    return {
+      id: 'foobar',
+      send: function(payload) {
+      },
+      recv: function(callback) {
+      }
+    }
   }
 }
