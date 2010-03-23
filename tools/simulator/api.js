@@ -69,23 +69,89 @@ btapp.fn = btapp.prototype = {
     });
   },
   torrent: {
+    // This is idiotic but I have no better idea of what to do.
+    _struct: {
+      'hash': 0,
+      'status': 1,
+      'name': 2,
+      'size': 3,
+      'percent_progress': 4,
+      'downloaded': 5,
+      'uploaded': 6,
+      'ratio': 7,
+      'upload_speed': 8,
+      'download_speed': 9,
+      'eta': 10,
+      'label': 11,
+      'peers_connected': 12,
+      'peers_in_swarm': 13,
+      'seeds_connected': 14,
+      'seeds_in_swarm': 15,
+      'availability': 16,
+      'torrent_queue_order': 17,
+      'remaining': 18,
+      'download_url': 19,
+      'rss_feed_url': 20
+    }
+    _status: {
+      started: 1,
+      checking: 2,
+      start_after_check: 4,
+      checked: 8,
+      error: 16,
+      paused: 32,
+      queued: 64,
+      loaded: 128
+    },
+    _torrent_index: function(hash) {
+      var self = this;
+      var i = _(self._torrents).pluck(0).indexOf(hash);
+      if (i == -1)
+        throw self._error_constructor(
+          'Invalid Torrent',
+          'There is no torrent with the hash "'+hash+'"');
+      return i;
+    },
+    _or: function(i, j) { return i | j },
+    _xor: function(i, j) { return i ^ j },
+    _set_status: function(hash, mods, fn) {
+      var self = this;
+      var i = self._torrent_index(hash);
+      self._torrents[i][this._struct['status']] =
+        fn(self._torrents[i][this._struct['status']], mods);
+    },
     start: function(hash, force) {
-      return {}
+      this._set_status(hash, this._status.started + this._status.queued,
+                       this._or);
+      return this._response({});
     },
     stop: function(hash) {
-      return {}
+      this._set_status(hash, this._status.started + this._status.queued,
+                       this._xor);
+      return this._response({});
     },
     pause: function(hash) {
-      return {}
+      this._set_status(hash, this._status.paused, this._or);
+      return this._response({});
     },
     unpause: function(hash) {
-      return {}
+      this._set_status(hash, this._status.paused, this._xor);
+      return this._response({});
     },
     recheck: function(hash) {
-      return {}
+      this._set_status(hash, this._status.checking, this._or);
+      this._set_status(hash, this._status.checked, this._xor);
+      return this._response({});
     },
     remove: function(hash, options) {
-      return {}
+      /*
+       *
+       *
+       * options - { XXX }
+       */
+      var i = this._torrent_index(hash);
+      this._torrents.splice(i, 1);
+      return this._response({});
     },
     setPriority: function(hash, file_index, priority) {
       return {}
@@ -154,3 +220,123 @@ btapp.fn = btapp.prototype = {
 }
 
 btapp.fn.init.prototype = btapp.fn;
+
+btapp.fn = btapp.prototype = {
+  init: function() {
+  },
+  settings: function(name, value) {
+    /*
+     * Access the client's settings.
+     *
+     * settings() -> list of all the available settings
+     * settings(name) -> get a specific setting
+     * settings(name, value) -> set a specific setting
+     */
+    return {}           
+  },
+  torrents: function() {
+    /*
+     * Get all the current torrents.
+     */
+    return {}
+  },
+  torrent: function(hash) {
+    return {
+      start: function(force) {},
+      stop: function() {},
+      pause: function() {},
+      unpause: function() {},
+      recheck: function() {},
+      remove: function() {},
+      properties: function(name, value) {
+        /*
+         * Access a specific torrent's properties
+         *
+         * properties() -> list of all the current properties
+         * properties(name) -> get a specific property
+         * properties(name, value) -> set a specific property
+         */
+      },
+      files: function() {
+        /*
+         * Get all the torrent's files.
+         */
+      },
+      file: function(index) {
+        return {
+          priority: function(p) {
+            /*
+             * Access a file's priority
+             *
+             * priority() -> get the file's priority
+             * priority(p) -> set the file's priority
+             */
+          },
+          get: function() {
+            /*
+             * Get a file's complete binary data.
+             */
+          }
+        }
+      }
+    }
+  },
+  rss_feeds: function() {
+    /*
+     * Get all the current RSS feeds.
+     */
+  },
+  rss_feed: function(id) {
+    return {
+      remove: function() {},
+      options: function(name, value) {
+        /*
+         * Access all the options associated with an rss_feed.
+         *
+         * options() -> return an object containing all the options and their 
+         *              settings.
+         * options(name) -> return the value of a specific option.
+         * options(name, value) -> set the value of a specific option.
+         */
+      }
+    }
+  },
+  rss_filters: function() {
+    /*
+     * Get all the current RSS filters.
+     */
+  },
+  rss_filter: function(id) {
+    return {
+      remove: function() {},
+      options: function(name, value) {
+        /*
+         * Access all the options associated with an rss_feed.
+         *
+         * options() -> return an object containing all the options and their 
+         *              settings.
+         * options(name) -> return the value of a specific option.
+         * options(name, value) -> set the value of a specific option.
+         */
+      }
+    }
+  },
+  events: function(name, callback) {
+    /*
+     * Access the available events for this client.
+     *
+     * events() -> list of all the registered events.
+     * events(name) -> get a specific event.
+     * events(name, callback) -> register a callback for a specific event.
+     */
+  },
+  store: function(name, value) {
+    /*
+     * Access the application's data store.
+     *
+     * store() -> object containing all the name/value pairs in the store.
+     * store(name) -> get a specific stored value.
+     * store(name, value) -> set a specific store value.
+     */
+  }
+}
