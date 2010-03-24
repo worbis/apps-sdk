@@ -15,7 +15,6 @@
  * underscore.js
  */
 
-
 var btapp = new btapp.fn.init();
 
 btapp.fn = btapp.prototype = {
