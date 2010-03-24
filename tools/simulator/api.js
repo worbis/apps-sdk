@@ -19,29 +19,40 @@
 var btapp = new btapp.fn.init();
 
 btapp.fn = btapp.prototype = {
-  init: function() {
-  },
+  init: function() { },
   settings: function(name, value) {
     /*
-     * Access the client's settings.
+     * Access the client's settings.  If a property is read only, a
+     * ReadOnlyException will be thrown.
      *
      * settings() -> dictionary of key/value pairs
      * settings(name) -> get a specific setting
      * settings(name, value) -> set a specific setting
+     *
+     * Note that the API suggests what properties might be returned, but to
+     * really know what actually is being returned, it is suggested for the
+     * developer to introspect a settings() call.
      */
-     // peer-id
+    /*         
+     * Available properties.
+     *
+     * peer_id
+     */
+    /*
+     * settings.get / settings.all / settings.set
+     */
     return {}           
   },
-  /*
-   * settings.get / settings.all / settings.set
-   */
-  torrents: function() {
-    /*
-     * Get all the current torrents.
-     */
-    return {}
-  },
   torrent: function(hash) {
+    /*
+     * Get a torrent.
+     *
+     * torrent() -> dictionary of hash/object pairs
+     * torrent(hash) -> get a specific torrent
+     */
+    /*
+     * torrent.get / torrent.all
+     */
     return {
       hash: 'SHA', // This is meant to be the primary key and is immutable.
       start: function(force) {},
@@ -97,18 +108,76 @@ btapp.fn = btapp.prototype = {
          * download_url: 'http://utorrent.com',
          * rss_feed_url: 'rss://rss.utorrent.com',
          */
-      },
-      // properties.get / properties.set / properties.all
-      files: function() {
         /*
-         * Get all the torrent's files.
+         * properties.get / properties.set / properties.all
          */
       },
+      peer: function(id) {
+        /*
+         * Get a peer associated with this torrent.
+         *
+         * peer() -> dictionary of peer_id/object pairs
+         * peer(id) -> get a specific peer
+         */
+        /*
+         * peer.get / peer.all
+         */
+        return {
+          torrent: { },          
+          id: 'foobar',
+          properties: function(name, value) {
+            /*
+             * Access a specific peer's properties. If a property is read
+             * only, a ReadOnlyException will be thrown.
+             *
+             * properties() -> list of all the current properties
+             * properties(name) -> get a specific property
+             * properties(name, value) -> set a specific property
+             *
+             * Note that the API suggests what properties might be returned,
+             * but to really know what actually is being returned, it is
+             * suggested for the developer to introspect a properties() call.
+             */
+            /*
+             * Available properties.
+             *
+             * location // country of origin
+             */
+          },
+          // properties.get / properties.set / properties.all
+          send: function(payload) {
+            /*
+             * Send a message to a specific peer.
+             *
+             * This is an asyncronous operation and there is no inherent
+             * guarantee that a specific peer received a message. It is up to
+             * the implementers to support this behavior.
+             */
+          },
+          recv: function(callback) {
+            /*
+             * Receive a message from a specific peer.
+             *
+             * This is a convenience method that registers with the message
+             * event and dispatches incoming messages to specific peers if
+             * there is a registered callback.
+             */
+          }
+        }
+      },
       file: function(index) {
+        /*
+         * Get a file associated with this torrent.
+         *
+         * file() -> dictionary of file_id/object pairs
+         * file(index) -> get a specific file
+         */
+        /*
+         * file.get / file.all
+         */
         return {
           torrent: {}, // The parent torrent object.
           index: 1, // Immutable index of the file with relation to its torrent
-          // Methods of an rss feed:
           properties: function(name, value) {
             /*
              * Access a specific file's properties. If a property is read only,
@@ -130,23 +199,32 @@ btapp.fn = btapp.prototype = {
              * downloaded // bytes
              * priority // int
              */
-          },
-          // properties.get / properties.set / properties.all
+            /*
+             * properties.get / properties.set / properties.all
+             */
+          },          
           get: function() {
             /*
              * Get a file's complete binary data.
+             *
+             * Note that this is meant for small files and thusly there is a
+             * size limit on how much data can be read from a file.
              */
           }
         }
       }
     }
   },
-  rss_feeds: function() {
-    /*
-     * Get all the current RSS feeds.
-     */
-  },
   rss_feed: function(id) {
+    /*
+     * Get an rss feed.
+     *
+     * rss_feed() -> dicitonary of feed_id/object pairs
+     * rss_feed(id) -> get a specific rss_feed
+     */
+    /*
+     * rss_feed.get / rss_feed.all
+     */
     return {
       id: 1,
       properties: function(name, value) {
@@ -176,15 +254,20 @@ btapp.fn = btapp.prototype = {
          * subscribe: true
          * smart_filter: true
          */
-      },
-      // properties.get / properties.set / properties.all
-      items: function() {
         /*
-         * Get all the current rss items.
+         * properties.get / properties.set / properties.all
          */
-        return {}
       },
       item: function(name) {
+        /*
+         * Get an item associated with this rss feed.
+         *
+         * item() -> dictionary of name/object pairs
+         * item(name) -> specific item object
+         */
+        /*
+         * item.get / item.all
+         */
         return {
           feed: {}, // The parent rss_Feed object.
           id: 1,
@@ -215,22 +298,27 @@ btapp.fn = btapp.prototype = {
              * repack: false,
              * in_history: false
              */
-          },
-          // properties.get / properties.set / properties.all      
+            /*
+             * properties.get / properties.set / properties.all      
+             */
+          }
         }
       },
       remove: function() {},
       force_update: function() {}
     }
   },
-  rss_filters: function() {
-    /*
-     * Get all the current RSS filters.
-     */
-  },
   rss_filter: function(id) {
+    /*
+     * Get an rss filter.
+     *
+     * rss_filter() -> dicitonary of filter_id/object pairs
+     * rss_filter(id) -> get a specific rss_filter
+     */
+    /*
+     * rss_filter.get / rss_filter.all
+     */
     return {
-      // Parameters of an rss filter:
       id: 1,
       properties: function(name, value) {
         /*
@@ -268,8 +356,10 @@ btapp.fn = btapp.prototype = {
          * postpone_mode: false,
          * feed: 1,      
          */
+        /*
+         * properties.get / properties.set / properties.all      
+         */
       },
-      // properties.get / properties.set / properties.all
       remove: function() {}
     }
   },
@@ -281,10 +371,11 @@ btapp.fn = btapp.prototype = {
      *             bound ones.
      * events(name) -> get a specific event.
      * events(name, callback) -> register a callback for a specific event.
-     * 
+     */
+    /*
+     * events.get / events.set / events.all 
      */
   },
-  // events.get / events.set / events.all 
   store: function(name, value) {
     /*
      * Access the application's data store.
@@ -292,54 +383,10 @@ btapp.fn = btapp.prototype = {
      * store() -> object containing all the name/value pairs in the store.
      * store(name) -> get a specific stored value.
      * store(name, value) -> set a specific store value.
-     *
      */
-  },
-  // store.get / store.set / store.all
-  peers: function() {
-  },
-  peer: function(id) {
-    return {
-      id: 'foobar',
-      properties: function(name, value) {
-        /*
-         * Access a specific filter's properties. If a property is read only, a
-         * ReadOnlyException will be thrown.
-         *
-         * properties() -> list of all the current properties
-         * properties(name) -> get a specific property
-         * properties(name, value) -> set a specific property
-         *
-         * Note that the API suggests what properties might be returned, but to
-         * really know what actually is being returned, it is suggested for the
-         * developer to introspect a properties() call.
-         */
-        /*
-         * Available properties.
-         *
-         * location // country of origin
-         */
-      },
-      // properties.get / properties.set / properties.all
-      send: function(payload) {
-        /*
-         * Send a message to a specific peer.
-         *
-         * This is an asyncronous operation and there is no inherent guarantee
-         * that a specific peer received a message. It is up to the implementers
-         * to support this behavior.
-         */
-      },
-      recv: function(callback) {
-        /*
-         * Receive a message from a specific peer.
-         *
-         * This is a convenience method that registers with the message event
-         * and dispatches incoming messages to specific peers if there is a
-         * registered callback.
-         */
-      }
-    }
+    /*
+     * store.get / store.set / store.all
+     */
   }
 }
 
