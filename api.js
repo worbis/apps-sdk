@@ -32,7 +32,7 @@ btapp.fn = btapp.prototype = {
      * really know what actually is being returned, it is suggested for the
      * developer to introspect a settings() call.
      */
-    /*         
+    /*
      * Available properties.
      *
      * peer_id
@@ -40,7 +40,7 @@ btapp.fn = btapp.prototype = {
     /*
      * settings.get / settings.all / settings.set
      */
-    return {}           
+    return {}
   },
   torrent: function(hash) {
     /*
@@ -63,7 +63,7 @@ btapp.fn = btapp.prototype = {
       properties: function(name, value) {
         /*
          * Access a specific torrent's properties. If a property is read only,
-         * a ReadOnlyException will be thrown. 
+         * a ReadOnlyException will be thrown.
          *
          * properties() -> list of all the current properties
          * properties(name) -> get a specific property
@@ -122,7 +122,7 @@ btapp.fn = btapp.prototype = {
          * peer.get / peer.all
          */
         return {
-          torrent: { },          
+          torrent: { },
           id: 'foobar',
           properties: function(name, value) {
             /*
@@ -180,7 +180,7 @@ btapp.fn = btapp.prototype = {
           properties: function(name, value) {
             /*
              * Access a specific file's properties. If a property is read only,
-             * a ReadOnlyException will be thrown. 
+             * a ReadOnlyException will be thrown.
              *
              * properties() -> list of all the current properties
              * properties(name) -> get a specific property
@@ -201,7 +201,7 @@ btapp.fn = btapp.prototype = {
             /*
              * properties.get / properties.set / properties.all
              */
-          },          
+          },
           get: function() {
             /*
              * Get a file's complete binary data.
@@ -298,7 +298,7 @@ btapp.fn = btapp.prototype = {
              * in_history: false
              */
             /*
-             * properties.get / properties.set / properties.all      
+             * properties.get / properties.set / properties.all
              */
           }
         }
@@ -353,10 +353,10 @@ btapp.fn = btapp.prototype = {
          * smart_ep_filter: 1,
          * add_stopped: true,
          * postpone_mode: false,
-         * feed: 1,      
+         * feed: 1,
          */
         /*
-         * properties.get / properties.set / properties.all      
+         * properties.get / properties.set / properties.all
          */
       },
       remove: function() {}
@@ -364,15 +364,15 @@ btapp.fn = btapp.prototype = {
   },
   events: function(name, callback) {
     /*
-     * Access the available events for this client. 
+     * Access the available events for this client.
      *
-     * events() -> full dictionary of all possible events with values for the 
+     * events() -> full dictionary of all possible events with values for the
      *             bound ones.
      * events(name) -> get a specific event.
      * events(name, callback) -> register a callback for a specific event.
      */
     /*
-     * events.get / events.set / events.all 
+     * events.get / events.set / events.all
      */
   },
   store: function(name, value) {
