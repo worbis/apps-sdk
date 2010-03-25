@@ -11,19 +11,20 @@
 
 _(btapp.fn).extend({
   _settings:  {
+    'peer.id': 'simulator',
     "net.bind_ip": "",
     "net.outgoing_ip": "",
-    ,["net.outgoing_port",0,"0"]
-    ,["net.outgoing_max_port",0,"0"]
-    ,["net.low_cpu",1,"false"]
-    ,["net.calc_overhead",1,"true"]
-    ,["net.max_halfopen",0,"8"]
-    ,["net.limit_excludeslocal",1,"false"]
-    ,["net.upnp_tcp_only",1,"false"]
-    ,["encryption_mode",0,"0"]
-    ,["encryption_allow_legacy",1,"true"]
-    ,["rss.update_interval",0,"15"]
-    ,["rss.smart_repack_filter",1,"true"]
-    ,["rss.feed_as_default_label",1,"true"]
+    "net.outgoing_port": 0,
+    "net.outgoing_max_port": 0,
+    "net.low_cpu": false,
+    "net.calc_overhead": true,
+    "net.max_halfopen": 8,
+    "net.limit_excludeslocal": false,
+    "net.upnp_tcp_only": false,
+    "encryption_mode": 0,
+    "encryption_allow_legacy": true,
+    "rss.update_interval": 15,
+    "rss.smart_repack_filter": true,
+    "rss.feed_as_default_label": true
   }
 });

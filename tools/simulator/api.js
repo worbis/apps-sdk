@@ -38,9 +38,21 @@ btapp.fn = btapp.prototype = {
      *
      * peer_id
      */
-    all: function() { },
-    get: function(name) { },
-    set: function(name, value) { }
+    /*
+     * To implement your own settings simulator, extend btapp.fn with _settings
+     * (key/value pairs of settings). For an example, see fixtures/settings.js
+     *
+     * Note that this implementation assumes all settings are writable.
+     */
+    all: function() {
+      return this._settings;
+    },
+    get: function(name) { 
+      return this._settings[name];
+    },
+    set: function(name, value) { 
+      this._settings[name] = value;
+    }
   },
   torrent: {
     /*
