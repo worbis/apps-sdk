@@ -4,5 +4,5 @@ dist
 *.diff
 *.patch
 test/qunit
-src/sizzle
+build/
 .DS_Store
