@@ -61,6 +61,14 @@ btapp.fn = btapp.prototype = {
      * all() -> dictionary of hash/object pairs
      * get(hash) -> get a specific torrent
      */
+    // XXX - Is there any reason why we'd need to be able to add a file?
+    add: function(url) {
+      /*
+       * Add a torrent by url (or magnet link).
+       *
+       */
+      return { } // torrent_object
+    },
     all: function() { },
     get: function(hash) { 
       return {
@@ -235,14 +243,6 @@ btapp.fn = btapp.prototype = {
           }
         }
       }
-    },
-    // XXX - Is there any reason why we'd need to be able to add a file?
-    add: function(url) {
-      /*
-       * Add a torrent by url (or magnet link).
-       *
-       */
-      return { } // torrent_object
     }
   },
   rss_feed: {
