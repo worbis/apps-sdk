@@ -252,6 +252,13 @@ btapp.fn = btapp.prototype = {
      * all() -> dicitonary of feed_id/object pairs
      * get(id) -> get a specific rss_feed
      */
+    add: function(url) {
+      /*
+       * Add a feed by url..
+       *
+       */
+      return // feed_object
+    },
     all: function() { },
     get: function(id) {
       return {
@@ -336,14 +343,7 @@ btapp.fn = btapp.prototype = {
         },
         remove: function() {},
         force_update: function() {}
-      } 
-    },
-    add: function(url) {
-      /*
-       * Add a feed by url..
-       *
-       */
-      return // feed_object
+      }
     }
   },
   rss_filter: {
@@ -353,6 +353,12 @@ btapp.fn = btapp.prototype = {
      * all() -> dicitonary of filter_id/object pairs
      * get(id) -> get a specific rss_filter
      */
+    add: function() {
+      /*
+       * Add an rss filter.
+       */
+      return { } // filter_object
+    },
     all: function() { },
     get: function(id) {
       return {
@@ -399,12 +405,6 @@ btapp.fn = btapp.prototype = {
         },
         remove: function() {}
       }
-    },
-    add: function() {
-      /*
-       * Add an rss filter.
-       */
-      return { } // filter_object
     }
   },
   events: {
