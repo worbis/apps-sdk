@@ -1,0 +1,229 @@
+<html>
+<head>
+<script type='text/javascript'>
+//
+// Example code for a btapp.  Uses script element injection to access the WebUI port.
+// Demonstrates a pretty straight-forward way of making a primitive API for access to
+// uTorrent.
+//
+// Notes:
+//
+// makemasterurl() should be called before anything else.
+// torrentlistsync() provides a convenient way of updating the torrents so that
+// access to the torrents list is immediate in javascript code.
+//
+// torrents() returns torrent objects with these properties and methods:
+//  - hash    -- The torrent's hash.  This identifies it for any call to the 
+//               web UI port that would manipulate it (specified as hash=, and must
+//               come after the action= parameter.
+//  - status  -- A numeric code that tell whether the torrent is running, stopped,
+//               or encountered an error.
+//  - caption -- The name of the torrent as seen by the user.
+//  - totalSize -- Total bytes in the torrent.
+//  - pctComplete -- Percentage complete.
+//  - totalDl,totalUl -- Bytes downloaded and uploaded on behalf of the torrent
+//  - ratio   -- Total ratio of upload to download
+//  - dlRate,ulRate -- Byte rates of upload and download traffic.
+//  - eta     -- uTorrent's estimate of time remaining to completion.
+//  - label   -- The filtering label set on the torrent (for example, the name of
+//               the tv series)
+//  - avail   -- Number of full and fractional copies available on the network.
+//  - order   -- Download order when queued.
+//  - remainingDl -- Number of bytes remaining
+//
+//  - files() -- Returns a list of file objects associated with this torrent
+// Currently these fields are useful:
+//  - name -- Path of the file inside the torrent
+//  - done -- Bytes complete.
+//  - size -- Total bytes required.
+//  - prio -- Priority.
+// In addition, the file() method, given a name, will return that specific file
+// object.
+//
+// The overall example adds the magnet link in magnetlink below to the user's torrents
+// and displays the files within and their fractional completion in a table, updating
+// frequently.
+//
+var port, pair;
+var masterurl;
+var magnetlink = "magnet:?xt=urn:btih:N35J7G7SLXT2VDMB7PN2WF2MI7IWA2KD&tr=udp%3a%2f%2ftracker.openbittorrent.com%3a80%2fannounce&tr=http%3a%2f%2ftracker.openbittorrent.com%3a80%2fannounce";
+
+function makemasterurl() {
+    var splitResult = document.location.toString().split('?');
+    var args = splitResult[1].split('&');
+    for (var aidx in args) {
+	var arg = args[aidx];
+	var vv = arg.split('=');
+	if (vv[0] == 'port') {
+	    port = vv[1];
+	} else if (vv[0] == 'pair') {
+	    pair = vv[1];
+	}
+    }
+    masterurl = 'http://localhost:' + port + '/';
+    document.getElementById('masterurl').appendChild(document.createTextNode(masterurl));
+}
+
+function getUrlForAddingUrl(magnetlink) {
+    return masterurl + 'gui/?token=' + pair + '&pairing=' + pair + '&action=add-url&s=' + escape(magnetlink);
+}
+
+function getUrlForListingTorrents(cbname) {
+    return masterurl + 'gui/?token=' + pair + '&pairing=' + pair + '&callback=' + cbname + '&list=1';
+}
+
+function getUrlForListingFiles(hash,cbname) {
+    var u = masterurl + 'gui/?token=' + pair + '&pairing=' + pair + '&callback=' + cbname + '&action=getfiles&hash=' + hash;
+    return u;
+}
+
+function makescript(url) {
+    var scriptElt = document.createElement('script');
+    scriptElt.type = 'text/javascript';
+    scriptElt.src = url;
+    document.getElementsByTagName('head')[0].appendChild(scriptElt);
+    return scriptElt;
+}
+
+function addmagnetlink(url) {
+    return makescript(getUrlForAddingUrl(url));
+}
+
+var pendingtorrents = { };
+var thetorrents = [];
+var torrentbyhash = { };
+
+function takefiles(data) {
+    var hash = data.files[0];
+    var flist = data.files[1];
+    var t = pendingtorrents[hash];
+    for (var i = 0; i < flist.length; i++) {
+	var f = flist[i];
+	var newfile = {
+	    "name":f[0],
+	    "size":f[1],
+	    "done":f[2],
+	    "prio":f[3]
+	};
+	t._files[t._files.length] = newfile;
+	t._files_by_name[newfile.name] = newfile;
+    }
+    thetorrents[thetorrents.length] = t;
+    torrentbyhash[newtorrent.hash] = t;
+    delete pendingtorrents[hash];
+}
+
+var generation = 0;
+
+function taketorrents(torrentlist) {
+    for (var i = 0; i < torrentlist.torrents.length; i++) {
+	var t = torrentlist.torrents[i];
+	var newtorrent = {
+	    "hash":t[0],
+	    "status":t[1],
+	    "caption":t[2],
+	    "totalSize":t[3],
+	    "pctComplete":t[4],
+	    "totalDl":t[5],
+	    "totalUl":t[6],
+	    "ratio":t[7],
+	    "ulRate":t[8],
+	    "dlRate":t[9],
+	    "eta":t[10],
+	    "label":t[11],
+	    "avail":t[16],
+	    "order":t[17],
+	    "remainingDl":t[18],
+	    "_files_by_name":{ },
+	    "_files":[],
+	    "files":function () {
+		return this._files;
+	    },
+	    "file":function (name) {
+		return this._files_by_name[name];
+	    }
+	};
+	pendingtorrents[newtorrent.hash] = newtorrent;
+	makescript(getUrlForListingFiles(newtorrent.hash,'takefiles'));
+    }
+}
+
+// Can't really be synchronous here, so we fake it a bit
+function torrents() {
+    return thetorrents;
+}
+
+function torrent(hash) {
+    return torrentsbyhash[hash];
+}
+
+function deleteElement(elt) {
+    elt.parentNode.removeChild(elt);
+}
+
+function emptyOut(elt) {
+    while (elt.childNodes.length) {
+	deleteElement(elt.childNodes[0]);
+    }
+}
+
+function updatetorrentlist() {
+    var tlist = torrents();
+    var host = document.getElementById('current-torrents');
+    emptyOut(host);
+    setTimeout('updatetorrentlist()',1000);
+    var tftable = document.createElement('table');
+    host.appendChild(tftable);
+    var tbody = document.createElement('tbody');
+    tftable.appendChild(tbody);
+    for (var i = 0; i < tlist.length; i++) {
+	var t = tlist[i];
+	var tfrow = document.createElement('tr');
+	var tfcell = document.createElement('th');
+	tfcell.setAttribute('colspan','2');
+	tfrow.appendChild(tfcell);
+	tbody.appendChild(tfrow);
+	flist = t.files();
+	for (var j = 0; j < flist.length; j++) {
+	    var frow = document.createElement('tr');
+	    var fncell = document.createElement('td');
+	    fncell.appendChild(document.createTextNode(flist[j].name));
+	    frow.appendChild(fncell);
+	    var fdcell = document.createElement('td');
+	    fdcell.appendChild(document.createTextNode(flist[j].done / flist[j].size));
+	    frow.appendChild(fdcell);
+	    tbody.appendChild(frow);
+	}
+    }
+    return tlist;
+}
+
+function torrentlistsync() {
+    setTimeout('torrentlistsync()',1000); // hack for now
+    var u = getUrlForListingTorrents('taketorrents');
+    makescript(u);
+}
+
+function doload() {
+    document.getElementById('url').appendChild(document.createTextNode(document.location));
+    makemasterurl();
+    document.getElementById('magnet').appendChild(document.createTextNode(magnetlink));
+    setTimeout('torrentlistsync()',1000); // hack for now
+    setTimeout('updatetorrentlist()',1000);
+    addmagnetlink(magnetlink);
+}
+</script>
+</head>
+<!-- <pad> </pad> -->
+<body onload='doload()'>
+<div id='url'> </div>
+<div id='masterurl'> </div>
+<div id='magnet'> </div>
+<div id='current-torrents-container'>
+<h2>Current Torrents</h2>
+<div id='current-torrents'>
+</div>
+</div>
+</body>
+</html>
+</html>
