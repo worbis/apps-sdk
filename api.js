@@ -1,14 +1,17 @@
 /*
  * btapp API simulation
  *
+ * Copyright(c) 2010 BitTorrent Inc.
+ * License: ************
+ *
+ * Date: %date%
+ * Version: %version%
+ *
  * To enable developers to develop apps while in the browser of their choice,
  * this simulator copies the btapp API in it's entirety. All methods return
  * valid return data. This data is picked up from replay files. There are a
  * couple replay files included. Alternatively, take a look at the replay file
  * documentation for how to write your own set of data to replay.
- *
- * Copyright(c) 2010 BitTorrent Inc.
- * License: ************
  */
 
 /* XXX - Dependencies
@@ -25,6 +28,7 @@ btapp.fn = btapp.prototype = {
      * ReadOnlyException will be thrown.
      *
      * all() -> dictionary of key/value pairs
+     * keys() -> list of all the settings names available.
      * get(name) -> get a specific setting
      * set(name, value) -> set a specific setting
      * add
@@ -47,6 +51,7 @@ btapp.fn = btapp.prototype = {
     all: function() {
       return this._settings;
     },
+    keys: function() { },
     get: function(name) { 
       return this._settings[name];
     },
@@ -58,7 +63,9 @@ btapp.fn = btapp.prototype = {
     /*
      * Get a torrent.
      *
+     * add() -> add a torrent by url or file path
      * all() -> dictionary of hash/object pairs
+     * keys() -> list of all the currently available torrent hashes
      * get(hash) -> get a specific torrent
      */
     // XXX - Is there any reason why we'd need to be able to add a file?
@@ -70,6 +77,7 @@ btapp.fn = btapp.prototype = {
       return { } // torrent_object
     },
     all: function() { },
+    keys: function() { },
     get: function(hash) { 
       return {
         hash: 'SHA', // This is meant to be the primary key and is immutable.
@@ -91,7 +99,9 @@ btapp.fn = btapp.prototype = {
            * Access a specific torrent's properties. If a property is read
            * only, a ReadOnlyException will be thrown.
            *
-           * all() -> list of all the current properties
+           * all() -> object containing the key/value pairs of all 
+           *          properties.
+           * keys() -> list of all the property names.
            * get(name) -> get a specific property
            * set(name, value) -> set a specific property
            *
@@ -134,6 +144,7 @@ btapp.fn = btapp.prototype = {
            * rss_feed_url: 'rss://rss.utorrent.com',
            */
           all: function() {},
+          keys: function() { },
           get: function(name) {},
           set: function(name) {}
         },
@@ -142,9 +153,11 @@ btapp.fn = btapp.prototype = {
            * Get a peer associated with this torrent.
            *
            * all() -> dictionary of peer_id/object pairs
+           * keys() -> list of all the peer ids associated with this torrent.
            * get(id) -> get a specific peer
            */
           all: function() { },
+          keys: function() { },
           get: function(id) { 
             return {
               torrent: { },
@@ -154,7 +167,9 @@ btapp.fn = btapp.prototype = {
                  * Access a specific peer's properties. If a property is read
                  * only, a ReadOnlyException will be thrown.
                  *
-                 * all() -> list of all the current properties
+                 * all() -> object containing the key/value pairs of all 
+                 *          properties.
+                 * keys() -> list of all the property names.
                  * get(name) -> get a specific property
                  * set(name, value) -> set a specific property
                  *
@@ -169,6 +184,7 @@ btapp.fn = btapp.prototype = {
                  * location // country code
                  */
                 all: function() { },
+                keys: function() { },
                 get: function(name) { },
                 set: function(name, value) { }
               },
@@ -198,9 +214,11 @@ btapp.fn = btapp.prototype = {
            * Get a file associated with this torrent.
            *
            * all() -> dictionary of file_id/object pairs
+           * keys() -> list of all the file indexes in this torrent
            * get(index) -> get a specific file
            */
           all: function() { },
+          keys: function() { },
           get: function(index) { 
             return {
               torrent: {}, // The parent torrent object.
@@ -210,7 +228,9 @@ btapp.fn = btapp.prototype = {
                  * Access a specific file's properties. If a property is read
                  * only, a ReadOnlyException will be thrown.
                  *
-                 * all() -> list of all the current properties
+                 * all() -> object containing the key/value pairs of all 
+                 *          properties.
+                 * keys() -> list of all the property names.
                  * get(name) -> get a specific property
                  * set(name, value) -> set a specific property
                  *
@@ -228,6 +248,7 @@ btapp.fn = btapp.prototype = {
                  * priority // int
                  */
                 all: function() { },
+                keys: function() { },
                 get: function(name) { },
                 set: function(name, value) { }
               },
@@ -250,6 +271,7 @@ btapp.fn = btapp.prototype = {
      * Get an rss feed.
      *
      * all() -> dicitonary of feed_id/object pairs
+     * keys() -> list of all the feed ids
      * get(id) -> get a specific rss_feed
      */
     add: function(url) {
@@ -260,6 +282,7 @@ btapp.fn = btapp.prototype = {
       return // feed_object
     },
     all: function() { },
+    keys: function() { },
     get: function(id) {
       return {
         id: 1,
@@ -268,7 +291,9 @@ btapp.fn = btapp.prototype = {
            * Access a specific feed's properties. If a property is read only, a
            * ReadOnlyException will be thrown.
            *
-           * all() -> list of all the current properties
+           * all() -> object containing the key/value pairs of all 
+           *          properties.
+           * keys() -> list of all the property names.
            * get(name) -> get a specific property
            * set(name, value) -> set a specific property
            *
@@ -291,6 +316,7 @@ btapp.fn = btapp.prototype = {
            * smart_filter: true
            */
           all: function() { },
+          keys: function() { },
           get: function(name) { },
           set: function(name, value) { }
         },
@@ -299,9 +325,11 @@ btapp.fn = btapp.prototype = {
            * Get an item associated with this rss feed.
            *
            * all() -> dictionary of name/object pairs
+           * keys() -> list of all rss feed item names.
            * get(name) -> specific item object
            */ 
           all: function() { },
+          keys: function() { },
           get: function(name) { 
             return {
               feed: {}, // The parent rss_Feed object.
@@ -311,7 +339,9 @@ btapp.fn = btapp.prototype = {
                  * Access a specific feed item's properties. If a property is
                  * read only, a ReadOnlyException will be thrown.
                  *
-                 * all() -> list of all the current properties
+                 * all() -> object containing the key/value pairs of all 
+                 *          properties.
+                 * keys() -> list of all the property names.
                  * get(name) -> get a specific property
                  * set(name, value) -> set a specific property
                  *
@@ -335,6 +365,7 @@ btapp.fn = btapp.prototype = {
                  * in_history: false
                  */
                 all: function() { },
+                keys: function() { },
                 get: function(name) { },
                 set: function(name, value) { }
               }
@@ -351,6 +382,7 @@ btapp.fn = btapp.prototype = {
      * Get an rss filter.
      *
      * all() -> dicitonary of filter_id/object pairs
+     * keys() -> list of all filter ids
      * get(id) -> get a specific rss_filter
      */
     add: function() {
@@ -360,6 +392,7 @@ btapp.fn = btapp.prototype = {
       return { } // filter_object
     },
     all: function() { },
+    keys: function() { },
     get: function(id) {
       return {
         id: 1,
@@ -368,7 +401,8 @@ btapp.fn = btapp.prototype = {
            * Access a specific filter's properties. If a property is read only,
            * a ReadOnlyException will be thrown.
            *
-           * all() -> list of all the current properties
+           * all() -> object containing the key/value pairs of all properties.
+           * keys() -> list of all the property names.
            * get(name) -> get a specific property
            * set(name, value) -> set a specific property
            *
@@ -400,6 +434,7 @@ btapp.fn = btapp.prototype = {
            * feed: 1,
            */      
           all: function() { },
+          keys: function() { },
           get: function(name) { },
           set: function(name, value) { }    
         },
@@ -413,22 +448,26 @@ btapp.fn = btapp.prototype = {
      *
      * all() -> full dictionary of all possible events with values for the
      *             bound ones.
+     * keys() -> the names of all events that can be bound.
      * get(name) -> get a specific event.
      * set(name, callback) -> register a callback for a specific event.
      */
     all: function() { },
+    keys: function() { },
     get: function(name) { },
     set: function(name, callback) { }
   },
-  store: {
+  stash: {
     /*
      * Access the application's data store.
      *
-     * all() -> object containing all the name/value pairs in the store.
+     * all() -> object containing all the name/value pairs in the stash.
+     * keys() -> the names of all items in the stash.
      * get(name) -> get a specific stored value.
      * set(name, value) -> set a specific store value.
      */
     all: function() { },
+    keys: function() { },
     get: function(name) { },
     set: function(name, callback) { }
   }

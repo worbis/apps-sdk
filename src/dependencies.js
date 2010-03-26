@@ -3,7 +3,7 @@
  * Copyright (c) 2010 BitTorrent Inc.
  *
  * Date: %date%
- * Revision: %revision%
+ * Version: %version%
  */
 
 var tags = [
