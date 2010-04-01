@@ -36,6 +36,7 @@ To build Griffin itself, you'll need the following tools:
 
 Also, if you'd like to stay up to date with the latest developments as well as
 contribute your work back to the Griffin community, you'll want to install Git:
+
   http://git-scm.com/. 
 
 The entire Griffin project can be found at:
@@ -63,16 +64,22 @@ If you need help with Griffin, you can get help from the following sources:
   - FAQ:            http://griffin.bittorrent.com/faq
   - Documentation:  http://griffin.bittorrent.com/doc
   - Wiki:           http://griffin.bittorrent.com/wikis
-  - Issues:         http://griffin.bittorrent.com/issues
   - Forums:         http://griffin.bittorrent.com/forums
+  - IRC:            irc://irc.freenode.net#griffin
   - Feedback:       griffin@bittorrent.com
+
+If you discover any bugs, please file a ticket at:
+
+  http://griffin.bittorrent.com/issues
+
+More Information
+================
+
+  - Tutorials:          http://griffin.bittorrent.com/doc/tutorials
+  - Programming Guide:  http://griffin.bittorrent.com/doc/programming_guide
+  - API:                http://griffin.bittorrent.com/doc/api
+  - Design:             http://griffin.bittorrent.com/doc/design
 
 License
 =======
 
-
-
-.. include:: tutorials.rst
-.. include:: programming_guide.rst
-.. include:: api.rst
-.. include:: design.rst
