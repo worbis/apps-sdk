@@ -6,10 +6,6 @@ Griffin Software Development Kit
   :depth: 2
   :backlinks: none
 
-========
-Overview
-========
-
 Introduction
 ============
 
