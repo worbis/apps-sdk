@@ -80,6 +80,42 @@ associated with torrent objects:
 Properties
 **********
 
+For a discussion of the methods that the torrent's properties implements, take
+a look at _General Properties.
+
+The properties specific to a torrent are:
+
+   - trackers // [ "tracker1", "tracker2" ]
+   - upload_limit // bytes/second
+   - download_limit // bytes/second
+   - superseed // not_allowed/disabled/enabled
+   - dht // not_allowed/disabled/enabled
+   - pex // not_allowed/disabled/enabled
+   - seed_override // not_allowed/disabled/enabled
+   - seed_ratio: 0.1 // percentage
+   - seed_time: 100 // seconds
+   - ulslots // maximum upload slots
+   - status // paused/started/seeding
+   - name: 'My Torrent'
+   - size: 100 // bytes
+   - progress: 0.50 // percentage
+   - downloaded: 50 // bytes
+   - uploaded: 100 // bytes
+   - ratio: 2.0 // percentage
+   - upload_speed: 1000 // bytes/second
+   - download_speed: 1000 // bytes/second
+   - eta: 10 // seconds
+   - label: 'test label'
+   - peers_connected: 10 // peers
+   - peers_in_swarm: 10 // peers
+   - seeds_connected: 10 // seeds
+   - seeds_in_swarm: 10 // seeds
+   - availability: 0.50 // percentage
+   - queue_order: 1
+   - remaining: 50 // bytes
+   - download_url: 'http://utorrent.com'
+   - rss_feed_url: 'rss://rss.utorrent.com'
+
 Peers
 *****
 
@@ -97,3 +133,7 @@ Events
 
 Stash
 =====
+
+General Properties
+==================
+
