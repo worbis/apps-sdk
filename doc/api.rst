@@ -27,14 +27,7 @@ only, a ReadOnlyException will be thrown.
 
 Available properties:
 
-::
-
-  peer_id = "local_client" // This is the peer ID of your own client.
-
-Note that the API suggests what properties might be returned, but to really
-know what actually is being returned, it is suggested that the developer should
-introspect bt.settings.all() or bt.settings.keys() to discover what settings
-their application can actually see.  
+  - peer_id = "local_client" // This is the peer ID of your own client.
 
 Torrents
 ========
@@ -119,6 +112,34 @@ The properties specific to a torrent are:
 Peers
 *****
 
+From torrent_obj.peer, you can access all the peers that are associated with
+the torrent itself via the normal means.
+
+::
+
+  torrent_obj.peer.all() -> dictionary of id/peer object pairs
+  torrent_obj.peer.keys() -> list of all the peers connected to this torrent
+  torrent_obj.peer.get(id) -> get a specific peer object
+
+A peer object is returned by torrent_obj.peer.all/get. These objects can be
+used to get the metadata of a connected peer.
+
+::
+
+  torrent = torrent_obj // The parent torrent
+  id: 'foobar' // ID of this specific peer
+  send: function(msg) // Send an arbitrary data to this peer
+    /*
+     * msg - This can be any kind of string or JSON object. It will be
+       serialized and sent to this peer.
+     */
+  recv: function(callback) // Receive a message from this peer. Note that this
+       is simply a convenience function that uses bt.event.
+    /*
+     * callback - Callback that gets called with the JSON.parse result from
+     *            this peer.
+     */
+
 Files
 *****
 
@@ -137,3 +158,7 @@ Stash
 General Properties
 ==================
 
+Note that the API suggests what properties might be returned, but to really
+know what actually is being returned, it is suggested that the developer should
+introspect bt.settings.all() or bt.settings.keys() to discover what settings
+their application can actually see.  
