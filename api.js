@@ -14,13 +14,9 @@
  * documentation for how to write your own set of data to replay.
  */
 
-/* XXX - Dependencies
- * underscore.js
- */
+var bt = new bt.fn.init();
 
-var btapp = new btapp.fn.init();
-
-btapp.fn = btapp.prototype = {
+bt.fn = bt.prototype = {
   init: function() { },
   settings: {
     /*
@@ -68,7 +64,6 @@ btapp.fn = btapp.prototype = {
      * keys() -> list of all the currently available torrent hashes
      * get(hash) -> get a specific torrent
      */
-    // XXX - Is there any reason why we'd need to be able to add a file?
     add: function(url) {
       /*
        * Add a torrent by url (or magnet link).
@@ -86,8 +81,6 @@ btapp.fn = btapp.prototype = {
         pause: function() {},
         unpause: function() {},
         recheck: function() {},
-        // XXX - Does there need to be a method to say whether
-        // data/torrent/torrentdata is removed?
         remove: function() {
           /*
            * Remove a torrent.
@@ -473,4 +466,4 @@ btapp.fn = btapp.prototype = {
   }
 }
 
-btapp.fn.init.prototype = btapp.fn;
+bt.fn.init.prototype = bt.fn;
