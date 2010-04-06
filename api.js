@@ -58,7 +58,8 @@ bt.fn = bt.prototype = {
   add: {
     /*
      * Add an element
-     *() -> add a torrent by url or file path
+     * torrent() -> add a torrent by url or file path
+     * rss_feed() -> 
      */
     torrent: function(url) {
       /*
@@ -388,9 +389,11 @@ bt.fn = bt.prototype = {
     /*
      * Get an rss filter.
      *
+     * all() -> dicitonary of filter_id/object pairs
      * keys() -> list of all filter ids
      * get(id) -> get a specific rss_filter
      */
+
     all: function() { },
     keys: function() { },
     get: function(id) {
