@@ -18,6 +18,7 @@ var bt = new bt.fn.init();
 
 bt.fn = bt.prototype = {
   init: function() { },
+  peer_id: 'foobar',
   settings: {
     /*
      * Access the client's settings.  If a property is read only, a
@@ -36,7 +37,6 @@ bt.fn = bt.prototype = {
     /*
      * Available properties.
      *
-     * peer_id
      */
     /*
      * To implement your own settings simulator, extend btapp.fn with _settings
@@ -55,22 +55,40 @@ bt.fn = bt.prototype = {
       this._settings[name] = value;
     }
   },
-  torrent: {
+  add: {
     /*
-     * Get a torrent.
-     *
-     * add() -> add a torrent by url or file path
-     * all() -> dictionary of hash/object pairs
-     * keys() -> list of all the currently available torrent hashes
-     * get(hash) -> get a specific torrent
+     * Add an element
+     *() -> add a torrent by url or file path
      */
-    add: function(url) {
+    torrent: function(url) {
       /*
        * Add a torrent by url (or magnet link).
        *
        */
-      return { } // torrent_object
+      return { } // torrent object
     },
+    rss_feed: function(url) {
+      /*
+       * Add a feed by url..
+       *
+       */
+      return { }// feed_object
+    },
+    rss_filter: function(filter) {
+      /*
+       * Add an rss filter.
+       */
+      return { } // filter_object
+    },
+  },
+  torrent: {
+    /*
+     * Get a torrent.
+     *
+     * all() -> dictionary of hash/object pairs
+     * keys() -> list of all the currently available torrent hashes
+     * get(hash) -> get a specific torrent
+     */
     all: function() { },
     keys: function() { },
     get: function(hash) { 
@@ -267,13 +285,6 @@ bt.fn = bt.prototype = {
      * keys() -> list of all the feed ids
      * get(id) -> get a specific rss_feed
      */
-    add: function(url) {
-      /*
-       * Add a feed by url..
-       *
-       */
-      return // feed_object
-    },
     all: function() { },
     keys: function() { },
     get: function(id) {
@@ -370,20 +381,16 @@ bt.fn = bt.prototype = {
       }
     }
   },
+  add: function() {
+
+  },
   rss_filter: {
     /*
      * Get an rss filter.
      *
-     * all() -> dicitonary of filter_id/object pairs
      * keys() -> list of all filter ids
      * get(id) -> get a specific rss_filter
      */
-    add: function() {
-      /*
-       * Add an rss filter.
-       */
-      return { } // filter_object
-    },
     all: function() { },
     keys: function() { },
     get: function(id) {

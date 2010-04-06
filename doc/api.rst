@@ -52,7 +52,7 @@ look into the metadata associated with this torrent.
 
 ::
 
-  hash = 'SHA' // This is meant to be the primary key and is immutable.
+  hash: 'SHA' // This is meant to be the primary key and is immutable.
   start: function(force)
     /*
      * force -> Instead of waiting to start, forces a start immediately.
@@ -74,46 +74,48 @@ Properties
 **********
 
 For a discussion of the methods that the torrent's properties implements, take
-a look at _General Properties.
+a look at _`General Properties`.
 
 The properties specific to a torrent are:
 
-   - trackers // [ "tracker1", "tracker2" ]
-   - upload_limit // bytes/second
-   - download_limit // bytes/second
-   - superseed // not_allowed/disabled/enabled
-   - dht // not_allowed/disabled/enabled
-   - pex // not_allowed/disabled/enabled
-   - seed_override // not_allowed/disabled/enabled
-   - seed_ratio: 0.1 // percentage
-   - seed_time: 100 // seconds
-   - ulslots // maximum upload slots
-   - status // paused/started/seeding
-   - name: 'My Torrent'
-   - size: 100 // bytes
-   - progress: 0.50 // percentage
-   - downloaded: 50 // bytes
-   - uploaded: 100 // bytes
-   - ratio: 2.0 // percentage
-   - upload_speed: 1000 // bytes/second
-   - download_speed: 1000 // bytes/second
-   - eta: 10 // seconds
-   - label: 'test label'
-   - peers_connected: 10 // peers
-   - peers_in_swarm: 10 // peers
-   - seeds_connected: 10 // seeds
-   - seeds_in_swarm: 10 // seeds
-   - availability: 0.50 // percentage
-   - queue_order: 1
-   - remaining: 50 // bytes
-   - download_url: 'http://utorrent.com'
-   - rss_feed_url: 'rss://rss.utorrent.com'
+::
+
+   trackers: ['tracker1', 'tracker2'] // list
+   upload_limit: 1000 // bytes/second
+   download_limit: 1000 // bytes/second
+   superseed: enabled // not_allowed/disabled/enabled
+   dht // not_allowed/disabled/enabled
+   pex // not_allowed/disabled/enabled
+   seed_override // not_allowed/disabled/enabled
+   seed_ratio: 0.1 // percentage
+   seed_time: 100 // seconds
+   ulslots // maximum upload slots
+   status // paused/started/seeding
+   name: 'My Torrent'
+   size: 100 // bytes
+   progress: 0.50 // percentage
+   downloaded: 50 // bytes
+   uploaded: 100 // bytes
+   ratio: 2.0 // percentage
+   upload_speed: 1000 // bytes/second
+   download_speed: 1000 // bytes/second
+   eta: 10 // seconds
+   label: 'test label'
+   peers_connected: 10 // peers
+   peers_in_swarm: 10 // peers
+   seeds_connected: 10 // seeds
+   seeds_in_swarm: 10 // seeds
+   availability: 0.50 // percentage
+   queue_order: 1
+   remaining: 50 // bytes
+   download_url: 'http://utorrent.com'
+   rss_feed_url: 'rss://rss.utorrent.com'
 
 Peers
 *****
 
 From torrent_obj.peer, you can access all the peers that are associated with
-the torrent itself via the normal means.
+a specific torrent itself via the normal means.
 
 ::
 
@@ -140,11 +142,125 @@ used to get the metadata of a connected peer.
      *            this peer.
      */
 
+In addition to these parameters and functions, there is another object
+associated with the peer object.
+
+  - properties
+
+For a discussion of the methods that the peer's properties implements, take
+a look at _`General Properties`.
+
+The properties specific to a peer are:
+
+::
+
+  location: 'US' // country code
+
 Files
 *****
 
+From torrent_obj.file, you can access all the files that are associated with a
+specific torrent via. the normal means.
+
+::
+
+  torrent_obj.file.all() -> dictionary of index/file object pairs
+  torrent_obj.file.keys() -> list of all the file indexes in this torrent
+  torrent_obj.file.get(index) -> get a specific file object
+
+A file object is returned by torrent_obj.file.all/get. These objects can be
+used to get the metadata of a specific file.
+
+::
+
+  torrent = torrent_obj // The parent torrent
+  index: 1 // Index of this file in the torrent
+  get_data: function() // Get the complete binary data of a file
+    /*
+     * Note that this is meant for small files and thusly there is a size limit
+     * on how large a file can be.
+     */
+
+In addition to these parameters and functions, there is another object
+associated with the file object.
+
+  - properties
+
+For a discussion of the methods that the file's properties implements, take a
+look at _`General Properties`.
+
+The properties specific to a file are:
+
+::
+  
+  name: 'test'
+  size: 1000 // bytes
+  downloaded: 100 // bytes
+  priority: 1 // int
+
 RSS Feeds
 =========
+
+Access all operations that have to do with rss feeds at bt_rss_feed. This will
+allow you to add rss feeds as well as access metadata about the rss feeds taht
+you added. The sandbox restricts the rss feeeds that you're available to see
+down to only the ones that your application added.
+
+::
+
+  bt.rss_feed.add(url) -> add an rss feed by url
+  bt.rss_feed.all() -> dictionary of id/rss feed object pairs
+  bt.rss_feed.keys() -> list of all the currently available rss feed ids
+  bt.rss_feed.get(id) -> get a specific rss feed object
+
+Object
+~~~~~~
+
+The rss feed object is returned by bt.rss_feed.all/get. This object allows you
+to look into the metadata associated with the rss feed.
+
+::
+
+  id: 1 // This is meant to be a primary key and is immutable.
+  remove: function()
+  force_update: function() // Don't wait until the next update time, do it now
+
+In addition to these parameters and functions, there is two other object
+associated with rss feed objects:
+
+  - properties - The properties associated with this rss feed.
+  - item - An item associated with this rss feed.
+
+Properties
+**********
+
+For a discussion of the methods that the rss feed's properties implements, take
+a look at _`General Properties`.
+
+The properties specific to an rss feed are:
+
+::
+
+  enabled: true 
+  use_feed_title: true
+  user_selected: true
+  programmed: true
+  download_state: 1
+  url: 'rss://rss.utorrent.com'
+  next_update: 10 // unix timestamp
+  alias: 'test feed'
+  subscribe: true
+  smart_filter: true
+
+Items
+*****
+
+From rss_feed_obj.item, you can access all the items that are associated with a
+specific rss_feed itself via the normal means.
+
+::
+
+  
 
 RSS Filters
 ===========
