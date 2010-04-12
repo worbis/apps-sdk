@@ -14,9 +14,9 @@
  * documentation for how to write your own set of data to replay.
  */
 
-var bt = new bt.fn.init();
+var btapp = new btapp.fn.init();
 
-bt.fn = bt.prototype = {
+btapp.fn = btapp.prototype = {
   init: function() { },
   peer_id: 'foobar',
   settings: {
@@ -382,9 +382,6 @@ bt.fn = bt.prototype = {
       }
     }
   },
-  add: function() {
-
-  },
   rss_filter: {
     /*
      * Get an rss filter.
@@ -476,4 +473,4 @@ bt.fn = bt.prototype = {
   }
 }
 
-bt.fn.init.prototype = bt.fn;
+btapp.fn.init.prototype = btapp.fn;
