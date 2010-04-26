@@ -125,7 +125,7 @@ Properties
 **********
 
 For a discussion of the methods that the torrent's properties implements, take
-a look at _`General Properties`.
+a look at `General Properties`_.
 
 The properties specific to a torrent are:
 
@@ -209,7 +209,7 @@ associated with the peer object.
 - properties
 
 For a discussion of the methods that the peer's properties implements, take
-a look at _`General Properties`.
+a look at `General Properties`_.
 
 The properties specific to a peer are:
 
@@ -264,7 +264,7 @@ associated with the file object.
 - properties
 
 For a discussion of the methods that the file's properties implements, take a
-look at _`General Properties`.
+look at `General Properties`_.
 
 The properties specific to a file are:
 
@@ -322,7 +322,7 @@ Properties
 **********
 
 For a discussion of the methods that the rss feed's properties implements, take
-a look at _`General Properties`.
+a look at `General Properties`_.
 
 The properties specific to an rss feed are:
 
@@ -378,7 +378,7 @@ associated with rss feed item objects:
 - properties - The properties associated with this rss feed item.
 
 For a discussion of the methods that the item's properties implements, take a
-look at _`General Properties`.
+look at `General Properties`_.
 
 The properties specific to an item are:
 
@@ -427,7 +427,7 @@ associated with rss filter objects:
 - properties - The properties associated with this rss filter.
 
 For a discussion of the methods that the rss filter's properties implements,
-take a look at _`General Properties`.
+take a look at `General Properties`_.
 
 The properties specific to an rss filter are:
 

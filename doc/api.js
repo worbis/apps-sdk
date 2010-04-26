@@ -2,7 +2,6 @@
  * btapp API simulation
  *
  * Copyright(c) 2010 BitTorrent Inc.
- * License: ************
  *
  * Date: %date%
  * Version: %version%
@@ -14,9 +13,9 @@
  * documentation for how to write your own set of data to replay.
  */
 
-var btapp = new btapp.fn.init();
+var bt = new btapp.fn.init();
 
-btapp.fn = btapp.prototype = {
+bt.fn = bt.prototype = {
   init: function() { },
   peer_id: 'foobar',
   settings: {
@@ -38,12 +37,6 @@ btapp.fn = btapp.prototype = {
      * Available properties.
      *
      */
-    /*
-     * To implement your own settings simulator, extend btapp.fn with _settings
-     * (key/value pairs of settings). For an example, see fixtures/settings.js
-     *
-     * Note that this implementation assumes all settings are writable.
-     */
     all: function() {
       return this._settings;
     },
@@ -59,7 +52,8 @@ btapp.fn = btapp.prototype = {
     /*
      * Add an element
      * torrent() -> add a torrent by url or file path
-     * rss_feed() -> 
+     * rss_feed() -> Add a rss feed by url
+     * rss_Filter() -> Add a rss filter
      */
     torrent: function(url) {
       /*
@@ -92,9 +86,10 @@ btapp.fn = btapp.prototype = {
      */
     all: function() { },
     keys: function() { },
-    get: function(hash) { 
+    get: function(name) { 
       return {
-        hash: 'SHA', // This is meant to be the primary key and is immutable.
+        name: 'My Torrent', // This is meant to be the primary key and is
+                            // immutable.
         start: function(force) {},
         stop: function() {},
         pause: function() {},
@@ -264,9 +259,15 @@ btapp.fn = btapp.prototype = {
                 get: function(name) { },
                 set: function(name, value) { }
               },
+              open: function() {
+                /*
+                 * Open the file. This can be used to start playing video and
+                 * music from within your application.
+                 */
+              }
               get_data: function() {
                 /*
-                 * Get a file's complete binary data.
+                 * Get the file's complete binary data.
                  *
                  * Note that this is meant for small files and thusly there is a
                  * size limit on how much data can be read from a file.
