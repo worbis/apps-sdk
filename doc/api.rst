@@ -22,7 +22,9 @@ Properties
 
 Available properties:
 
-  - peer_id = "local_client" // This is the peer ID of your own client.
+::
+
+  peer_id = "local_client" // This is the peer ID of your own client.
 
 Settings
 ========
@@ -49,6 +51,19 @@ Add a variety of elements to the client.
   bt.add.rss_feed() -> Add a rss feed by url
   bt.add.rss_filter() -> Add an rss filter
 
+To add a torrent to your client, you'd simply run the following command.
+
+::
+
+  bt.add.torrent('http://vodo.net/media/torrents/VODO.Mixtape.1.2010.Xvid-VODO.torrent');
+
+Note that this operation will return instantly. The client will then go and
+download the torrent, adding it to the torrent list. If you want notification
+of this event, use the 'torrent_added' event.
+
+RSS Feeds that are added from within your application will show up within the
+'Feeds' menu on the client. This item will be associated with your application.
+
 Torrents
 ========
 
@@ -62,7 +77,17 @@ only the ones that your application added.
 
   bt.torrent.all() -> dictionary of hash/torrent object pairs
   bt.torrent.keys() -> list of all the currently available torrent hashes
-  bt.torrent.get(hash) -> get a specific torrent object
+  bt.torrent.get(name) -> get a specific torrent object
+
+It is generally a good idea to provide progress bars inside your application
+for torrents that it has added. An easy way to do this is by iterating through
+bt.torrent.all() and updating the local DOM elements.
+
+::
+
+  _.each(bt.torrent.all(), function(torrent, name) {
+    update_progress(name, torrent.properties.get('progress'));
+  });
 
 Object
 ~~~~~~
@@ -72,7 +97,7 @@ look into the metadata associated with this torrent.
 
 ::
 
-  hash: 'SHA' // This is meant to be the primary key and is immutable.
+  name: 'Test Torrent' // This is meant to be the primary key and is immutable.
   start: function(force)
     /*
      * force -> Instead of waiting to start, forces a start immediately.
@@ -83,12 +108,15 @@ look into the metadata associated with this torrent.
   recheck: function() 
   remove: function() 
 
-In addition to these parameters and functions, there are three objects
+Note that torrents will typically be started (or queued) automatically for you
+as part of the add operation.
+
+In addition to these parameters and methods, there are three objects
 associated with torrent objects:
 
-  - properties - The properties associated with this torrent.
-  - peer - The peers associated with this torrent.
-  - file - The files associated with this torrent.
+- properties - The properties associated with this torrent.
+- peer - The peers associated with this torrent.
+- file - The files associated with this torrent.
 
 Properties
 **********
@@ -131,11 +159,21 @@ The properties specific to a torrent are:
    download_url: 'http://utorrent.com'
    rss_feed_url: 'rss://rss.utorrent.com'
 
+It's easy to get any of these properties. To get the url that a torrent was
+downloaded from, you can:
+
+::
+
+  var torrent = bt.torrent.get('My Torrent');
+  console.log(torrent.properties.get('download_url'));
+
 Peers
 *****
 
-From torrent_obj.peer, you can access all the peers that are associated with
-a specific torrent itself via the normal means.
+From torrent_obj.peer, you can access all the peers that are associated with a
+specific torrent itself via the normal means. This is especially useful for
+broadcasting data to, and receiving data from, specific peers in a torrent's
+swarm.
 
 ::
 
@@ -162,10 +200,10 @@ used to get the metadata of a connected peer.
      *            this peer.
      */
 
-In addition to these parameters and functions, there is another object
+In addition to these parameters and methods, there is another object
 associated with the peer object.
 
-  - properties
+- properties
 
 For a discussion of the methods that the peer's properties implements, take
 a look at _`General Properties`.
@@ -180,7 +218,9 @@ Files
 *****
 
 From torrent_obj.file, you can access all the files that are associated with a
-specific torrent via. the normal means.
+specific torrent via. the normal means. The file object is especially useful
+for opening or playing specific files in a torrent from directly in your
+application. This allows users an easy way to consume your content.
 
 ::
 
@@ -195,16 +235,30 @@ used to get the metadata of a specific file.
 
   torrent = torrent_obj // The parent torrent
   index: 1 // Index of this file in the torrent
+  open: function() // Open this file (or play if this is a video/audio file)
+                   // for the user.
   get_data: function() // Get the complete binary data of a file
     /*
      * Note that this is meant for small files and thusly there is a size limit
      * on how large a file can be.
      */
 
-In addition to these parameters and functions, there is another object
+A common use for files is to present users with a 'Play' button that allows
+them to watch the content they just downloaded. A way to do this is:
+
+::
+
+  var files = bt.torrent.get('My Torrent').file.all();
+  // It's likely that we can play the largest file by default since that is
+  // most likely to be the video.
+  _(files).chain().values().sort(function(file_a, file_b) {
+    return file_a.properties.get('size') > file_b.properties.get('size');
+  }).value()[0].open();
+
+In addition to these parameters and methods, there is another object
 associated with the file object.
 
-  - properties
+- properties
 
 For a discussion of the methods that the file's properties implements, take a
 look at _`General Properties`.
@@ -218,13 +272,24 @@ The properties specific to a file are:
   downloaded: 100 // bytes
   priority: 1 // int
 
+To present a user with progress for a specific file, you could:
+
+::
+
+  var file = bt.torrent.get('My Torrent').file.get('my_awsome_file.mov');
+  var progress = file.properties.get('downloaded') / 
+    file.properties.get('size');
+
 RSS Feeds
 =========
 
 Access all operations that have to do with rss feeds at bt.rss_feed. This will
 allow you to access metadata about the rss feeds that you have added. The
 sandbox restricts the rss feeds that you're available to see down to only the
-ones that your application added.
+ones that your application added. 
+
+Remember that feeds you've added from within your application will also show up
+in the RSS feeds section of the client and be associated with your application.
 
 ::
 
@@ -244,11 +309,11 @@ to look into the metadata associated with the rss feed.
   remove: function() // Remove this feed.
   force_update: function() // Don't wait until the next update time, do it now
 
-In addition to these parameters and functions, there are two other objects
+In addition to these parameters and methods, there are two other objects
 associated with rss feed objects:
 
-  - properties - The properties associated with this rss feed.
-  - item - An item associated with this rss feed.
+- properties - The properties associated with this rss feed.
+- item - An item associated with this rss feed.
 
 Properties
 **********
@@ -291,10 +356,23 @@ to get the metadata of an rss feed's item.
   feed: rss_feed_obj // The parent rss feed
   id: 1 // ID of this specific feed
 
-In addition to these parameters and functions, there are two other objects
+To keep from using any kind of JSONP to update the torrents that are available
+from an application, it is possible to use RSS Feeds. The entire process would
+look something like this:
+
+::
+
+  bt.add.rss_feed('http://utorrent.com/rss.xml');
+  var feed = bt.rss_feed.get('1);
+  feed.force_update();
+  _.each(feed.item.all(), function(item) {
+    render_item(item.properties.get('name'), item.properties.get('url'));
+  });
+
+In addition to these parameters and methods, there are two other objects
 associated with rss feed item objects:
 
-  - properties - The properties associated with this rss feed item.
+- properties - The properties associated with this rss feed item.
 
 For a discussion of the methods that the item's properties implements, take a
 look at _`General Properties`.
@@ -340,10 +418,10 @@ you to look into the metadata associated wit the rss filter.
   id: 1 // This is meant to be a primary key and is immutable.
   remove: function() // Remove this filter.
 
-In addition to these parameters and functions, there is one other object
+In addition to these parameters and methods, there is one other object
 associated with rss filter objects:
 
-  - properties - The properties associated with this rss filter.
+- properties - The properties associated with this rss filter.
 
 For a discussion of the methods that the rss filter's properties implements,
 take a look at _`General Properties`.
@@ -403,6 +481,27 @@ these methods:
   bt.stash.get(key) -> The JSON decoded data of a specific key
   bt.stash.set(key, value) -> A key and JSON serializable value to save to the 
                               stash.
+
+Operations on the stash end up being very important to the user experience of
+your application. It allows you to save your application's state between
+application restarts. Any kind of network operation should have its results
+saved to the stash so that users can see results as quickly as possible when
+using your application.
+
+::
+
+  $.ajax({
+    url: 'http://vodo.net/jsonp/releases/all',
+    dataType: 'jsonp',
+    success: function(items) {
+      bt.stash.set('items', items);
+      render_response(items);
+    }
+  });
+
+Another thing to note is that all input/output from the stash is passed through
+a JSON parser. This allows you to pass any native javascript objects into
+stash.set and get native json objects out from stash.get.
 
 General Properties
 ==================
