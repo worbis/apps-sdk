@@ -38,18 +38,20 @@ var bt = {
 
   window.btapp = {
     stash: {
-      _set_cookie: function(key, value) {
-        document.cookie = key + '=' + value + '; path=/';
-      },
-      _get_cookies: function() {
-        _(document.cookie.split(';')).chain().map(function(v) { 
-          return v.split('='); }).reduce({}, function(acc, val) { 
+      _get_data: function() {
+        return _($.jStorage.get('index', [])).chain().map(function(v) {
+          return [v, $.jStorage.get(v)];
+        }).reduce({}, function(acc, val) { 
             acc[val[0]] = val[1]; return acc }).value();
       },
-      all: function() { return btapp.stash._get_cookies(); },
+      _set_data: function(key, value) {
+        $.jStorage.set('index', $.jStorage.get('index', []).concat([key]));
+        $.jStorage.set(key, value);
+      },
+      all: function() { return btapp.stash._get_data(); },
       keys: function() { return _.keys(btapp.stash.all()) },
       get: function(k) { return btapp.stash.all()[k]; },
-      set: function(k, v) { btapp.stash._set_cookie(k, v); }
+      set: function(k, v) { btapp.stash._set_data(k, v); }
     }
   };
 })();
