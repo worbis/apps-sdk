@@ -1,7 +1,7 @@
 /*
  * Base of the bt convenience object for creating Griffin applications
  *
- * Copyright(c) <%= Time.now.year %> BitTorrent Inc.
+ * Copyright(c) 2010 BitTorrent Inc.
  * License: ************
  *
  * Date: %date%
