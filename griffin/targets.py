@@ -15,6 +15,8 @@ available_targets = ['develop', 'build', 'package', 'test', 'serve']
 import json
 import os
 
+import griffin.templates
+
 class PackageSyntax(Exception):
 
     def __init__(self, name, package, err):
@@ -89,10 +91,11 @@ class Package(object):
             return []
         lib_path = ''
         if not 'directories' in self.manifest:
-            lib_path = 'lib/'
+            lib_path = os.path.join(self.location, 'lib/')
         elif 'lib' in self.manifest['directories']:
-            lib_path = self.manifest['directories']['lib']
-        return self._lib_dependencies(lib_path) + self._package_dependencies()
+            lib_path = os.path.join(self.location,
+                                    self.manifest['directories']['lib'])
+        return self._package_dependencies() + self._lib_dependencies(lib_path)
 
     def _lib_dependencies(self, path):
         if not 'lib' in self.manifest['bt:dependencies']:
@@ -125,23 +128,18 @@ class Package(object):
                 raise PackageWrongVersion(name, package_obj.location,
                                           package_obj.manifest['version'],
                                           package['version'])
-            dependencies += [os.path.join(package['name'], x) for x in
-                             package_obj.dependencies()]
+            dependencies += package_obj.dependencies()
         return dependencies
 
 class Target(object):
 
-    def __init__(self, app_dir, package_dir, debug=False):
+    def __init__(self, app_dir, search_path, debug=False):
         self.debug = debug
         self.app_dir = app_dir
-        self.manifest = self.package(self.app_dir)
-        self.package_dir = package_dir
+        self.package = Package('', app_dir, search_path)
+        self.dependencies = self.package.dependencies()
 
-    def package(self, path='.', fname='package.json'):
-        try:
-            return json.load(open(os.path.join(path, fname)))
-        except ValueError as err:
-            raise PackageSyntax(os.path.join(path, fname), err)
+
 
 class develop(Target):
     pass

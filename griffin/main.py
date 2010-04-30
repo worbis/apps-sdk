@@ -23,7 +23,7 @@ if __name__ == '__main__':
     parser.add_option('-p', '--path', default='.',
                       help='The path to your application. This defaults to ' \
                           'the local directory.')
-    parser.add_option('-s', '--sdk', default='package',
-                      help='The path to the location that the griffin ' \
-                          'toolkit was installed. This defaults to package/.')
+    parser.add_option('-s', '--search-path', default=['package'], type=list
+                      help='The search paths to use for locating package ' \
+                      'dependencies.')
 
