@@ -1,0 +1,8 @@
+setup.py
+griffin/__init__.py
+griffin/main.py
+griffin/targets.py
+griffin.egg-info/PKG-INFO
+griffin.egg-info/SOURCES.txt
+griffin.egg-info/dependency_links.txt
+griffin.egg-info/top_level.txt

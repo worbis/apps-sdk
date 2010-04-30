@@ -1,0 +1,33 @@
+{ "name": "griffin",
+  "version": "0.1",
+  "description": "Griffin provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client.",
+  "site": "http://griffin.bittorrent.com",
+  "author": "Thomas Rampelberg <thomas@bittorrent.com>",
+  "maintainers": [ { "name": "Thomas Rampelberg",
+                     "email": "thomas@bittorrent.com"
+                   }
+                 ],
+  "licenses": [ { "type": "New BSD License",
+                  "url": "http://www.opensource.org/licenses/bsd-license.php"
+                }
+              ],
+  "keywords": ["bittorrent", "griffin", "utorrent", "application"],
+  "repositories": [ { "type": "git",
+                      "url": "git@github.com:bittorrent/griffin.git"
+                    }
+                  ],
+  "directories": {
+    "src": "src",
+    "lib": "lib",
+    "doc": "doc",
+    "test": "test"
+  },
+  "bt:dependencies": {
+    "lib": [ { "name": "jquery" },
+             { "name": "underscore" },
+             { "name": "jquery.json" },
+             { "name": "jstorage" }
+    ]
+  },
+  "bt:publisher": "BitTorrent, Inc."
+}
