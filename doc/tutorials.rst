@@ -1,6 +1,4 @@
-------------
-Hello World
-------------
+.. contents::
 
 Welcome to Griffin! Griffin provides a powerful, rich javascript framework that
 allows you to build applications for the BitTorrent client. This tutorial will
@@ -12,7 +10,7 @@ If, at any time you'd like to see a complete version of the app that this
 tutorial builds, take a look at `Hello World
 <http://github.com/bittorrent/griffin/tree/master/examples/hello_world>`_.
 
-.. contents::
+
 
 Setup
 =====
