@@ -12,8 +12,7 @@ If, at any time you'd like to see a complete version of the app that this
 tutorial builds, take a look at `Hello World
 <http://github.com/bittorrent/griffin/tree/master/examples/hello_world>`_.
 
-.. contents:: Table of Contents
-   :depth: 2
+.. contents::
 
 Setup
 =====
