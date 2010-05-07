@@ -12,8 +12,11 @@ __version__ = "%version%"
 
 available_targets = ['develop', 'build', 'package', 'test', 'serve']
 
+import itertools
 import json
+import logging
 import os
+import shutil
 
 import griffin.templates
 
@@ -70,6 +73,22 @@ class MissingDependency(Exception):
         return 'The %s dependency (version=%s) could not be found at %s' % (
             self.lib, self.version, self.path)
 
+class Dependency(object):
+
+    def __init__(self, package, path):
+        self.package = package
+        self.path = path
+
+    def __str__(self):
+        return '(%s, %s)' % (self.package, self.path)
+
+    def source(self):
+        return self.path
+
+    def destination(self):
+        return 'lib/%s' % (self.package,) if self.package else '' + \
+            os.path.basename(self.path)
+
 class Package(object):
 
     def __init__(self, name, location, search_path):
@@ -77,6 +96,7 @@ class Package(object):
         self.location = location
         self.search_path = search_path
         self.manifest = self.parse_manifest()
+        self.files = [Dependency(name, x) for x in self.app_files()]
 
     def parse_manifest(self):
         try:
@@ -106,13 +126,14 @@ class Package(object):
             fname = os.path.join(path, '%s%s.js' % (lib['name'], version))
             if not os.path.exists(fname):
                 raise MissingDependency(path, lib['name'], version)
-            dependencies.append(fname)
+            dependencies.append(('lib', fname))
         return dependencies
 
     def locate_package(self, name):
         for path in self.search_path:
             location = os.path.join(path, name)
-            if os.path.exists(location):
+            if os.path.exists(location) and os.path.exists(
+                os.path.join(location, 'package.json')):
                 return location
         raise PackageDNE(name, self.search_path)
 
@@ -128,8 +149,20 @@ class Package(object):
                 raise PackageWrongVersion(name, package_obj.location,
                                           package_obj.manifest['version'],
                                           package['version'])
-            dependencies += package_obj.dependencies()
+            dependencies += package_obj.file_list()
         return dependencies
+
+    def flatten(self, listOfLists):
+        return itertools.chain.from_iterable(listOfLists)
+
+    def app_files(self):
+        src_dir = self.manifest['directories'].get('src', 'src')
+        return self.flatten(
+            [[Dependency('.', os.path.join(x, i)) for i in z]
+             for x,y,z in os.walk(src_dir)])
+
+    def file_list(self):
+        return self.dependencies() + self.files
 
 class Target(object):
 
@@ -139,10 +172,37 @@ class Target(object):
         self.package = Package('', app_dir, search_path)
         self.dependencies = self.package.dependencies()
 
+    def setup_files(self):
+        build_dir = self.package.manifest['directories'].get('build', '_build')
+        try:
+            shutil.rmtree(build_dir)
+        except OSError:
+            pass
+        os.makedirs(os.path.join(build_dir, 'lib'))
+        index = open(os.path.join(build_dir, 'index.html'), 'w')
+        for dep in self.package.app_files():
+            self.move(dep.path, os.path.join(build_dir,
+                                             os.path.basename(dep.path)))
+        for dep in self.dependencies:
+            if not os.path.exists(os.path.join(build_dir, 'lib', dep.package)):
+                os.makedirs(os.path.join(build_dir, 'lib', dep.package))
+            self.move(dep.path, os.path.join(
+                    os.path.join(build_dir, 'lib', dep.package),
+                    os.path.basename(dep.path)))
+        includes = [x.destination for x in self.package.app_files() +
+        includes = [os.path.basename(x) for x in self.package.app_files()] + \
+            [os.path.join('lib', os.path.basename(x)) for x in
+             self.dependencies]
+        index.write(griffin.templates.render_template(
+                'index_html', debug=self.debug, dependencies=includes))
 
+    def run(self):
+        self.setup_files()
 
 class develop(Target):
-    pass
+
+    def move(self, source, target):
+        os.symlink(source, target)
 
 class build(Target):
 
@@ -151,6 +211,9 @@ class build(Target):
     def __init__(self, *args, **kwargs):
         Target.__init__(self, *args, **kwargs)
         self.build_dir = os.path.join(self.app_dir, '../build')
+
+    def move(self, source, target):
+        shutil.copy2(source, target)
 
     def btapp(self):
         fobj = open(os.path.join(self.build_dir, 'btapp'), 'w')
