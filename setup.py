@@ -21,4 +21,6 @@ setup(
     author = __author__,
     author_email = __author_email__,
     description = "Build tool to develop, build and package griffin apps.",
+    install_requires = [ 'mako' ],
+    include_package_data = True,
     )

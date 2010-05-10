@@ -21,7 +21,7 @@ class Project(object):
 
     def __init__(self, name, update_url='http://localhost'):
         self.name = name
-        self.update = update
+        self.update_url = update_url
 
     def create_dirs(self):
         for i in self.dirs:
@@ -33,7 +33,7 @@ class Project(object):
             btapp.write('%s:%s\n' % (i, getattr(self, i)))
         btapp.close()
 
-    def sample(self):
+    def create(self):
         self.create_dirs()
         self.create_btapp()
         self.create_icon()
@@ -42,14 +42,16 @@ class Project(object):
 
     def create_icon(self):
         shutil.copy(pkg_resources.resource_filename(
-                griffin.data, 'icon.bmp'), 'icon.bmp')
+                'griffin.data', 'icon.bmp'),
+                    os.path.join(self.name, 'icon.bmp'))
 
     def create_main(self):
         shutil.copy(pkg_resources.resource_filename(
-                griffin.data, 'main.html'), 'main.html')
+                'griffin.data', 'main.html'),
+                    os.path.join(self.name, 'html', 'index.html'))
 
     def create_javascript(self):
-
+        pass
 
 if __name__ == '__main__':
     usage = "usage: %prog [options] name"
@@ -57,6 +59,8 @@ if __name__ == '__main__':
 
     (options, args) = parser.parse_args()
 
-    if not args[0]:
+    if len(args) < 1:
         print 'Must include a project name.'
         sys.exit(1)
+
+    Project(args[0]).create()
