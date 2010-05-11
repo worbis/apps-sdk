@@ -90,7 +90,7 @@ following text:
       <h1>Hello World!</h1>
     </body>
   </html>
-  
+
 Feel free to open this up in your browser of choice. Since Griffin applications
 are just html, css and javascript. It makes sense to do a lot of the
 development inside your favorite browser with all the debug tools that come
@@ -110,7 +110,7 @@ to get this all packaged is:
   $ zip -r ../hello.btapp .
 
 This command will recursively zip up everything in the local directory and
-package it into a hello.btapp file. 
+package it into a hello.btapp file.
 
 Installation
 ============
@@ -122,7 +122,7 @@ client. Let's use that method now.
 
 Take hello.btapp and drag it onto your client. You should be prompted as to
 whether the app should be installed or not. You've now got your first
-application installed! 
+application installed!
 
 Use
 ===
@@ -131,3 +131,4 @@ Under the apps icon, there should now be "Hello World!". Clicking on that will
 bring up your application. Unfortunately, there isn't much to do yet. Let's
 work on that.
 
+XXX - Need to add a how to bundle an app with the client tutorial

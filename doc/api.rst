@@ -106,10 +106,10 @@ look into the metadata associated with this torrent.
      * force -> Instead of waiting to start, forces a start immediately.
      */
   stop: function()
-  pause: function() 
-  unpause: function() 
-  recheck: function() 
-  remove: function() 
+  pause: function()
+  unpause: function()
+  recheck: function()
+  remove: function()
 
 Note that torrents will typically be started (or queued) automatically for you
 as part of the add operation.
@@ -220,10 +220,14 @@ The properties specific to a peer are:
 Files
 *****
 
-From torrent_obj.file, you can access all the files that are associated with a
-specific torrent via. the normal means. The file object is especially useful
-for opening or playing specific files in a torrent from directly in your
-application. This allows users an easy way to consume your content.
+XXX - This is unclear and needs to be reworked.
+
+After getting a torrent object from bt.torrent.get() or bt.torrent.all(), you
+can access all the files that are associated with a specific torrent via. the
+"file" attribute. This attribute returns file objects in the normal
+fashion. The file object is especially useful for opening or playing specific
+files in a torrent from directly in your application. This allows users an easy
+way to consume your content.
 
 ::
 
@@ -269,7 +273,7 @@ look at `General Properties`_.
 The properties specific to a file are:
 
 ::
-  
+
   name: 'test'
   size: 1000 // bytes
   downloaded: 100 // bytes
@@ -280,7 +284,7 @@ To present a user with progress for a specific file, you could:
 ::
 
   var file = bt.torrent.get('My Torrent').file.get('my_awsome_file.mov');
-  var progress = file.properties.get('downloaded') / 
+  var progress = file.properties.get('downloaded') /
     file.properties.get('size');
 
 RSS Feeds
@@ -289,7 +293,7 @@ RSS Feeds
 Access all operations that have to do with rss feeds at bt.rss_feed. This will
 allow you to access metadata about the rss feeds that you have added. The
 sandbox restricts the rss feeds that you're available to see down to only the
-ones that your application added. 
+ones that your application added.
 
 Remember that feeds you've added from within your application will also show up
 in the RSS feeds section of the client and be associated with your application.
@@ -328,7 +332,7 @@ The properties specific to an rss feed are:
 
 ::
 
-  enabled: true 
+  enabled: true
   use_feed_title: true
   user_selected: true
   programmed: true
@@ -482,7 +486,7 @@ these methods:
   bt.stash.all() -> All the data stored in the stash in key/value pairs
   bt.stash.keys() -> The keys of all data stored in the stash
   bt.stash.get(key) -> The JSON decoded data of a specific key
-  bt.stash.set(key, value) -> A key and JSON serializable value to save to the 
+  bt.stash.set(key, value) -> A key and JSON serializable value to save to the
                               stash.
 
 Operations on the stash end up being very important to the user experience of
@@ -514,7 +518,7 @@ There are four methods that all properties objects have:
 ::
 
   all: function() // Get all the properties associated with this object.
-  keys: function() // Get only the names of the properties associated with 
+  keys: function() // Get only the names of the properties associated with
                    // this object.
   get: function(name) // Get a specific property's value from this object.
   set: function(name, value) // Set a specific property's value for this object.
@@ -522,4 +526,4 @@ There are four methods that all properties objects have:
 Note that the API suggests what properties might be returned, but to really
 know what actually is being returned, it is suggested that the developer should
 introspect bt.settings.all() or bt.settings.keys() to discover what settings
-their application can actually see.  
+their application can actually see.

@@ -22,12 +22,11 @@
     "doc": "doc",
     "test": "test"
   },
-  "bt:dependencies": {
-    "lib": [ { "name": "jquery" },
-             { "name": "underscore" },
-             { "name": "jquery.json" },
-             { "name": "jstorage" }
-    ]
+  "bt:libs": {
+    "jquery": "1.4.2",
+    "underscore": "~",
+    "jquery.json": "~",
+    "jstorage": "~"
   },
   "bt:publisher": "BitTorrent, Inc."
 }
