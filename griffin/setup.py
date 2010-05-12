@@ -8,6 +8,7 @@ Setup the griffin directory structure.
 """
 
 import json
+import mako.template
 import optparse
 import os
 import pkg_resources
@@ -15,6 +16,7 @@ import shutil
 import sys
 import tempfile
 import urllib2
+import zipfile
 
 import griffin.data
 
@@ -31,6 +33,8 @@ class Project(object):
         try:
             self.package = json.load(open(os.path.join(self.name,
                                                        'package.json'), 'r'))
+            self.name = self.package['name']
+            self.update_url = self.package['update_url']
         except:
             self.package = {
                 'name': self.name,
@@ -42,12 +46,13 @@ class Project(object):
                 'bt:publisher': 'Default Publisher',
                 'bt:update_url': self.update_url,
                 'bt:libs': [
-                    'http://10.20.30.79/apps/lib/griffin.pkg'
+                    { 'name': 'griffin',
+                      'url': 'http://10.20.30.79/apps/lib/griffin.pkg' }
                     ]
                 }
 
-    def update_libs(self, url):
-        if not url in self.package['bt:libs']:
+    def update_libs(self, name, url):
+        if not name in [x['name'] for x in self.package['bt:libs']]:
             self.package['bt:libs'].append(url)
         self.write_package()
 
@@ -64,19 +69,23 @@ class Project(object):
         btapp.close()
 
     def write_package(self):
-        print self.package
         json.dump(self.package,
                   open(os.path.join(self.name, 'package.json'), 'w'),
                   indent=4)
 
     def create(self):
+        if os.path.exists(self.name):
+            print 'The project already exists. Remove it if ' \
+                         'you\'d like to create it again.'
+            sys.exit(1)
         self.create_dirs()
         self.write_package()
         self.create_btapp()
         self.create_icon()
         self.create_main()
-        for url in self.package['bt:libs']:
-            self.add(url)
+        for pkg in self.package['bt:libs']:
+            self.add(pkg['url'])
+        self.index()
 
     def create_icon(self):
         shutil.copy(pkg_resources.resource_filename(
@@ -88,21 +97,79 @@ class Project(object):
                 'griffin.data', 'main.html'),
                     os.path.join(self.name, 'html', 'index.html'))
 
-    def add(self, url):
+    def add(self, url, update=True):
         handlers = { '.js': self._add_javascript,
                      '.pkg': self._add_pkg
                      }
         fp, fname = tempfile.mkstemp()
-        open(fname, 'w').write(urllib2.urlopen(url).read())
-        handlers[os.path.splitext(url)[-1]](fname,
-                                            os.path.split(url)[-1])
-        self.update_libs(url)
+        try:
+            open(fname, 'w').write(urllib2.urlopen(url).read())
+        except urllib2.HTTPError:
+            print 'The file at <%s> is missing.' % (url,)
+            sys.exit(1)
+        name = handlers[os.path.splitext(url)[-1]](fname,
+                                                   os.path.split(url)[-1])
+        if update:
+            self.update_libs(name, url)
 
     def _add_javascript(self, source, fname):
         shutil.move(source, os.path.join(self.name, 'packages', fname))
+        return os.path.splitext(fname)[0]
 
     def _add_pkg(self, source, fname):
-        pass
+        pkg = zipfile.ZipFile(source)
+        pkg_manifest = json.loads(pkg.read('package.json'))
+        pkg_root = os.path.join(self.name, 'packages', pkg_manifest['name'])
+        tmpdir = tempfile.mkdtemp(dir=os.path.join(self.name, 'packages'))
+        # Move over the package specific files
+        for finfo in pkg.infolist():
+            if 'lib' == finfo.filename[:3]:
+                pkg.extract(finfo.filename, tmpdir)
+        # This is because I'm lazy ....
+        shutil.copytree(os.path.join(tmpdir, 'lib'), pkg_root)
+        shutil.rmtree(tmpdir)
+        pkg.extract('package.json', pkg_root)
+        # Handle the dependencies specifically
+        for pkg in pkg_manifest['bt:libs']:
+            self.add(pkg['url'], False)
+        return pkg_manifest['name']
+
+    def index(self):
+        template = mako.template.Template(
+            filename=pkg_resources.resource_filename(
+                'griffin.data', 'index.html'))
+        index = open(os.path.join(self.name, 'index.html'), 'w')
+        index.write(template.render(scripts=self._scripts_list(self.package),
+                                    styles=self._styles_list()))
+        index.close()
+
+    def _styles_list(self):
+        return [os.path.join('css', x) for x in
+                filter(lambda x: os.path.splitext(x)[1] == '.css',
+                       os.listdir(os.path.join(self.name, 'css')))]
+
+    def _scripts_list(self, package):
+        handlers = { '.js': self._list_lib,
+                     '.pkg': self._list_pkg
+                     }
+        scripts = []
+        for lib in package['bt:libs']:
+            scripts += handlers[os.path.splitext(lib['url'])[-1]](lib)
+        return scripts
+
+    def _list_lib(self, lib):
+        return [os.path.join('packages', os.path.split(lib['url'])[-1])]
+
+    def _list_pkg(self, pkg):
+        pkg_scripts = self._scripts_list(
+            json.load(open(os.path.join(self.name, 'packages', pkg['name'],
+                                   'package.json'))))
+        pkg_scripts += filter(lambda x: x != 'package.json',
+                              os.listdir(os.path.join(self.name, 'packages',
+                                                      pkg['name'])))
+        return pkg_scripts
+
+
 
 if __name__ == '__main__':
     usage = "usage: %prog [options] name"

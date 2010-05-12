@@ -8,23 +8,12 @@ Serve an application locally for development.
 """
 
 import BaseHTTPServer
-from mako.template import Template
 import optparse
 import os
 import pkg_resources
 import SimpleHTTPServer
 
-def styles():
-    return [os.path.join('css', x) for x in
-            filter(lambda x: os.path.splitext(x)[1] == '.css',
-                   os.listdir('css'))]
-
-def generate_index():
-    template = Template(filename=pkg_resources.resource_filename(
-            'griffin.data', 'index.html'))
-    index = open('index.html', 'w')
-    index.write(template.render(scripts=[], styles=styles()))
-    index.close()
+import griffin.setup
 
 def listen(port):
     httpd = BaseHTTPServer.HTTPServer(
@@ -42,5 +31,5 @@ if __name__ == '__main__':
         args.append('.')
 
     os.chdir(args[0])
-    generate_index()
+    griffin.setup.Project('.').index()
     listen(options.port)

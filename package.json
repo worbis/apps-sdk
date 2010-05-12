@@ -22,11 +22,14 @@
     "doc": "doc",
     "test": "test"
   },
-  "bt:libs": {
-    "jquery": "1.4.2",
-    "underscore": "~",
-    "jquery.json": "~",
-    "jstorage": "~"
-  },
+  "bt:libs": [ { "name": "jquery",
+                 "url": "http://10.20.30.79/apps/lib/jquery.js" },
+               { "name": "underscore",
+                 "url": "http://10.20.30.79/apps/lib/underscore.js" },
+               { "name": "jquery.json",
+                 "url": "http://10.20.30.79/apps/lib/jquery.json.js" },
+               { "name": "jstorage",
+                 "url": "http://10.20.30.79/apps/lib/jstorage.js" }
+  ],
   "bt:publisher": "BitTorrent, Inc."
 }
