@@ -33,8 +33,6 @@ class Project(object):
         try:
             self.package = json.load(open(os.path.join(self.name,
                                                        'package.json'), 'r'))
-            self.name = self.package['name']
-            self.update_url = self.package['update_url']
         except:
             self.package = {
                 'name': self.name,
@@ -155,6 +153,9 @@ class Project(object):
         scripts = []
         for lib in package['bt:libs']:
             scripts += handlers[os.path.splitext(lib['url'])[-1]](lib)
+        if package == self.package:
+            scripts += [os.path.join('lib', x) for x in
+                        os.listdir(os.path.join(self.name, 'lib'))]
         return scripts
 
     def _list_lib(self, lib):
@@ -164,9 +165,10 @@ class Project(object):
         pkg_scripts = self._scripts_list(
             json.load(open(os.path.join(self.name, 'packages', pkg['name'],
                                    'package.json'))))
-        pkg_scripts += filter(lambda x: x != 'package.json',
-                              os.listdir(os.path.join(self.name, 'packages',
-                                                      pkg['name'])))
+        pkg_scripts += [os.path.join('packages', pkg['name'], x) for x in
+                        filter(lambda x: x != 'package.json',
+                               os.listdir(os.path.join(self.name, 'packages',
+                                                       pkg['name'])))]
         return pkg_scripts
 
 
