@@ -43,6 +43,8 @@ class Project(object):
                 'keywords': [ 'default' ],
                 'bt:publisher': 'Default Publisher',
                 'bt:update_url': self.update_url,
+                'bt:release_date': '00/00/0000',
+                'bt:description': 'This is the default app.',
                 'bt:libs': [
                     { 'name': 'griffin',
                       'url': 'http://10.20.30.79/apps/lib/griffin.pkg' }
@@ -59,7 +61,8 @@ class Project(object):
             os.makedirs(os.path.join(self.name, i))
 
     def create_btapp(self):
-        keys = [ 'name', 'version', 'bt:publisher', 'bt:update_url' ]
+        keys = [ 'name', 'version', 'bt:publisher', 'bt:update_url',
+                 'bt:release_date', 'bt:description' ]
         btapp = open(os.path.join(self.name, 'btapp'), 'w')
         for i in keys:
             btapp.write('%s:%s\n' % (i.split(':')[-1],
@@ -152,10 +155,12 @@ class Project(object):
                      }
         scripts = []
         for lib in package['bt:libs']:
-            scripts += handlers[os.path.splitext(lib['url'])[-1]](lib)
+            scripts += filter(lambda x: not x in scripts,
+                              handlers[os.path.splitext(lib['url'])[-1]](lib))
         if package == self.package:
-            scripts += [os.path.join('lib', x) for x in
-                        os.listdir(os.path.join(self.name, 'lib'))]
+            scripts += filter(lambda x: not x in scripts,
+                              [os.path.join('lib', x) for x in
+                               os.listdir(os.path.join(self.name, 'lib'))])
         return scripts
 
     def _list_lib(self, lib):
