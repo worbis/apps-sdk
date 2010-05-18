@@ -1,13 +1,9 @@
-***********************************************************
-Griffin Software Development Kit
-***********************************************************
 
-.. contents:: Table of Contents
-  :depth: 2
-  :backlinks: none
+# Griffin Software Development Kit
 
-Introduction
-============
+[TOC]
+
+## Introduction
 
 Griffin makes it possible to create a native application that runs inside the
 BitTorrent client. This allows developers to create their own interface which
@@ -23,8 +19,7 @@ application.
 
 For more information, see http://griffin.bittorrent.com.
 
-System Requirements
-===================
+## System Requirements
 
 To run an application, all you need is the BitTorrent client itself. For
 testing of your application, you can either use the BitTorrent client or your
@@ -37,27 +32,26 @@ To build Griffin itself, you'll need the following tools:
 Also, if you'd like to stay up to date with the latest developments as well as
 contribute your work back to the Griffin community, you'll want to install Git:
 
-  http://git-scm.com/. 
+    http://git-scm.com/. 
 
 The entire Griffin project can be found at:
-  http://github.com/bittorrent/griffin/.
 
-Getting Started
-===============
+    http://github.com/bittorrent/griffin/.
+
+## Getting Started
 
 These instructions are for building a development copy of Griffin. If you'd
 just like to get started using Griffin for your web apps, you should instead
 download a pre-packaged and compiled copy from:
 
-  http://griffin.bittorrent.com/download/
+    http://griffin.bittorrent.com/download/
 
 To build Griffin from source, type "make" from within the root of the Griffin
 directory. This will build a release copy of the kit. Typing "make debug" will
 build a debug version and "make install" will build and install Griffin and its
 associated tools for general use.
 
-Getting Help
-============
+## Getting Help
 
 If you need help with Griffin, you can get help from the following sources:
 
@@ -72,14 +66,12 @@ If you discover any bugs, please file a ticket at:
 
   http://griffin.bittorrent.com/issues
 
-More Information
-================
+## More Information
 
   - Tutorials:          http://griffin.bittorrent.com/doc/tutorials
   - Programming Guide:  http://griffin.bittorrent.com/doc/programming_guide
   - API:                http://griffin.bittorrent.com/doc/api
   - Design:             http://griffin.bittorrent.com/doc/design
 
-License
-=======
+## License
 
