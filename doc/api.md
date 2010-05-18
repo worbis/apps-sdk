@@ -1,11 +1,18 @@
 # Overview
 
 The Griffin API provides applications a method to interface with the BitTorrent
-client the application has been installed within. The API allows sandboxed
-access to the client for tasks such as adding a torrent or an rss feed.
+client that an application has been installed within. The API allows sandboxed
+access to the client for tasks such as adding a torrent or an rss feed. This
+document outlines the raw interface presented by the client. If you'd like a
+somewhat more user friendly version, check out the 
+[SDK](https://github.com/bittorrent/griffin/blob/master/doc/SDK.md).
 
 For those that prefer to look at code instead of documentation, take a look at
 [api.js](https://github.com/bittorrent/griffin/blob/master/doc/api.js).
+
+# SDK
+
+
 
 # Sandbox
 
