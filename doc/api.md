@@ -5,7 +5,7 @@ client the application has been installed within. The API allows sandboxed
 access to the client for tasks such as adding a torrent or an rss feed.
 
 For those that prefer to look at code instead of documentation, take a look at
-`api.js <api.js>`_.
+[api.js](https://github.com/bittorrent/griffin/blob/master/doc/api.js).
 
 # Sandbox
 
@@ -98,7 +98,7 @@ associated with torrent objects:
 ## Properties
 
 For a discussion of the methods that the torrent's properties implements, take
-a look at [General Properties][test].
+a look at General Properties.
 
 The properties specific to a torrent are:
 
@@ -173,7 +173,7 @@ associated with the peer object.
 - properties
 
 For a discussion of the methods that the peer's properties implements, take
-a look at [General Properties]{#properties}.
+a look at General Properties.
 
 The properties specific to a peer are:
 
@@ -223,7 +223,7 @@ associated with the file object.
 - properties
 
 For a discussion of the methods that the file's properties implements, take a
-look at [General Properties]{#properties}.
+look at General Properties.
 
 The properties specific to a file are:
 
@@ -270,7 +270,7 @@ associated with rss feed objects:
 ## Properties
 
 For a discussion of the methods that the rss feed's properties implements, take
-a look at [General Properties]{#properties}.
+a look at General Properties.
 
 The properties specific to an rss feed are:
 
@@ -317,7 +317,7 @@ associated with rss feed item objects:
 - properties - The properties associated with this rss feed item.
 
 For a discussion of the methods that the item's properties implements, take a
-look at [General Properties]{#properties}.
+look at General Properties.
 
 The properties specific to an item are:
 
@@ -358,7 +358,7 @@ associated with rss filter objects:
 - properties - The properties associated with this rss filter.
 
 For a discussion of the methods that the rss filter's properties implements,
-take a look at [General Properties]{#properties}.
+take a look at General Properties.
 
 The properties specific to an rss filter are:
 
@@ -427,7 +427,7 @@ Another thing to note is that all input/output from the stash is passed through
 a JSON parser. This allows you to pass any native javascript objects into
 stash.set and get native json objects out from stash.get.
 
-# General Properties [test]
+# General Properties
 
 There are four methods that all properties objects have:
 
