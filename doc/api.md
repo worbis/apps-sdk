@@ -98,7 +98,7 @@ associated with torrent objects:
 ## Properties
 
 For a discussion of the methods that the torrent's properties implements, take
-a look at [General Properties]{#properties}.
+a look at [General Properties][test].
 
 The properties specific to a torrent are:
 
@@ -427,7 +427,7 @@ Another thing to note is that all input/output from the stash is passed through
 a JSON parser. This allows you to pass any native javascript objects into
 stash.set and get native json objects out from stash.get.
 
-# General Properties {#properties}
+# General Properties [test]
 
 There are four methods that all properties objects have:
 
