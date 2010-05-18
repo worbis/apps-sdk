@@ -36,7 +36,7 @@ contribute your work back to the Griffin community, you'll want to install Git:
 
 The entire Griffin project can be found at:
 
-    http://github.com/bittorrent/griffin/.
+    http://github.com/bittorrent/griffin/
 
 ## Getting Started
 
