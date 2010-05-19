@@ -4,15 +4,11 @@ The Griffin API provides applications a method to interface with the BitTorrent
 client that an application has been installed within. The API allows sandboxed
 access to the client for tasks such as adding a torrent or an rss feed. This
 document outlines the raw interface presented by the client. If you'd like a
-somewhat more user friendly version, check out the 
+somewhat more user friendly version, check out the
 [SDK](https://github.com/bittorrent/griffin/blob/master/doc/SDK.md).
 
 For those that prefer to look at code instead of documentation, take a look at
 [api.js](https://github.com/bittorrent/griffin/blob/master/doc/api.js).
-
-# SDK
-
-
 
 # Sandbox
 
@@ -21,22 +17,35 @@ only be able to access torrents and rss feeds that it added to the client
 itself. The application's events and stash are also specific to the
 application and cannot be accessed from another application.
 
-# Properties
+# btapp object
 
-Available properties:
+The entire raw API sits under the `btapp` javascript object. This object has a
+bunch of methods and a couple properties that it exports to allow you to access
+and modify the BitTorrent client your application has been installed into.
 
-    peer_id = "local_client" // This is the peer ID of your own client.
+The available properties are:
+
+    >> btapp.peer_id // This is the peer ID of your own client.
+    "local_client"
+
+For a discussion of the methods that you're able to use, please read on.
 
 # Settings
 
-Access the client's settings at bt.settings. This will allow you to access all
-the client settings allowed in your current sandbox. If a property is read
-only, a ReadOnlyException will be thrown.
+All the settings for a client can be accessed at `btapp.settings`. This allows
+you read/write access to the settings inside your sandbox. For properties that
+are read only, an exception will be thrown when you try to set that property.
 
-    bt.settings.all() -> dictionary of key/value pairs
-    bt.settings.keys() -> list of all the settings names available.
-    bt.settings.get(name) -> get a specific setting
-    bt.settings.set(name, value) -> set a specific setting
+    >> btapp.settings.all() // Dictionary of key/value pairs
+    { "rss.update_interval": 15,
+      "cid": "1234567",
+      "net.calc_overhead": false }
+    >> btapp.settings.keys() // List of all the settings available.
+    [ "cid", "rss.update_interval", "net.calc_overhead" ]
+    >> btapp.settings.get("cid") // get the value of a specific setting
+    "1234567"
+    >> btapp.settings.set("net.calc_overhead", true) // set the value of a specific setting
+    true
 
 # Add
 
