@@ -117,7 +117,7 @@ There is also a couple special methods associated with torrent objects:
 
 ## Properties
 
-The properties method allows access to a bunch of properties that aren't first
+The properties methods allows access to a bunch of properties that aren't first
 class properties of the torrent object. This allows access to things such as
 the torrent's name, status or progress. To access the properties, you can do
 something like:
@@ -189,102 +189,107 @@ comparison. An example of this is:
 
 ## Peers
 
-From torrent_obj.peer, you can access all the peers that are associated with a
-specific torrent itself via the normal means. This is especially useful for
-broadcasting data to, and receiving data from, specific peers in a torrent's
-swarm.
+The peers method allows access to all of the peers connected to a torrent
+currently. This allows access to the ID of a specific peer. To fetch the peer
+objects associated with a specific torrent object, you can:
 
-    torrent_obj.peer.all() -> dictionary of id/peer object pairs
-    torrent_obj.peer.keys() -> list of all the peers connected to this torrent
-    torrent_obj.peer.get(id) -> get a specific peer object
+    >> var my_torrent = btapp.torrent.get("1234567890");
+    >> my_torrent.peer.all() // Dictionary of id/peer object pairs
+    { "ABCDEFG": { "id": "ABCDEFG", "torrent": my_torrent } }
+    >> my_torrent.peer.keys() // List of all the peers connected to this torrent
+    [ "ABCDEFG" ]
+    >> my_torrent.peer.get("ABCDEFG") // Get a specific peer object
+    { "id": "ABCDEFG", "torrent": my_torrent }
 
-A peer object is returned by torrent_obj.peer.all/get. These objects can be
-used to get the metadata of a connected peer.
+Once you've gotten a peer object from `my_torrent.peer`, there are some
+properties and methods that allow you to interact with this peer in a sane
+fashion.
 
-    torrent: torrent_obj // The parent torrent
-    id: 'foobar' // ID of this specific peer
-    send: function(msg) // Send an arbitrary data to this peer
-      /*
-       * msg - This can be any kind of string or JSON object. It will be
-         serialized and sent to this peer.
-       */
-    recv: function(callback) // Receive a message from this peer. Note that this
-         is simply a convenience function that uses bt.event.
-      /*
-       * callback - Callback that gets called with the JSON.parse result from
-       *            this peer.
-       */
+    >> var my_torrent = btapp.torrent.get("1234567890");
+    >> var my_peer = my_torrent.peer.get("ABCDEFG");
+    >> my_peer.id // ID of this specific peer
+    "ABCDEFG"
+    >> my_peer.torrent // The parent torrent
+    { "name": "my_torrent" }
 
-In addition to these parameters and methods, there is another object
-associated with the peer object.
+Just like with the torrent object, there are some more properties that you can
+access via. the `my_peer.properties` methods.
 
-- properties
+    >> var my_torrent = btapp.torrent.get("1234567890")
+    >> var my_peer = my_torrent.peer.get("ABCDEFG")
+    >> my_peer.properties.all() // Dictionary of property/value pairs
+    { }
+    >> my_peer.properties.keys() // Names of all the available properties
+    [ ]
+    >> my_peer.properties.get() // Get a peer's property
+    >> my_peer.properties.set() // Set a specific property for this peer.
 
-For a discussion of the methods that the peer's properties implements, take
-a look at General Properties.
+## File
 
-The properties specific to a peer are:
+The file methods allow access to all the files that are being downloaded as
+part of a specific torrent. This allows you to do things such as open or play
+files from within your application. To fetch the file objects associated with a
+specific torrent, you can:
 
-    location: 'US' // country code
+    >> var my_torrent = btapp.torrent.get("1234567890")
+    >> my_torrent.file.all() // Object containing index/object pairs
+    { "1": { "name": "test", "torrent": my_torrent } }
+    >> my_torrent.file.keys() // List of all the file indexes in this torrent
+    [ "1" ]
+    >> my_torrent.file.get("1") // Get a specific file object
+    { "name": "test", "torrent": my_torrent }
 
-## Files
+Once you've gotten a file object from `my_torrent.file`, there are some
+properties and methods that allow you to interact with this specific file in a
+sane fashion.
 
-XXX - This is unclear and needs to be reworked.
+    >> var my_torrent = btapp.torrent.get("1234567890")
+    >> var my_file = my_torrent.file.get("1")
+    >> my_file.index
+    "1"
+    >> my_file.torrent
+    my_torrent
+    >> my_file.open() // Open (or play) this file for the user
+    >> my_file.get_data() // Get the complete binary data of a file
 
-After getting a torrent object from bt.torrent.get() or bt.torrent.all(), you
-can access all the files that are associated with a specific torrent via. the
-"file" attribute. This attribute returns file objects in the normal
-fashion. The file object is especially useful for opening or playing specific
-files in a torrent from directly in your application. This allows users an easy
-way to consume your content.
+A common use of file objects is to present users with a 'Play' button that
+allows them to watch the content they just downloaded. A way to do this is:
 
-    torrent_obj.file.all() -> dictionary of index/file object pairs
-    torrent_obj.file.keys() -> list of all the file indexes in this torrent
-    torrent_obj.file.get(index) -> get a specific file object
+    >> var my_torrent = btapp.torrent.get("1234567890")
+    >> var files = my_torrent.file.all()
+    >> for (var i in files) {
+     >     files[i].open()
+     > }
 
-A file object is returned by torrent_obj.file.all/get. These objects can be
-used to get the metadata of a specific file.
+Just like with the torrent object, there are some more properties that you can
+access via. the `my_file.properties` methods.
 
-    torrent = torrent_obj // The parent torrent
-    index: 1 // Index of this file in the torrent
-    open: function() // Open this file (or play if this is a video/audio file)
-                     // for the user.
-    get_data: function() // Get the complete binary data of a file
-      /*
-       * Note that this is meant for small files and thusly there is a size limit
-       * on how large a file can be.
-       */
+    >> var my_torrent = btapp.torrent.get("1234567890")
+    >> var my_file = my_torrent.file.get("1")
+    >> my_file.properties.all() // Object containing all the property/value pairs
+    { "name": "test", "size": 1000 }
+    >> my_file.properties.keys() // List of all the property names
+    [ "name", "size" ]
+    >> my_file.properties.get("name") // Get the value of a specific property
+    "test"
+    >> my_file.properties.set("name", "foo") // Set the specific property
 
-A common use for files is to present users with a 'Play' button that allows
-them to watch the content they just downloaded. A way to do this is:
-
-    var files = bt.torrent.get('My Torrent').file.all();
-    // It's likely that we can play the largest file by default since that is
-    // most likely to be the video.
-    _(files).chain().values().sort(function(file_a, file_b) {
-      return file_a.properties.get('size') > file_b.properties.get('size');
-    }).value()[0].open();
-
-In addition to these parameters and methods, there is another object
-associated with the file object.
-
-- properties
-
-For a discussion of the methods that the file's properties implements, take a
-look at General Properties.
-
-The properties specific to a file are:
+There are a couple more parameters than the examples above show. It is
+suggested that you use `my_file.properties.keys()` to find all the available
+properties. That said, a comprehensive list is:
 
     name: 'test'
     size: 1000 // bytes
     downloaded: 100 // bytes
     priority: 1 // int
 
-To present a user with progress for a specific file, you could:
+As a little example, suppose that you'd like to present a user with a progress
+bar for a specific file, you could:
 
-    var file = bt.torrent.get('My Torrent').file.get('my_awsome_file.mov');
-    var progress = file.properties.get('downloaded') /
-      file.properties.get('size');
+    >> var my_torrent = btapp.torrent.get("1234567890")
+    >> var my_file = my_torrent.file.get("1")
+    >> update_progress(my_file.properties.get("name"),
+     >                 my_file.properties.get("downloaded") / my_file.properties.get("size")
 
 # RSS Feeds
 
