@@ -289,7 +289,7 @@ bar for a specific file, you could:
     >> var my_torrent = btapp.torrent.get("1234567890")
     >> var my_file = my_torrent.file.get("1")
     >> update_progress(my_file.properties.get("name"),
-     >                 my_file.properties.get("downloaded") / my_file.properties.get("size")
+     >                 my_file.properties.get("downloaded") / my_file.properties.get("size") * 100 )
 
 # RSS Feeds
 
