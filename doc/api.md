@@ -51,72 +51,92 @@ are read only, an exception will be thrown when you try to set that property.
 
 Add a variety of elements to the client.
 
-    bt.add.torrent() -> add a torrent by url, file path or magnet link
-    bt.add.rss_feed() -> Add a rss feed by url
-    bt.add.rss_filter() -> Add an rss filter
+    >> btapp.add.torrent('http://default.com/test.torrent') // Add a torrent by url, file path or magnet link
+    >> btapp.add.rss_feed() // Add a rss feed by url
+    >> btapp.add.rss_filter() // Add an rss filter
 
-To add a torrent to your client, you'd simply run the following command.
+Note that add operations are asynchronous. If you'd like to get the results of
+add events, you must bind an event. When adding torrents, you probably want
+something like:
 
-    bt.add.torrent('http://vodo.net/media/torrents/VODO.Mixtape.1.2010.Xvid-VODO.torrent');
+    >> function result(status) { console.log(status.message); }
+    >> btapp.events.set('torrent', result);
+    >> btapp.add.torrent('http://default.com/test.torrent');
 
-Note that this operation will return instantly. The client will then go and
-download the torrent, adding it to the torrent list. If you want notification
-of this event, use the 'torrent_added' event.
+If the torrent can be added successfully, your registered callback will be
+called with an object that looks like:
+
+    { "status": 404, // HTTP error code
+      "message": "error",
+      "url": "http://default.com/test.torrent",
+      "hash": "" }
 
 RSS Feeds that are added from within your application will show up within the
-'Feeds' menu on the client. This item will be associated with your application.
+'Feeds' menu on the client. This item will then be associated with your
+application and removed when your application is uninstalled.
 
 # Torrents
 
-Access all operations that have to do with torrents at bt.torrent. This will
-allow you to see metadata about the torrents that your application has
-added. The sandbox restricts the torrents that you're available to see down to
-only the ones that your application added.
+All the torrents inside your sandbox can be fetched via. `btapp.torrent`
+methods. After a torrent has been added to the client, it can be fetched from
+`btapp.torrent`. Once a torrent object has been fetched, you can do things such
+as stop it, play it or fetch the current progress.
 
-    bt.torrent.all() -> dictionary of hash/torrent object pairs
-    bt.torrent.keys() -> list of all the currently available torrent hashes
-    bt.torrent.get(name) -> get a specific torrent object
+To access the torrent objects in your sandbox:
 
-It is generally a good idea to provide progress bars inside your application
-for torrents that it has added. An easy way to do this is by iterating through
-bt.torrent.all() and updating the local DOM elements.
+    >> btapp.torrent.all() // Dictionary of hash/torrent object pairs
+    { "1234567890": { "name": "my_torrent" } }
+    >> btapp.torrent.keys() // A list of all the currently available torrent hashes
+    [ "1234567890" ]
+    >> btapp.torrent.get("1234567890") // Get a specific torrent object
+    { "name": "my_torrent" }
 
-    _.each(bt.torrent.all(), function(torrent, name) {
-      update_progress(name, torrent.properties.get('progress'));
-    });
+Once you've gotten a torrent object from `btapp.torrent`, there are a lot of
+properties that you can access and methods that interact with that torrent. The
+metadata that is associated with your torrent object looks something like:
 
-## Object
-
-The torrent object is returned by bt.torrent.all/get. This object allows you to
-look into the metadata associated with this torrent.
-
-    name: 'Test Torrent' // This is meant to be the primary key and is immutable.
-    start: function(force)
-      /*
-       * force -> Instead of waiting to start, forces a start immediately.
-       */
-    stop: function()
-    pause: function()
-    unpause: function()
-    recheck: function()
-    remove: function()
+    >> var my_torrent = btapp.torrent.get("1234567890");
+    >> my_torrent.hash; // This is the hash of the torrent, and is immutable.
+    "1234567890"
+    >> my_torrent.start(true) // Start the torrent, if the parameter is true,
+                              // force start the torrent.
+    >> my_torrent.stop() // Stop the torrent
+    >> my_torrent.pause() // Pause the torrent
+    >> my_torrent.unpause() // Unpause the torrent
+    >> my_torrent.recheck() // Recheck the torrent
+    >> my_torrent.remove() // Remove the torrent
 
 Note that torrents will typically be started (or queued) automatically for you
 as part of the add operation.
 
-In addition to these parameters and methods, there are three objects
-associated with torrent objects:
+There is also a couple special methods associated with torrent objects:
 
-- properties - The properties associated with this torrent.
-- peer - The peers associated with this torrent.
-- file - The files associated with this torrent.
+- properties
+- peer
+- file
 
 ## Properties
 
-For a discussion of the methods that the torrent's properties implements, take
-a look at General Properties.
+The properties method allows access to a bunch of properties that aren't first
+class properties of the torrent object. This allows access to things such as
+the torrent's name, status or progress. To access the properties, you can do
+something like:
 
-The properties specific to a torrent are:
+    >> var my_torrent = btapp.torrent.get("1234567890");
+    >> my_torrent.properties.all() // All the properties and their values
+    { "progress": 1000,
+      "download_url": "http://default.com/test.torrent" }
+    >> my_torrent.properties.keys() // The names of all the available properties
+    [ "progress", "download_url" ]
+    >> my_torrent.properties.set("trackers", [ "tracker1", "tracker2" ])
+    >> my_torrent.properties.get("progress") // Percentage progress in 0-1000
+    1000
+    >> my_torrent.properties.get("download_url") // URL the torrent was fetched from
+    "http://default.com/test.torrent"
+
+There are actually a lot more parameters than the examples above show. It is
+suggested that developers use `my_torrent.properties.keys()` to find all the
+available properties. That said, a comprehensive list is:
 
     trackers: ['tracker1', 'tracker2'] // list
     upload_limit: 1000 // bytes/second
@@ -149,10 +169,22 @@ The properties specific to a torrent are:
     download_url: 'http://utorrent.com'
     rss_feed_url: 'rss://rss.utorrent.com'
 
-It's easy to get any of these properties. To get the url that a torrent was
-downloaded from, you can:
+As an example, if you wanted to update a progress bar for all the currently
+downloading torrents associated with your application, you could do something
+like:
 
-    var torrent = bt.torrent.get('My Torrent');
+    >> var torrents = btapp.torrents.all();
+    >> for (var i in torrents) {
+     >   update_progress(torrents[i].name,
+     >       torrents[i].properties.get('progress'));
+     > });
+
+For those that don't know what the name of a downloaded torrent will be (but do
+know the URL the torrent was fetched from), you can just look at
+`my_torrent.properties.get('download_url')` and get that metadata for
+comparison. An example of this is:
+
+    var my_torrent = bt.torrent.get("1234567890");
     console.log(torrent.properties.get('download_url'));
 
 ## Peers
