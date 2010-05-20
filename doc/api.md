@@ -310,7 +310,7 @@ To access the rss feed objects in your sandbox:
     { "1": { "id": "1" } }
     >> btapp.rss_feed.keys() // List of all the currently available rss feed ids
     [ "1" ]
-    >> btapp.rss_feed.get("1") // Get a specific rss feed object.l
+    >> btapp.rss_feed.get("1") // Get a specific rss feed object
 
 Remember that feeds you've added from within your application will also show up
 in the RSS feeds section of the client and be associated with your
@@ -432,32 +432,56 @@ application around it. The entire process would look something like this:
 
 # RSS Filters
 
-Access all operations that have to do with rss filters at bt.rss_filter. This
-will allow you to access metadata about the rss filters that you have
-added. The sandbox restricts the rss filters that you're available to see down
-to only the ones that your application added.
+All the RSS filters available to your sandbox can be fetched
+via. `btapp.rss_filter` methods. After an RSS filter has been added to the
+client, its object can be fetched from `btapp.rss_filter`. Once an RSS filter
+object has been fetched, you can do things with it such as removing it or
+checking the properties associated with it.
 
-    bt.rss_filter.all() -> dictionary of id/rss filter object pairs
-    bt.rss_filter.keys() -> list of all the currently available rss filter ids
-    bt.rss_filter.get(id) -> get a specific rss filter object
+To access the rss filter objects in your sandbox:
 
-## Object
+    >> btapp.rss_filter.all() // Object containing the id/object pairs for rss filters
+    { "1": { "id": "1" } }
+    >> btapp.rss_filter.keys() // List of all the currently available rss filter ids
+    [ "1" ]
+    >> btapp.rss_filter.get("1") // Get a specific rss filter object
 
-The rss filter object is returned by bt.rss_filter.all/get. This object allows
-you to look into the metadata associated wit the rss filter.
+Remember that the filters you've added from within your application will also
+show up in the RSS filters section of the client and be associated with your
+application. This means that when users uninstall your application, the RSS
+filter will be removed as well.
 
-    id: 1 // This is meant to be a primary key and is immutable.
-    remove: function() // Remove this filter.
+Once you've gotten an RSS filter object from `btapp.rss_filter`, there are some
+properties and methods that you can access to interact with the filter. This
+looks something like:
 
-In addition to these parameters and methods, there is one other object
-associated with rss filter objects:
+    >> var my_filter = btapp.rss_filter.get("1")
+    >> my_filter.id
+    "1"
+    >> my_filter.remove()
 
-- properties - The properties associated with this rss filter.
+There is also a set of special methods associated with filter objects:
 
-For a discussion of the methods that the rss filter's properties implements,
-take a look at General Properties.
+- properties
 
-The properties specific to an rss filter are:
+## Properties
+
+The properties methods allow access to a bunch of properties that aren't first
+class properties of the filter object. This allows access to things such as the
+filter's regex or label. To access the properties, you can do something like:
+
+    >> var my_filter = btapp.rss_filter.get("1")
+    >> my_filter.properties.all()
+    { "filter": "^.*$", "label": "default" }
+    >> my_filter.properties.keys()
+    [ "filter", "label" ]
+    >> my_filter.properties.get("label")
+    "default"
+    >> my_filter.properties.set("label", "foobar")
+
+There are actually quite a few properties available than the examples shown
+above. It is suggested that you use `my_filter.properties.keys()` to find all
+the available properties. That said, a comphrensive list is:
 
     flags: 1, // int
     directory: 'test', // Directory to save matches to.
@@ -481,60 +505,55 @@ The properties specific to an rss filter are:
 
 # Events
 
-Access all operations that have to do with client generated events at
-bt.events. Events are special operations that allow the client to notify an
-application of a specific action that has occurred. Some events are torrent
-completion and message received. The methods that you can use to interact with
-events are:
+Almost everything in javascript is setup to be asynchronous. Since many
+BitTorrent operations are also asynchronous, this is a great match. The
+`btapp.events` methods allow callbacks to be registered for arbitrary
+events. You can then have actions correspond to these events. The events
+framework allows for your application to be notified whether adding a torrent
+was successful or not. To interact with the events in your client:
 
-    bt.events.all() -> All available events in name/callback pairs
-    bt.events.keys() -> Name of all the events available to this application
-    bt.events.get(name) -> Get a callback that has been bound to a specific event
-    bt.events.set(name, callback) -> Bind a callback to a specific event
+    >> btapp.events.all()
+    { 'torrent': function() {} }
+    >> btapp.events.keys()
+    [ 'torrent' ]
+    >> btapp.events.get('torrent')
+    function() { }
+    >> btapp.events.set('torrent', function() { alert('torrent event') })
+
+As an example, if you wanted to have notification of when a client actually
+added a torrent, you can do something like:
+
+    >> function notify(status) {
+     >    if (status.message == 'success') alert('added!');
+     >    else alert('failure: ' + status.code);
+     > }
+    >> btapp.events.set('torrent', notify)
+    >> btapp.add.torrent('http://default.com/test.torrent')
 
 # Stash
 
-The stash allows applications to save state between uses. Any data in the JSON
-format can be saved to the stash. On startup, any data that has been saved to
-the stash previously can be recovered. To manipulate the stash, you can use
-these methods:
+To provide a more desktop application style experience, there are many times
+where it makes sense to save arbitrary data that can be accessed or modified
+from within your application. For any applications fetching remote data, this
+is especially useful. Instead of waiting the time that it takes to retrieve
+your remote resource, you can just display the previous values (fetched from
+the stash) and then update once the remote resource returns a response. Like
+most other interfaces in this API, you can access the stash like:
 
-    bt.stash.all() -> All the data stored in the stash in key/value pairs
-    bt.stash.keys() -> The keys of all data stored in the stash
-    bt.stash.get(key) -> The JSON decoded data of a specific key
-    bt.stash.set(key, value) -> A key and JSON serializable value to save to the
-                                stash.
+    >> btapp.stash.all()
+    { "state": "default", "data": "default" }
+    >> btapp.stash.keys()
+    [ "state", "data" ]
+    >> btapp.stash.get("data")
+    "default"
+    >> btapp.stash.set("data", "foobar")
 
-Operations on the stash end up being very important to the user experience of
-your application. It allows you to save your application's state between
-application restarts. Any kind of network operation should have its results
-saved to the stash so that users can see results as quickly as possible when
-using your application.
+Note that the stash requires you use a string as values. Javascript objects can
+be serialized to JSON first (and the SDK helpers actually do this for you,
+check out the
+[SDK](https://github.com/bittorrent/griffin/blob/master/doc/SDK.md)).
 
-    $.ajax({
-      url: 'http://vodo.net/jsonp/releases/all',
-      dataType: 'jsonp',
-      success: function(items) {
-        bt.stash.set('items', items);
-        render_response(items);
-      }
-    });
-
-Another thing to note is that all input/output from the stash is passed through
-a JSON parser. This allows you to pass any native javascript objects into
-stash.set and get native json objects out from stash.get.
-
-# General Properties
-
-There are four methods that all properties objects have:
-
-    all: function() // Get all the properties associated with this object.
-    keys: function() // Get only the names of the properties associated with
-                     // this object.
-    get: function(name) // Get a specific property's value from this object.
-    set: function(name, value) // Set a specific property's value for this object.
-
-Note that the API suggests what properties might be returned, but to really
-know what actually is being returned, it is suggested that the developer should
-introspect bt.settings.all() or bt.settings.keys() to discover what settings
-their application can actually see.
+Among other things, the stash allows you to save your application's state
+between application restarts. Any kind of network operation should have its
+results saved to the stash so that users can see results as quickly as possible
+when starting your application.
