@@ -10,6 +10,11 @@ somewhat more user friendly version, check out the
 For those that prefer to look at code instead of documentation, take a look at
 [api.js](https://github.com/bittorrent/griffin/blob/master/doc/api.js).
 
+This document will be using a specific style to introduce the api. Look at each
+code block as a javascript interpreter. The lines that have either `>>` or `>`
+on the front of them are user input to the interpreter and the lines without
+anything are output from the interpreter.
+
 # Sandbox
 
 All applications live inside a sandbox. This means that your application will
@@ -109,7 +114,7 @@ metadata that is associated with your torrent object looks something like:
 Note that torrents will typically be started (or queued) automatically for you
 as part of the add operation.
 
-There is also a couple special methods associated with torrent objects:
+There are also a couple special methods associated with torrent objects:
 
 - properties
 - peer
@@ -117,7 +122,7 @@ There is also a couple special methods associated with torrent objects:
 
 ## Properties
 
-The properties methods allows access to a bunch of properties that aren't first
+The properties methods allow access to a bunch of properties that aren't first
 class properties of the torrent object. This allows access to things such as
 the torrent's name, status or progress. To access the properties, you can do
 something like:
@@ -293,39 +298,59 @@ bar for a specific file, you could:
 
 # RSS Feeds
 
-Access all operations that have to do with rss feeds at bt.rss_feed. This will
-allow you to access metadata about the rss feeds that you have added. The
-sandbox restricts the rss feeds that you're available to see down to only the
-ones that your application added.
+All the RSS feeds available to your sandbox can be fetched
+via. `btapp.rss_feed` methods. After an RSS feed has been added to the client,
+its object can be fetched from `btapp.rss_feed`. Once an RSS feed object has
+been fetched, you can do things with it such as remove it or force it to
+update.
+
+To access the rss feed objects in your sandbox:
+
+    >> btapp.rss_feed.all() // Object containing the id/object pairs for rss feeds
+    { "1": { "id": "1" } }
+    >> btapp.rss_feed.keys() // List of all the currently available rss feed ids
+    [ "1" ]
+    >> btapp.rss_feed.get("1") // Get a specific rss feed object.l
 
 Remember that feeds you've added from within your application will also show up
-in the RSS feeds section of the client and be associated with your application.
+in the RSS feeds section of the client and be associated with your
+application. This means that when users uninstall your application, the RSS
+feed will be removed as well.
 
-    bt.rss_feed.all() -> dictionary of id/rss feed object pairs
-    bt.rss_feed.keys() -> list of all the currently available rss feed ids
-    bt.rss_feed.get(id) -> get a specific rss feed object
+Once you've gotten a RSS feed object from `btapp.rss_feed`, there are some
+properties and methods that you can access to interact with the feed. This
+looks something like:
 
-## Object
+    >> var my_feed = btapp.rss_feed.get("1")
+    >> my_feed.id
+    "1"
+    >> my_feed.force_update() // Don't wait for the next update, do it now
+    >> my_feed.remove() // Remove this feed
 
-The rss feed object is returned by bt.rss_feed.all/get. This object allows you
-to look into the metadata associated with the rss feed.
+There are also a couple special methods associated with rss feed objects:
 
-    id: 1 // This is meant to be a primary key and is immutable.
-    remove: function() // Remove this feed.
-    force_update: function() // Don't wait until the next update time, do it now
-
-In addition to these parameters and methods, there are two other objects
-associated with rss feed objects:
-
-- properties - The properties associated with this rss feed.
-- item - An item associated with this rss feed.
+- properties
+- item
 
 ## Properties
 
-For a discussion of the methods that the rss feed's properties implements, take
-a look at General Properties.
+The properties methods allow access to a bunch of properties that aren't first
+class properties of the feed object. This allows access to things such as the
+feed's url and update status. To access the properties, you can do something
+like:
 
-The properties specific to an rss feed are:
+    >> var my_feed = btapp.rss_feed.get("1")
+    >> my_feed.properties.all() // All the properties and their values
+    { "enabled": true, "url": "http://rss.default.com" }
+    >> my_feed.properties.keys() // The names of all the available properties
+    [ "enabled", "url" ]
+    >> my_feed.properties.get("enabled") // Get a specific property's value
+    true
+    >> my_feed.properties.set("enabled", false) //Set the value for a property
+
+There are actually a couple more parameters than the examples above show. It is
+suggested that you use `my_feed.properties.keys()` to find all the available
+properties. That said, a comprehensive list is:
 
     enabled: true
     use_feed_title: true
@@ -338,41 +363,47 @@ The properties specific to an rss feed are:
     subscribe: true
     smart_filter: true
 
-## Items
+## Item
 
-From rss_feed_obj.item, you can access all the items that are associated with a
-specific rss_feed itself via the normal means.
+The item methods allow access to all the items that are associated with a
+specific RSS feed. These item objects allow you to look into what exactly the
+RSS feed is fetching. To fetch the item objects associated with a specific feed
+object, you can:
 
-    rss_feed_obj.all() -> dictionary of id/item object pairs
-    rss_feed_obj.keys() -> list of all the peers connected to this torrent
-    rss_feed_obj.get(id) -> get a specific item from this feed
+    >> var my_feed = btapp.rss_feed.get("1")
+    >> my_feed.all() // Object containing id/object pairs for items
+    { "1": { "id": "1", "feed", my_feed } }
+    >> my_feed.keys() // List of all the items associated with this feed
+    [ "1" ]
+    >> my_feed.get("1") // Get a item object
+    { "id": "1", "feed": my_feed }
 
-An item object is returned by rss_feed_obj.all/get. These objects can be used
-to get the metadata of an rss feed's item.
+Once you've gotten an item object from `my_feed.item`, there are a couple
+properties that allow you to figure out what's going on with this item:
 
-    feed: rss_feed_obj // The parent rss feed
-    id: 1 // ID of this specific feed
+    >> var my_feed = btapp.rss_feed.get("1")
+    >> var my_item = my_feed.item.get("1")
+    >> my_item.feed // The parent feed object
+    my_feed
+    >> my_item.id // The ID of this item
+    "1"
 
-To keep from using any kind of JSONP to update the torrents that are available
-from an application, it is possible to use RSS Feeds. The entire process would
-look something like this:
+Just like with the feed object, there are some more properties that you can
+access via. the `my_feed.properties` methods.
 
-    bt.add.rss_feed('http://utorrent.com/rss.xml');
-    var feed = bt.rss_feed.get('1);
-    feed.force_update();
-    _.each(feed.item.all(), function(item) {
-      render_item(item.properties.get('name'), item.properties.get('url'));
-    });
+    >> var my_feed = btapp.rss_feed.get("1")
+    >> var my_item = my_feed.item.get("1")
+    >> my_item.properties.all() // Object containing all the property/value pairs
+    { "name": "test", "url": "http://default.com/test.torrent" }
+    >> my_item.properties.keys() // List of all the available properties
+    [ "name", "url" ]
+    >> my_item.properties.get("name") // Get a property value
+    "test"
+    >> my_item.properties.set() // Set a property's value
 
-In addition to these parameters and methods, there are two other objects
-associated with rss feed item objects:
-
-- properties - The properties associated with this rss feed item.
-
-For a discussion of the methods that the item's properties implements, take a
-look at General Properties.
-
-The properties specific to an item are:
+There are actually a couple more parameters than the examples above show. It is
+suggested that you use `my_item.properties.keys()` to find all the available
+properties. That said, a comprehensive list is:
 
     name: 'test', // string
     name_full: 'test foo bar', // string
@@ -385,6 +416,19 @@ The properties specific to an item are:
     episode_to: 1, // int
     repack: false, // boolean
     in_history: false // boolean
+
+Sometimes, websites provide RSS feeds instead of JSON compatible sources for
+consumption. It is possible to take this RSS data and render your entire
+application around it. The entire process would look something like this:
+
+    >> btapp.add.rss_feed("http://default.com/rss.xml")
+    >> var my_feed = btapp.rss_feed.get("1")
+    >> my_feed.force_update()
+    >> var items = my_feed.item.all()
+    >> for (var i in items) {
+     >    render_item(items[i].properties.get('name'),
+     >                items[i].properties.get('url'))
+     > }
 
 # RSS Filters
 
