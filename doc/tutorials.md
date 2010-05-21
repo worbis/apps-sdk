@@ -126,18 +126,18 @@ Instead of binding an event to only the Ubuntu torrent, let's bind one to all
 the add links by changing `js/add.js` a little bit:
 
     $("a").click(function() {
-        bt.add.torrent(this.href);
+        bt.add.torrent(this.href, function(resp) {
+            $("body").append("Tried to add <" + resp.url + 
+                ">. The status was: " + resp.status + 
+                ". That means that it was added " + resp.message);            
+        });
         return false;
     });
 
-At this moment, if you were to click the failure link, nothing would
-happen. Since this is probably undesired behavior, let's add a little bit to
-report what happened:
-
-    bt.events.set('torrent', function(resp) {
-      $("body").append("Tried to add <" + resp.url + ">. The status was: " +
-          resp.status + ". That means that it was added " + resp.message);
-    });
+The callback that gets passed in as the second parameter on bt.add.torrent is
+an optional callback. Since adding a torrent is an asynchronous operation, a
+callback is required to report whether the torrent was actually added to the
+client or not.
 
 Give this a try in both your browser and inside the client and check out how it
 works.
