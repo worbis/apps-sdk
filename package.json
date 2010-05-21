@@ -29,7 +29,9 @@
                { "name": "jquery.json",
                  "url": "http://10.20.30.79/apps/lib/jquery.json.js" },
                { "name": "jstorage",
-                 "url": "http://10.20.30.79/apps/lib/jstorage.js" }
+                 "url": "http://10.20.30.79/apps/lib/jstorage.js" },
+               { "name": "object",
+                 "url": "http://10.20.30.79/apps/lib/object.js" }
   ],
   "bt:publisher": "BitTorrent, Inc."
 }

@@ -5,7 +5,7 @@ interactions with the BitTorrent client itself. This is a work in progress, so
 please send feedback or ask questions as you work through the tutorial.
 
 If, at any time you'd like to see a complete version of the app that this
-tutorial builds, take a look at [Hello World](http://github.com/bittorrent/griffin/tree/master/examples/hello_world>).
+tutorial builds, take a look at [Hello World](http://github.com/bittorrent/griffin/tree/master/examples/hello_world/).
 
 # Setup
 
@@ -52,7 +52,7 @@ looks.
 
     % python -m griffin.serve 
 
-Open your favorite browser and go to [your project](http://localhost:8080/)!
+Open your favorite browser and go to [your project](http://localhost:8080/) (http://localhost:8080)!
 `griffin.serve` is starting up a web server so that you can actively develop
 your application in your favorite web browser before trying to see how it works
 inside the BitTorrent client.
