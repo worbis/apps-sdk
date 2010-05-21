@@ -50,7 +50,7 @@ icon that is 15x15 pixels.
 Okay, now that the basic project structure has been setup, let's see how it all
 looks.
 
-    % python -m griffin.serve 
+    % python -m griffin.serve
 
 Open your favorite browser and go to [your project](http://localhost:8080/) (http://localhost:8080)!
 `griffin.serve` is starting up a web server so that you can actively develop
@@ -75,7 +75,7 @@ modify the HTML to have a control to add the torrent with. Open up
 `html/index.html` and have the file look something like:
 
     <div>Hello World!</div>
-    <a id="ubuntu" 
+    <a id="ubuntu"
        href="http://releases.ubuntu.com/10.04/ubuntu-10.04-desktop-i386.iso.torrent">
        Start downloading a torrent</a>
 
@@ -127,9 +127,9 @@ the add links by changing `js/add.js` a little bit:
 
     $("a").click(function() {
         bt.add.torrent(this.href, function(resp) {
-            $("body").append("Tried to add <" + resp.url + 
-                ">. The status was: " + resp.status + 
-                ". That means that it was added " + resp.message);            
+            $("body").append("Tried to add <" + resp.url +
+                ">. The status was: " + resp.status +
+                ". That means that it was added " + resp.message);
         });
         return false;
     });
@@ -145,13 +145,30 @@ works.
 # Active Torrents
 
 Once a torrent has been added to the client, you're able to check up on that
-torrent. First off, let's get the layout setup in the DOM so that it is easy to
-add a list of torrents. So, let's add a little HTML to `html/index.html`.
+torrent. Since we've added the Ubuntu torrent to your client already, let's
+check up on how it is doing. Start by adding some new HTML to
+`html/index.html`.
+
+    <div id="status"></div>
+
+Now, to put the progress in, we'll need to edit `js/add.js`:
+
+    var my_torrent = bt.torrent.get('http://releases.ubuntu.com/10.04/ubuntu-10.04-desktop-i386.iso.torrent');
+    $("#status").text(my_torrent.properties.get('progress') / 10);
+
+As you can see, the torrent object itself was fetched via. the URL that it was
+downloaded from. This makes sense in this instance since we don't know what the
+info hash is beforehand. It is also possible to just fetch the torrent object
+using an info hash (`bt.torrent.get('0123456789')`).
+
+In a somewhat different fashion, sometimes it makes sense to update the whole
+list of torrents at once instead of a specific one. To do this, let's get the
+layout setup in the DOM so that it is easy to add a list of torrents. So, let's
+add a little HTML to `html/index.html`.
 
     <ul id="torrent-list"></ul>
 
-The accompanying javascript that will actually populate that list will get
-added to `js/add.js`:
+And, add the following to `js/add.js`.
 
     var torrents = bt.torrent.all();
     for (var i in torrents) {
@@ -162,3 +179,44 @@ added to `js/add.js`:
     }
 
 Take a look in your browser and client to get a feeling of what's going on.
+
+# Progress Bars
+
+Sure, a text description of progress is nice, but it sure would be nicer to
+have a pretty progress bar wouldn't it? The default libraries make it a little
+tough to add in a pretty progress bar but there's a library that makes doing
+progress bars really easy (jquery-ui). To add jquery-ui into your project:
+
+    % python -m griffin.add http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js
+
+This will fetch jquery-ui from google and add it to your project. If you take a
+look at `package.json`, you'll notice that jquery-ui is now part of
+`bt:libs`. This means that jquery-ui has been marked as a dependency for your
+project and when `index.html` is built, jquery-ui will get included.
+
+Along with the javascript that jquery-ui uses, there is some CSS that is
+required. Add the following into `html/index.html`:
+
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" type="text/css" media="all">
+
+Since the HTML is already setup to handle this, let's change a little of the
+code in `js/add.js`. Find these lines:
+
+    var my_torrent = bt.torrent.get('http://releases.ubuntu.com/10.04/ubuntu-10.04-desktop-i386.iso.torrent');
+    $("#status").text(my_torrent.properties.get('progress') / 10);
+
+And remove them. We don't need any stinking text anymore! Instead, replace it
+with:
+
+    function update_progress() {
+        var my_torrent = bt.torrent.get('http://releases.ubuntu.com/10.04/ubuntu-10.04-desktop-i386.iso.torrent');
+        $("#status").progressbar(
+            { value: my_torrent.properties.get('progress') / 10 });
+    }
+    setInterval(update_progress, 100);
+
+Check it out in your browser and client. Hopefully, you're still downloading
+the Ubuntu torrent and you can see the progress bar update in real time.
+
+# Remote Resources
+

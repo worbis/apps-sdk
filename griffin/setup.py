@@ -53,7 +53,7 @@ class Project(object):
 
     def update_libs(self, name, url):
         if not name in [x['name'] for x in self.package['bt:libs']]:
-            self.package['bt:libs'].append(url)
+            self.package['bt:libs'].append({ "name": name, "url": url})
         self.write_package()
 
     def create_dirs(self):
