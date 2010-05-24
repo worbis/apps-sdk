@@ -27,7 +27,6 @@ class Project(object):
 
     def __init__(self, name, debug=False):
         self.name = name
-        self.update_url = update_url
         self.debug = debug
         self.read_package()
 
@@ -44,7 +43,7 @@ class Project(object):
                 'author': 'Default Author <default@default.com>',
                 'keywords': [ 'default' ],
                 'bt:publisher': 'Default Publisher',
-                'bt:update_url': self.update_url,
+                'bt:update_url': "http://localhost/default",
                 'bt:release_date': '00/00/0000',
                 'bt:description': 'This is the default app.',
                 'bt:libs': [
