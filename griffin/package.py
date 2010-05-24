@@ -3,7 +3,7 @@
 #
 
 """
-Add a package or library to a project.
+Bundle a project into a btapp file, use .ignore for excludes.
 """
 
 import optparse

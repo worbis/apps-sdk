@@ -58,7 +58,7 @@ look in your browser. You should see a list of links with the torrent title.
 To make it so any of these torrents can be added to your client, let's add a
 line to `render_item` in `lib/list.js`:
 
-    elem.click(function() {
+    $("a", elem).click(function() {
         bt.add.torrent(item.torrents[0].url);
         return false;
     });
@@ -85,7 +85,7 @@ downloading. Replace the render item function in `lib/list.js` with:
         var elem = $(JUP.html({ url: item.torrents[0].url, title: item.title },
                               template));
         $("#items").append(elem);
-        elem.click(function() {
+        $("a", elem).click(function() {
             bt.add.torrent(item.torrents[0].url, function(resp) {
                 if (resp.message == 'success') {
                     $(".bar", elem).progressbar();
@@ -173,7 +173,7 @@ the list is getting duplicated by the `$.getJSON` call completing. Let's modify
         var elem = $(JUP.html({ url: item.torrents[0].url, title: item.title },
                               template));
         $("#items").append(elem);
-        elem.click(function() {
+        $("a", elem).click(function() {
             bt.add.torrent(item.torrents[0].url, function(resp) {
                 if (resp.message == 'success') {
                     $(".bar", elem).progressbar();
@@ -210,9 +210,9 @@ create the file `css/list.css` and add the following to it:
 
 This file will get automatically included in your app, so don't worry about
 adding the link to the css anywhere. To get the area actually working, let's
-add some javascript. Replace `elem.click` in `render_item` with the following:
+add some javascript. Replace `$("a", elem).click` in `render_item` with the following:
 
-    elem.click(function() {
+    $("a", elem).click(function() {
         $("#notification").text(
             'Adding a torrent, please be patient...').slideDown();
         bt.add.torrent(item.torrents[0].url, function(resp) {
@@ -227,6 +227,39 @@ add some javascript. Replace `elem.click` in `render_item` with the following:
         return false;
     });
 
-# Play a file
+Once a download is completed, it's convenient to give the user of your
+application a button to play or open the file. First, let's get rid of the
+progress bars on torrents that have completed and replace them with play
+buttons. Replace `update_progress` in `lib/list.js` with the following:
+
+    function update_progress() {
+        var torrents = bt.torrent.all();
+        for (var i in torrents) {
+            var tor = torrents[i];
+            var container = $(
+                sprintf("li a[href=%s]", tor.properties.get('download_url'))
+            ).closest('li');
+            var progress = tor.properties.get('progress') / 10;
+            if (progress != 100) {
+                $(".bar", container).progressbar({ value: progress });
+                return
+            }
+            if ($(".play", container).length > 0)
+                return
+            $(".bar", container).hide();
+            $("<button class='play'>Play</button>").appendTo(container).click(
+                function() {
+                    var files = tor.file.all();
+                    var f;
+                    for (var i in files) {
+                        if (f && f.properties.get('size') >
+                            files[i].properties.get('size'))
+                                f = files[i];
+                    }
+                    f.open();
+                });
+        }
+    }
+
 
 # Analytics

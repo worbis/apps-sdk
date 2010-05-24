@@ -199,6 +199,16 @@ class Project(object):
                 btapp.write(f)
         btapp.close()
 
+    def update_deps(self):
+        pkg_dir = os.path.join(self.name, 'packages')
+        try:
+            shutil.rmtree(pkg_dir)
+        except OSError:
+            pass
+        os.makedirs(pkg_dir)
+        for pkg in self.package['bt:libs']:
+            self.add(pkg['url'])
+
 if __name__ == '__main__':
     usage = "usage: %prog [options] name"
     parser = optparse.OptionParser(usage=usage)
