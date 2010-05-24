@@ -22,7 +22,9 @@
     "doc": "doc",
     "test": "test"
   },
-  "bt:libs": [ { "name": "jquery",
+  "bt:libs": [ { "name": "firebug",
+                 "url": "http://10.20.30.79/apps/lib/firebug.js" },
+               { "name": "jquery",
                  "url": "http://10.20.30.79/apps/lib/jquery.js" },
                { "name": "underscore",
                  "url": "http://10.20.30.79/apps/lib/underscore.js" },

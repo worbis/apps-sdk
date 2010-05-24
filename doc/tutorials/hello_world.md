@@ -1,8 +1,7 @@
-Welcome to Griffin! Griffin provides a powerful, rich javascript framework that
-allows you to build applications for the BitTorrent client. This tutorial will
-take you through the basics of creating a new application and some basic
-interactions with the BitTorrent client itself. This is a work in progress, so
-please send feedback or ask questions as you work through the tutorial.
+This tutorial will take you through the basics of creating a new application
+and some basic interactions with the BitTorrent client itself. This is a work
+in progress, so please send feedback or ask questions as you work through the
+tutorial.
 
 If, at any time you'd like to see a complete version of the app that this
 tutorial builds, take a look at [Hello World](http://github.com/bittorrent/griffin/tree/master/examples/hello_world/).

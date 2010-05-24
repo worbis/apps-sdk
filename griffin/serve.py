@@ -25,11 +25,14 @@ if __name__ == '__main__':
     parser = optparse.OptionParser(usage=usage)
     parser.add_option('-p', '--port', dest='port', default=8080,
                       type=int, help='Port for the server to listen on.')
+    parser.add_option('-d', '--debug', dest='debug', default=False,
+                      action='store_true',
+                      help='Include firebug for debugging.')
     (options, args) = parser.parse_args()
 
     if len(args) < 1:
         args.append('.')
 
     os.chdir(args[0])
-    griffin.setup.Project('.').index()
+    griffin.setup.Project('.', debug=options.debug).index()
     listen(options.port)

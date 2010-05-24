@@ -24,9 +24,11 @@ class Project(object):
 
     dirs = [ 'css', 'html', 'lib', 'src', 'packages' ]
 
-    def __init__(self, name, update_url='http://localhost/default'):
+    def __init__(self, name, update_url='http://localhost/default',
+                 debug=False):
         self.name = name
         self.update_url = update_url
+        self.debug = debug
         self.read_package()
 
     def read_package(self):
@@ -141,7 +143,8 @@ class Project(object):
                 'griffin.data', 'index.html'))
         index = open(os.path.join(self.name, 'index.html'), 'w')
         index.write(template.render(scripts=self._scripts_list(self.package),
-                                    styles=self._styles_list()))
+                                    styles=self._styles_list(),
+                                    debug=self.debug))
         index.close()
 
     def _styles_list(self):
