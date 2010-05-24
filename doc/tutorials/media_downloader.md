@@ -261,5 +261,8 @@ buttons. Replace `update_progress` in `lib/list.js` with the following:
         }
     }
 
-
-# Analytics
+We're assuming here that the biggest file in a torrent is the file that you
+want to play. The experience that you get from within the browser ends up being
+a little lackluster. However, give this a try in your client. It's pretty nice
+to be able to play content from right there, instead of having to hunt around
+on the file system for it.
