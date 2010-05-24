@@ -66,10 +66,15 @@ line to `render_item` in `lib/list.js`:
 Take a couple minutes to see how this looks in your browser. Now, let's test
 the app in your client. Run:
 
-    % zip -r ../media_downloader.btapp .
+    % python -m griffin.package --debug
 
 And, double click on the `media_downloader.btapp` file. In your client, take a
 look at the application and try to add some torrents.
+
+Looking at the app so far in your client, you'll notice that there's a debug
+console on the bottom of the window. The `--debug` option on griffin.package
+includes this console. It works like a normal debug console letting you log to
+it via. `console.log()` and navigate the current DOM from the `HTML` tab.
 
 Now, let's make the app reflect that a torrent was actually started
 downloading. Replace the render item function in `lib/list.js` with:
@@ -132,7 +137,7 @@ torrent jump to half completed almost at once.
 And, now let's package the app up. Make sure you're in the `media_downloader`
 directory and:
 
-    % zip -r ../media_downloader.btapp .
+    % python -m griffin.package
 
 Open up your client and double click on `media_downloader.btapp`. The app
 should be added into your client. Take some time adding torrents to get a feel
@@ -146,7 +151,7 @@ actually add the torrent. During that time, there's no notification to the user
 that something has occurred and is working in the background.
 
 To fix the first problem, let's make the app use something called the stash. At
-the bottom of `js/list.js`, add some new code right after `$.getJSON` inside
+the bottom of `lib/list.js`, add some new code right after `$.getJSON` inside
 the `$(document).ready()` function:
 
     var items = bt.stash.get('items', []);

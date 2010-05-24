@@ -58,7 +58,7 @@ inside the BitTorrent client.
 
 To view the project inside your client, run:
 
-    % zip -r ../hello_world.btapp .
+    % python -m griffin.package
 
 This will package everything up into the official Griffin package format
 (which, just happens to be a zip file). Now, navigate to `hello_world.btapp`
@@ -105,7 +105,7 @@ Firebug). Click on the torrent link in your browser and see what happens.
 
 Finally, let's update the btapp package and test this out in your client:
 
-    % zip -r ../hello_world.btapp .
+    % python -m griffin.package
 
 Once you've updated your client with the latest code by double clicking on the
 file, try adding the torrent and see what happens in your client.
