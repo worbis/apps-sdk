@@ -84,7 +84,7 @@ special. It is auto-generated based on what is in your project and
 `html/index.html` is auto-included by the Griffin SDK for you.
 
 Now, let's hook this HTML up so that the torrent gets easily added to the
-client. Create `js/add.js` and put the following code into it:
+client. Create `lib/add.js` and put the following code into it:
 
     $("#ubuntu").click(function() {
         bt.add.torrent("http://releases.ubuntu.com/10.04/ubuntu-10.04-desktop-i386.iso.torrent");
@@ -110,6 +110,22 @@ Finally, let's update the btapp package and test this out in your client:
 Once you've updated your client with the latest code by double clicking on the
 file, try adding the torrent and see what happens in your client.
 
+## Debugging
+
+To aid in debugging from within the BitTorrent client, there is a small
+debugging library included. Put an error somewhere in `lib/add.js` and then
+run:
+
+    % python -m griffin.package --debug
+
+Try adding `hello_world.btapp` to your client. You should now see not only a
+debugging console at the bottom of your app's window but also the error. For
+any kind of logging that you'd like to do within your app, you can just put:
+
+    console.log('test!')
+
+That message will end up in the debugging console (and not an alert box).
+
 ## Failure
 
 Unfortunately, you can't assume that torrent add operations complete every
@@ -122,7 +138,7 @@ that will fail by opening `html/index.html` and adding:
     </a>
 
 Instead of binding an event to only the Ubuntu torrent, let's bind one to all
-the add links by changing `js/add.js` a little bit:
+the add links by changing `lib/add.js` a little bit:
 
     $("a").click(function() {
         bt.add.torrent(this.href, function(resp) {
@@ -150,7 +166,7 @@ check up on how it is doing. Start by adding some new HTML to
 
     <div id="status"></div>
 
-Now, to put the progress in, we'll need to edit `js/add.js`:
+Now, to put the progress in, we'll need to edit `lib/add.js`:
 
     var my_torrent = bt.torrent.get('http://releases.ubuntu.com/10.04/ubuntu-10.04-desktop-i386.iso.torrent');
     $("#status").text(my_torrent.properties.get('progress') / 10);
@@ -167,7 +183,7 @@ add a little HTML to `html/index.html`.
 
     <ul id="torrent-list"></ul>
 
-And, add the following to `js/add.js`.
+And, add the following to `lib/add.js`.
 
     var torrents = bt.torrent.all();
     for (var i in torrents) {
@@ -199,7 +215,7 @@ required. Add the following into `html/index.html`:
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" type="text/css" media="all">
 
 Since the HTML is already setup to handle this, let's change a little of the
-code in `js/add.js`. Find these lines:
+code in `lib/add.js`. Find these lines:
 
     var my_torrent = bt.torrent.get('http://releases.ubuntu.com/10.04/ubuntu-10.04-desktop-i386.iso.torrent');
     $("#status").text(my_torrent.properties.get('progress') / 10);
@@ -217,5 +233,4 @@ with:
 Check it out in your browser and client. Hopefully, you're still downloading
 the Ubuntu torrent and you can see the progress bar update in real time.
 
-# Remote Resources
 

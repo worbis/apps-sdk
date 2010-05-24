@@ -16,6 +16,7 @@ To setup your project directory:
     % python -m griffin.setup media_downloader
     % cd media_downloader
     % python -m griffin.add http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js
+    % python -m griffin.add http://10.20.30.79/apps/lib/jup.js
 
 Since this is all about downloading media, let's get the main page setup to
 have a list of content. Open `html/index.html` in the media_downloader
@@ -27,10 +28,11 @@ directory and replace what's there with:
 Now, open `lib/list.js` so that we can add some javascript to populate that
 list.
 
-
     function render_item(item) {
-        var elem = $('<li><a href="'+item.torrents[0].url+'">'+
-                     item.title + '</a></li>');
+        var template = [ "li", [ "a", { "href": "{{url}}" }, "{{title}}" ],
+                         ["div", { "class": "bar" } ] ];
+        var elem = $(JUP.html({ url: item.torrents[0].url, title: item.title },
+                              template));
         $("#items").append(elem);
     }
 
@@ -41,7 +43,16 @@ list.
         });
     }
 
-Run your application in debug mode via. `python -m griffin.serve` and take a
+Most of this code is pretty standard jquery and javascript. However, there's
+the weird `JUP` thing. JUP is a javascript templating library. A lot of apps
+end up rendering quite a bit of content dynamically. Without some kind of
+templating, your code ends up being this unmaintainable soup of `+` between
+strings all over the place. While there are many templating libraries for
+javascript, we're suggesting JUP at this point because of its lightweight
+nature and ease of use. Feel free to use whatever you'd like, it is just
+suggested that some kind of templating library is used.
+
+Run your application in local mode via. `python -m griffin.serve` and take a
 look in your browser. You should see a list of links with the torrent title.
 
 To make it so any of these torrents can be added to your client, let's add a
@@ -64,13 +75,14 @@ Now, let's make the app reflect that a torrent was actually started
 downloading. Replace the render item function in `lib/list.js` with:
 
     function render_item(item) {
-        var elem = $('<li><a href="'+item.torrents[0].url+'">'+
-                     item.title + '</a></li>');
+        var template = [ "li", [ "a", { "href": "{{url}}" }, "{{title}}" ],
+                         ["div", { "class": "bar" } ] ];
+        var elem = $(JUP.html({ url: item.torrents[0].url, title: item.title },
+                              template));
         $("#items").append(elem);
         elem.click(function() {
             bt.add.torrent(item.torrents[0].url, function(resp) {
                 if (resp.message == 'success') {
-                    elem.append("<div class='bar'></div>");
                     $(".bar", elem).progressbar();
                 }
             });
@@ -89,14 +101,18 @@ there will need to be a little more code. Just add it at the bottom of
         var torrents = bt.torrent.all();
         for (var i in torrents) {
             var container = $(
-                "li a[href=" + torrents[i].properties.get('download_url') + "]"
+                sprintf("li a[href=%s]",
+                        torrents[i].properties.get('download_url'))
             ).closest('li');
             $(".bar", container).progressbar(
                 { value: torrents[i].properties.get('progress') / 10 });
         }
     }
 
-Then, inside the `$(document).ready()` function, add:
+A quick note about sprintf. This function is part of the Griffin SDK's
+dependencies and provides full C/C++ sprintf functionality. Once you've added
+`update_progress` to `lib/list.js`, add the following inside the
+`$(document).ready()` function:
 
     setInterval(update_progress, 100);
 
@@ -108,7 +124,7 @@ automatically. To get something added to your progress bars, add any torrent on
 the page by clicking on it and then type this into your debugging console
 (Firebug for example):
 
-    bt.torrent.all()[bt.torrent.keys[0]].properties.set('progress', 500)
+    >>> bt.torrent.all()[bt.torrent.keys[0]].properties.set('progress', 500)
 
 If everything is working correctly, you should see the progress bar of that
 torrent jump to half completed almost at once.
@@ -145,15 +161,16 @@ the list is getting duplicated by the `$.getJSON` call completing. Let's modify
 
     function render_item(item) {
         item.torrents[0].url = item.torrents[0].url.replace(/ /g, '');
-        if ($("li a[href=" + item.torrents[0].url + "]").length > 0)
+        if ($(sprintf("li a[href=%s]", item.torrents[0].url)).length > 0)
             return
-        var elem = $('<li><a href="'+item.torrents[0].url+'">'+
-                     item.title + '</a></li>');
+        var template = [ "li", [ "a", { "href": "{{url}}" }, "{{title}}" ],
+                         ["div", { "class": "bar" } ] ];
+        var elem = $(JUP.html({ url: item.torrents[0].url, title: item.title },
+                              template));
         $("#items").append(elem);
         elem.click(function() {
             bt.add.torrent(item.torrents[0].url, function(resp) {
                 if (resp.message == 'success') {
-                    elem.append("<div class='bar'></div>");
                     $(".bar", elem).progressbar();
                 }
             });
@@ -195,9 +212,16 @@ add some javascript. Replace `elem.click` in `render_item` with the following:
             'Adding a torrent, please be patient...').slideDown();
         bt.add.torrent(item.torrents[0].url, function(resp) {
             if (resp.message == 'success') {
-                elem.append("<div class='bar'></div>");
+                $("#notification").slideUp();
                 $(".bar", elem).progressbar();
+            } else {
+                $("#notification").text(
+                    'There was a problem adding the torrent :(');
             }
         });
         return false;
     });
+
+# Play a file
+
+# Analytics

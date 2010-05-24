@@ -7,6 +7,7 @@
 Setup the griffin directory structure.
 """
 
+import fnmatch
 import json
 import mako.template
 import optparse
@@ -83,6 +84,7 @@ class Project(object):
             sys.exit(1)
         self.create_dirs()
         self.write_package()
+        self.create_ignores()
         self.create_btapp()
         self.create_icon()
         self.create_main()
@@ -99,6 +101,10 @@ class Project(object):
         shutil.copy(pkg_resources.resource_filename(
                 'griffin.data', 'main.html'),
                     os.path.join(self.name, 'html', 'index.html'))
+
+    def create_ignores(self):
+        shutil.copy(pkg_resources.resource_filename('griffin.data', '.ignore'),
+                    os.path.join(self.name, '.ignore'))
 
     def add(self, url, update=True):
         handlers = { '.js': self._add_javascript,
@@ -179,7 +185,21 @@ class Project(object):
                                                        pkg['name'])))]
         return pkg_scripts
 
-
+    def btapp(self, path='.'):
+        self.index()
+        ignore = [os.path.join(path, x) for x in
+                  open(os.path.join(self.name, '.ignore')).read().split('\n')]
+        def _filter(fname):
+            for pat in ignore:
+                if fnmatch.fnmatch(fname, pat):
+                    return False
+            return True
+        btapp = zipfile.ZipFile(open(os.path.join(path, '%s.btapp' % (
+                    self.package['name'],)), 'w'), 'w')
+        for p, dirs, files in os.walk(self.name):
+            for f in filter(_filter, [os.path.join(p, x) for x in files]):
+                btapp.write(f)
+        btapp.close()
 
 if __name__ == '__main__':
     usage = "usage: %prog [options] name"
