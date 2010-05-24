@@ -25,8 +25,7 @@ class Project(object):
 
     dirs = [ 'css', 'html', 'lib', 'src', 'packages' ]
 
-    def __init__(self, name, update_url='http://localhost/default',
-                 debug=False):
+    def __init__(self, name, debug=False):
         self.name = name
         self.update_url = update_url
         self.debug = debug
