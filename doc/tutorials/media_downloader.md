@@ -6,8 +6,7 @@ World](http://github.com/bittorrent/griffin/tree/master/doc/tutorials/hello_worl
 first.
 
 If, at any time you'd like to see a complete version of the app that this
-tutorial builds, take a look at [Media
-Downloader](http://github.com/bittorrent/griffin/tree/master/examples/media_downloader).
+tutorial builds, take a look at [Media Downloader](http://github.com/bittorrent/griffin/tree/master/examples/media_downloader).
 
 # Setup
 

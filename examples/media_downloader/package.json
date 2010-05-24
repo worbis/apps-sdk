@@ -1,0 +1,28 @@
+{
+    "description": "The default project.", 
+    "bt:libs": [
+        {
+            "url": "http://10.20.30.79/apps/lib/griffin.pkg", 
+            "name": "griffin"
+        }, 
+        {
+            "url": "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js", 
+            "name": "jquery-ui"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/jup.js", 
+            "name": "jup"
+        }
+    ], 
+    "bt:publisher": "Default Publisher", 
+    "author": "Default Author <default@default.com>", 
+    "site": "http://griffin.bittorrent.com", 
+    "bt:update_url": "http://localhost/default", 
+    "version": "0.1", 
+    "bt:description": "This is the default app.", 
+    "keywords": [
+        "default"
+    ], 
+    "bt:release_date": "00/00/0000", 
+    "name": "media_downloader"
+}
