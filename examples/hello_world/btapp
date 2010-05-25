@@ -1,2 +1,6 @@
-name:Hello World!
-update_url:http://localhost/hello
+name:hello_world
+version:0.1
+publisher:Default Publisher
+update_url:http://localhost/default
+release_date:00/00/0000
+description:This is the default app.

@@ -6,14 +6,6 @@
         {
             "url": "http://10.20.30.79/apps/lib/griffin.pkg", 
             "name": "griffin"
-        }, 
-        {
-            "url": "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js", 
-            "name": "jquery-ui"
-        }, 
-        {
-            "url": "http://10.20.30.79/apps/lib/jup.js", 
-            "name": "jup"
         }
     ], 
     "site": "http://griffin.bittorrent.com", 
@@ -24,5 +16,5 @@
         "default"
     ], 
     "bt:release_date": "00/00/0000", 
-    "name": "media_downloader"
+    "name": "hello_world"
 }

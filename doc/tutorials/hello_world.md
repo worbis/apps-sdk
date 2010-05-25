@@ -86,24 +86,23 @@ special. It is auto-generated based on what is in your project and
 Now, let's hook this HTML up so that the torrent gets easily added to the
 client. Create `lib/add.js` and put the following code into it:
 
-    $("#ubuntu").click(function() {
-        bt.add.torrent("http://releases.ubuntu.com/10.04/ubuntu-10.04-desktop-i386.iso.torrent");
-        return false;
+    $(document).ready(function() {
+        $("#ubuntu").click(function() {
+            bt.add.torrent("http://releases.ubuntu.com/10.04/ubuntu-10.04-desktop-i386.iso.torrent");
+            return false;
+        });
     });
 
 And, now to test it out:
 
     % python -m griffin.serve
 
-Direct your favorite browser to [the normal location](http://localhost:8080/)
-and let's see what happens.
-
 To make development easier, the Griffin SDK provides a wrapper around the
 client's API. This makes it so that you can get a general feel for how your
 application will work while still using your favorite tools (like
-Firebug). Click on the torrent link in your browser and see what happens.
-
-Finally, let's update the btapp package and test this out in your client:
+Firebug). Click on the torrent link in your browser and see what happens. As
+I'm sure you've figured out by now, the app is a little boring in a
+browser. Let's update the btapp package and test this out in your client:
 
     % python -m griffin.package
 
@@ -140,13 +139,16 @@ that will fail by opening `html/index.html` and adding:
 Instead of binding an event to only the Ubuntu torrent, let's bind one to all
 the add links by changing `lib/add.js` a little bit:
 
-    $("a").click(function() {
-        bt.add.torrent(this.href, function(resp) {
-            $("body").append("Tried to add <" + resp.url +
-                ">. The status was: " + resp.status +
-                ". That means that it was added " + resp.message);
+    $(document).ready(function() {
+        $("a").click(function() {
+            bt.add.torrent(this.href, function(resp) {
+                $("body").append(sprintf(
+                    "Tried to add <%s>. The status was: %s. " +
+                    "That means there was a %s adding it.",
+                    resp.url, resp.status, resp.message));
+            });
+            return false;
         });
-        return false;
     });
 
 The callback that gets passed in as the second parameter on bt.add.torrent is

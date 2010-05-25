@@ -23,7 +23,7 @@ import griffin.data
 
 class Project(object):
 
-    dirs = [ 'css', 'html', 'lib', 'src', 'packages' ]
+    dirs = [ 'css', 'html', 'lib', 'packages' ]
 
     def __init__(self, name, debug=False):
         self.name = name
@@ -86,8 +86,7 @@ class Project(object):
         self.create_btapp()
         self.create_icon()
         self.create_main()
-        for pkg in self.package['bt:libs']:
-            self.add(pkg['url'])
+        self.update_deps()
         self.index()
 
     def create_icon(self):
