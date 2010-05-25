@@ -168,10 +168,19 @@ check up on how it is doing. Start by adding some new HTML to
 
     <div id="status"></div>
 
-Now, to put the progress in, we'll need to edit `lib/add.js`:
+Now, to put the progress in, we'll need to edit `lib/add.js` and put some code
+into the top of the file:
 
-    var my_torrent = bt.torrent.get('http://releases.ubuntu.com/10.04/ubuntu-10.04-desktop-i386.iso.torrent');
-    $("#status").text(my_torrent.properties.get('progress') / 10);
+    function status() {
+        var my_torrent = bt.torrent.get('http://releases.ubuntu.com/10.04/ubuntu-10.04-desktop-i386.iso.torrent');
+        if (my_torrent)
+            $("#status").text(my_torrent.properties.get('progress') / 10);
+    }
+
+And, let's check that status every 100 milliseconds by adding some code to the
+bottom of `$(document).ready()`:
+
+    setInterval(status, 100);
 
 As you can see, the torrent object itself was fetched via. the URL that it was
 downloaded from. This makes sense in this instance since we don't know what the
@@ -185,14 +194,18 @@ add a little HTML to `html/index.html`.
 
     <ul id="torrent-list"></ul>
 
-And, add the following to `lib/add.js`.
+And, replace the `status` function in `lib/add.js` with the following.
 
-    var torrents = bt.torrent.all();
-    for (var i in torrents) {
-        var torrent = torrents[i];
-        var name = torrent.properties.get('name');
-        var progress = torrent.properties.get('progress');
-        $("#torrent-list").append('<li>' + name + ': ' + progress + '</li>');
+    function status() {
+        var torrents = bt.torrent.all();
+        for (var i in torrents) {
+            var torrent = torrents[i];
+            var name = torrent.properties.get('name');
+            var progress = torrent.properties.get('progress');
+            if ($(sprintf("li[ref=%s]", name)).length == 0)
+                $("#torrent-list").append(
+                    sprintf('<li ref="%s">%s: %s</li>', name, name, progress));
+        }
     }
 
 Take a look in your browser and client to get a feeling of what's going on.
