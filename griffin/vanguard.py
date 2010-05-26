@@ -15,6 +15,7 @@ import os
 import sys
 
 import griffin.command
+import griffin.config
 
 class Options(dict):
 
@@ -26,7 +27,6 @@ class Options(dict):
 
 class Vanguard(object):
 
-    config_filename = '.griffin.cfg'
     global_options = [ ('verbose', 'v', 'run verbosely (default)', None),
                        ('quiet', 'q', 'run quiety (turns verbose off)', None),
                        ('help', 'h', 'show detailed help message', None),
@@ -44,17 +44,6 @@ class Vanguard(object):
         self.args = sys.argv[1:]
         self.ran = []
 
-    def find_config_files(self):
-        files = []
-        user_file = os.path.join(os.path.expanduser('~'), self.config_filename)
-        if os.path.isfile(user_file):
-            files.append(user_file)
-
-        if os.path.isfile(self.config_filename):
-            files.append(self.config_filename)
-
-        return files
-
     def _command_opts(self, command):
         d = self.command_options.get(command)
         if not d:
@@ -68,15 +57,8 @@ class Vanguard(object):
         - project/.griffin.cfg
         - $HOME/.griffin.cfg
         """
-        for fname in self.find_config_files():
-            parser = ConfigParser.SafeConfigParser()
-            logging.debug('Reading: %s' % (fname,))
-            parser.read(fname)
-            for section in parser.sections():
-                command_opts = self._command_opts(section)
-                options = parser.options(section)
-                for opt in options:
-                    command_opts[opt] = parser.get(section, opt)
+        config_handler = griffin.config.Config()
+        self.command_options = config_handler.config
 
         for k, v in self._command_opts('general').iteritems():
             self.options[k] = v
@@ -144,6 +126,7 @@ class Vanguard(object):
         parser.set_negative_aliases(negative_opt)
         (args, opts) = parser.getopt(args[1:])
         if hasattr(opts, 'help') and opts.help:
+            self._command_opts(command_name)['help'] = 1
             self._show_help()
             return
 
@@ -213,7 +196,12 @@ class Vanguard(object):
 def run():
     handler = Vanguard()
     handler.parse_config_files()
-    if handler.parse_command_line():
+    handler.parse_command_line()
+    if not handler.options.help and \
+            len(filter(lambda x: 'help' in x,
+                       [x.keys() for x in
+                        handler.command_options.values()])) == 0:
+
         handler.run_commands()
 
 if __name__ == '__main__':
