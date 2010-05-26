@@ -82,9 +82,6 @@ class Vanguard(object):
             self.options[k] = v
 
     def is_display_option(self, order, parser):
-        if self.options.help:
-            for l in parser.generate_help():
-                logging.error(l)
         if self.options.help_commands:
             self.print_commands()
             return True
@@ -111,6 +108,11 @@ class Vanguard(object):
             args = self._parse_command_opts(parser, args)
             if not args:
                 return
+
+        if self.options.help:
+            self._show_help()
+            return
+        return True
 
     def get_command(self, name):
         module_name = 'griffin.command.%s' % (name,)
@@ -211,8 +213,8 @@ class Vanguard(object):
 def run():
     handler = Vanguard()
     handler.parse_config_files()
-    handler.parse_command_line()
-    handler.run_commands()
+    if handler.parse_command_line():
+        handler.run_commands()
 
 if __name__ == '__main__':
     run()
