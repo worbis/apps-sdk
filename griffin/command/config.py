@@ -2,6 +2,11 @@
 # Copyright (c) 2010 BitTorrent Inc.
 #
 
+import ConfigParser
+import logging
+import sys
+
+import griffin.config
 import griffin.command.base
 
 class config(griffin.command.base.Command):
@@ -10,9 +15,27 @@ class config(griffin.command.base.Command):
     user_options = [
         ('global', 'g',
          'set the options globally ($HOME/.griffin.cfg)', None),
-        ('local', 'l',
-         'set the options locally (default) (project/.griffin.cfg)', None),
+        ('key=', None, 'the config name to update', None),
+        ('value=', None, 'the value to update the config to', None),
+        ('command=', None, 'the command to push the change to.', None)
         ]
+    option_defaults = { 'command': 'general' }
+
+    def print_value(self, section, opt):
+        logging.error('%20s=%-60s' % (
+                '%s.%s' % (section, opt),
+                self.config.get(section, {}).get(opt, 'unset')))
 
     def run(self):
-        pass
+        self.config = griffin.config.Config()
+        if not self.options.get('key', None):
+            logging.error('Must include `--key` for the key you\'d like to ' \
+                              'set or get')
+            sys.exit(1)
+        if self.options.get('value', None):
+            self.config.set(
+                self.options['command'], self.options['key'],
+                self.options['value'],
+                'global' if self.options.get('global', None) else 'local')
+            return
+        self.print_value(self.options['command'], self.options['key'])

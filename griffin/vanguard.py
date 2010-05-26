@@ -58,7 +58,7 @@ class Vanguard(object):
         - $HOME/.griffin.cfg
         """
         config_handler = griffin.config.Config()
-        self.command_options = config_handler.config
+        self.command_options = config_handler
 
         for k, v in self._command_opts('general').iteritems():
             self.options[k] = v
