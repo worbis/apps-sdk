@@ -371,11 +371,11 @@ RSS feed is fetching. To fetch the item objects associated with a specific feed
 object, you can:
 
     >> var my_feed = btapp.rss_feed.get("1")
-    >> my_feed.all() // Object containing id/object pairs for items
+    >> my_feed.item.all() // Object containing id/object pairs for items
     { "1": { "id": "1", "feed", my_feed } }
-    >> my_feed.keys() // List of all the items associated with this feed
+    >> my_feed.item.keys() // List of all the items associated with this feed
     [ "1" ]
-    >> my_feed.get("1") // Get a item object
+    >> my_feed.item.get("1") // Get a item object
     { "id": "1", "feed": my_feed }
 
 Once you've gotten an item object from `my_feed.item`, there are a couple

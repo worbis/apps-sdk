@@ -1,14 +1,10 @@
 This is a tutorial that will introduce consumption of remote resources from
 within an application as well as how to make the application feel a little more
-like a native application than a web page. If you're looking for something to
-just get started off, take a look at [Hello
-World](http://github.com/bittorrent/griffin/tree/master/doc/tutorials/hello_world.md)
-first.
+like a native application than a web page. The focus is on media and
+specialized feeds that aren't RSS.
 
 If, at any time you'd like to see a complete version of the app that this
 tutorial builds, take a look at [Media Downloader](http://github.com/bittorrent/griffin/tree/master/examples/media_downloader).
-
-# Setup
 
 First, let's get some tools installed. Along with the SDK comes a python
 program that makes a bunch of common tasks a little bit easier. To install
@@ -27,7 +23,7 @@ directory are special.
 
 - package.json - This is a file that describes your app. Take a look and change
   the values to something that makes a little more sense. Pay attention to
-  `bi:update_url`. This is the location that will be checked for updates once
+  `bt:update_url`. This is the location that will be checked for updates once
   your client has been installed. Make sure that this is a valid location so
   that you can update your app.
 
