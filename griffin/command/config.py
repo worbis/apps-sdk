@@ -5,4 +5,5 @@
 import griffin.command.base
 
 class config(griffin.command.base.Command):
-    pass
+
+    help = 'View and modify configuration of your project and griffin.'

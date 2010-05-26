@@ -16,11 +16,17 @@ class Command(object):
 
     help = 'Uninteresting command.'
     user_options = []
+    option_defaults = {}
+    pre_commands = []
+    post_commands = []
 
     def __init__(self, vanguard):
         self.vanguard = vanguard
         self.options = self.vanguard.command_options.get(
             self.__class__.__name__, {})
+        for k,v in self.option_defaults.iteritems():
+            if not self.options.get(k, None):
+                self.options[k] = v
         self.project = griffin.project.Project(self.options.get('name', '.'))
 
     def run(self):
@@ -32,6 +38,7 @@ class Command(object):
         self.write_metadata()
 
     def write_metadata(self):
+        logging.info('\tupdating project metadata')
         json.dump(self.project.metadata,
                   open(os.path.join(self.project.path, 'package.json'), 'w'),
                   indent=4)
@@ -44,6 +51,7 @@ class Command(object):
         btapp.close()
 
     def update_deps(self):
+        logging.info('\tupdating project dependencies')
         pkg_dir = os.path.join(self.project.path, 'packages')
         try:
             shutil.rmtree(pkg_dir)
@@ -59,6 +67,7 @@ class Command(object):
                      }
         fp, fname = tempfile.mkstemp()
         try:
+            logging.info('\tfetching %s ...' % (url,))
             open(fname, 'w').write(urllib2.urlopen(url).read())
         except urllib2.HTTPError:
             print 'The file at <%s> is missing.' % (url,)
@@ -88,6 +97,7 @@ class Command(object):
         shutil.rmtree(tmpdir)
         pkg.extract('package.json', pkg_root)
         # Handle the dependencies specifically
+        logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
         for pkg in pkg_manifest['bt:libs']:
             self.add(pkg['url'], False)
         return pkg_manifest['name']

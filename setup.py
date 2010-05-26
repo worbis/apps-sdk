@@ -23,4 +23,9 @@ setup(
     description = "Build tool to develop, build and package griffin apps.",
     install_requires = [ 'mako' ],
     include_package_data = True,
+    entry_points = {
+        'console_scripts': [
+            'griffin = griffin.vanguard:run',
+            ],
+        }
     )

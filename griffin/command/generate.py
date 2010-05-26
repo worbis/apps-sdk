@@ -11,6 +11,8 @@ import griffin.command.base
 
 class generate(griffin.command.base.Command):
 
+    help = 'Generate `index.html` for the project.'
+
     def run(self):
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(

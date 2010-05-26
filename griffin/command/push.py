@@ -5,4 +5,5 @@
 import griffin.command.base
 
 class push(griffin.command.base.Command):
-    pass
+
+    help = 'Push the packaged project to a remote resource.'

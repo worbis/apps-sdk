@@ -10,8 +10,10 @@ import griffin.command.base
 
 class package(griffin.command.base.Command):
 
+    help = 'Package the project into a .btapp file.'
+    pre_commands = [ 'generate' ]
+
     def run(self):
-        self.vanguard.run_command('generate')
         path = self.options.get('path', self.project.path)
         ignore = [os.path.join(path, x) for x in
                   open(os.path.join(self.project.path,

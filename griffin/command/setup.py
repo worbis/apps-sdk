@@ -12,8 +12,10 @@ import griffin.command.base
 
 class setup(griffin.command.base.Command):
 
+    help = 'Build a project directory and do initial setup.'
     dirs = [ 'css', 'html', 'lib', 'packages' ]
     user_options = [ ('name=', None, 'Name of the project to create.', None) ]
+    post_commands = [ 'generate' ]
 
     def create_dirs(self):
         for i in self.dirs:
@@ -42,4 +44,4 @@ class setup(griffin.command.base.Command):
         self.move_defaults()
         self.update_deps()
         os.chdir(self.project.path)
-        self.vanguard.run_command('generate')
+

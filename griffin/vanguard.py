@@ -30,7 +30,8 @@ class Vanguard(object):
     global_options = [ ('verbose', 'v', 'run verbosely (default)', None),
                        ('quiet', 'q', 'run quiety (turns verbose off)', None),
                        ('help', 'h', 'show detailed help message', None),
-                       ('debug', 'd', 'run with debug logging', None)
+                       ('debug', 'd', 'run with debugging options enabled',
+                        None)
                        ]
     display_options = [
         ('help-commands', None, 'list all available commands', None),
@@ -80,7 +81,10 @@ class Vanguard(object):
         for k, v in self._command_opts('general').iteritems():
             self.options[k] = v
 
-    def is_display_option(self, order):
+    def is_display_option(self, order, parser):
+        if self.options.help:
+            for l in parser.generate_help():
+                logging.error(l)
         if self.options.help_commands:
             self.print_commands()
             return True
@@ -100,7 +104,7 @@ class Vanguard(object):
         order = parser.get_option_order()
         self.setup_logging()
 
-        if self.is_display_option(order):
+        if self.is_display_option(order, parser):
             return
 
         while args:
@@ -161,9 +165,14 @@ class Vanguard(object):
     def run_command(self, command_name):
         if command_name in self.ran:
             return
-        logging.info('Running `%s` ...' % (command_name,))
-        self.get_command(command_name)(self).run()
+        command = self.get_command(command_name)
+        for pre in command.pre_commands:
+            self.run_command(pre)
+        logging.info('running `%s` ...' % (command_name,))
+        command(self).run()
         self.ran.append(command_name)
+        for post in command.post_commands:
+            self.run_command(post)
 
     def setup_logging(self):
         handlers = logging.getLogger().handlers
@@ -199,8 +208,11 @@ class Vanguard(object):
                     opt[2]))
         logging.error('')
 
+def run():
+    handler = Vanguard()
+    handler.parse_config_files()
+    handler.parse_command_line()
+    handler.run_commands()
+
 if __name__ == '__main__':
-    q = Vanguard()
-    q.parse_config_files()
-    q.parse_command_line()
-    q.run_commands()
+    run()
