@@ -1,0 +1,66 @@
+<link rel="stylesheet" href="theme/ui.all.css">
+<!--[if lte IE 7]>
+<style type="text/css">
+/* next 2 lines fix IE7 and 6 list whitespace bugs */
+.release {display:inline-block;}
+.release {display:block;margin-bottom:-2px;}
+* html .overview {height:54px;}
+.overview .download input {padding:0 0.25em;}
+.detail .section {width:77%;}
+* html .detail .section {height:8em;}
+* html #promo h2 {background:#000;}
+* html #promo .download {background:#fff;}
+* html #promo .descr {background:#000;}
+/* no IE6 :first-child pseudo-selector */
+* html #promo .download .links-toggle li, * html .overview .download .links-toggle li {border-left:none;}
+/* next 2 lines fix IE6 list whitespace bug */
+* html .detail .nav li  {display:inline-block;}
+* html .detail .nav li  {display:block;margin-bottom:-3px;}
+</style>
+<![endif]-->
+<div id="login-failure">Login failure, please try again.</div>
+<div id="msg"></div>
+<div id="app-title" class="group">
+  <!-- <div id="loginout"> -->
+  <!--     <a href="#" id="login">Log In</a> -->
+  <!--     <a href="#" id="logout">Log Out</a> -->
+  <!-- </div> -->
+  <h1>VODO</h1>
+</div>
+<div id="promo" class="group">
+  <div class="download">
+    <div class="links">
+      <ul>
+        <li class="download-button">
+          <button>Download</button>
+        </li>
+        <li class="play-button">
+          <button>Play</button>
+        </li>
+      </ul>
+      <div class="progressbar"></div>
+      <ul class="links-toggle"></ul>
+    </div>
+  </div>
+  <h2></h2>
+  <div class="descr-cont"><p class="descr"></p></div>
+</div>
+<div id="list-title">
+  <p class="sort">Sort by: <a href="#" id="datesort">Date</a> |
+    <a href="#" id="titlesort">Name</a>
+  </p>
+  <h2>All Releases</h2>
+</div>
+<ul id="releases"></ul>
+<div id="login-dialog">
+  <form>
+    <ul>
+      <li>Username: <input type="text" name="username" /></li>
+      <li>Password: <input type="password" name="password" /></li>
+      <li><input type="submit" value="Log In" /></li>
+    </ul>
+  </form>
+</div>
+<div id="playable">
+  <p>There are no playable files in this torrent.</p>
+</div>

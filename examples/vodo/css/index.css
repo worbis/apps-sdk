@@ -1,0 +1,107 @@
+/* Reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {margin:0;padding:0;text-align:left;}
+table {border-collapse:collapse;border-spacing:0;}
+fieldset,img {border:0;}
+address,caption,cite,code,dfn,th,var {font-style:normal;font-weight:normal;}
+ol,ul {list-style:none;}
+caption,th {text-align:left;}
+h1,h2,h3,h4,h5,h6 {font-size:100%;font-weight:normal;}
+q:before,q:after {content:'';}
+abbr,acronym {border:0;}
+a:active {outline:none;}
+/* General */
+body {font-family:Arial,sans-serif;color:#222;font-size:75%;line-height:1.3;}
+html>body {font-size:12px;}
+input, textarea {font-family:Arial,sans-serif;}
+a {color:#0066cc;}
+/* Easy Clearing Method */
+.group {
+display:block;
+}
+.group:after {
+content:".";
+display:block;
+height:0;
+clear:both;
+visibility:hidden;
+}
+.group {display:inline-block;}
+/* Hide from IE Mac \*/
+.group {display:block;}
+/* End hide from IE Mac */
+* html .group {
+height:1%;
+}
+
+/**** thomas ***/
+.detail {display:none;}
+#logout {display:none;}
+#login-dialog {display:none;}
+#login-failure {display:none;}
+#msg {display:none;}
+.author, .comments, .donate {display:none;}
+.comments form {display:none;}
+#promo .title {display:none;}
+#playable {display:none;}
+.play-button {display:none;}
+
+/****brig****/
+body {background:#a6a3a0 url("imgs/page_background.png") 0 0 repeat-x;font-family:"Lucida Grande","Verdana",sans-serif;}
+a {color:#09af61;}
+a.default-download {color:#222;text-decoration:none;}
+.progressbar {border-color:#09af61;}
+.progressbar .ui-progressbar-value {background-image:url("imgs/green_gradient_1x100.png");border-color:#09af61;}
+#app-title {/*position:fixed;top:0;left:0;width:100%;*/padding:0 12px;background-color:#333;border-bottom:1px solid #777;}
+#app-title #loginout {float:right;width:150px;margin:12px 0;text-align:right;}
+#app-title #loginout a {color:#fff;text-decoration:none;}
+#app-title h1 {padding:9px 12px 9px 30px;background:transparent url("imgs/vodo_logo_25h.gif") 0 50% no-repeat;font-size:1.75em;line-height:1;font-weight:bold;color:#08ae60;letter-spacing:-1px;}
+#promo {padding:1em;background-color:#000;background-position:50% 0;background-repeat:no-repeat;}
+#promo h2 {display:inline;font-size:2.5em;font-weight:bold;color:#fff;/*background-color:rgba(0,0,0,0.5);*/background:transparent url("imgs/black_op_50.png") 0 0 repeat;}
+/*#promo img {display:none;}*/
+#promo .download {float:right;width:10em;padding:1.5em 1.5em 0.75em;margin:1.5em;/*background-color:rgba(255,255,255,0.85);*/background:transparent url("imgs/white_op_85.png") 0 0 repeat;border:1px solid #eee;text-align:center;}
+#promo .download input {width:8em;padding:0 0.25em;font-size:1.5em;text-align:center;cursor:pointer;}
+#promo .download-button {text-align:center;}
+#promo .download .progressbar {display:none;width:7em;height:20px;margin:0 auto;}
+#promo .download .links-toggle {padding-top:2px;text-align:center;}
+#promo .download .links-toggle li {display:inline;padding:0 2px 0 6px;border-left:1px solid #ccc;text-align:center;}
+#promo .download .links-toggle li:first-child {border-left:none;}
+#promo .descr-cont {clear:both;padding-top:3.5em;}
+#promo .descr {padding:0.25em 0;font-size:1.1em;color:#fff;/*background-color:rgba(0,0,0,0.5);*/background:transparent url("imgs/black_op_50.png") 0 0 repeat;}
+#list-title {background-color:#eee;border-top:1px solid #ccc;border-bottom:1px solid #ccc;}
+#list-title .sort {float:right;width:150px;text-align:right;margin:4px 12px 0;}
+#list-title .sort .current-sort {color:#222;font-weight:bold;text-decoration:none;}
+#list-title h2 {padding:3px 12px;font-size:1.1em;font-weight:bold;}
+.release {color:#222;border-bottom:1px solid #eee;}
+.overview {position:relative;min-height:54px;padding:9px 200px 8px 102px;background-color:#fff;cursor:pointer;}
+.overview h3 {padding:0.2em 0 0.1em;font-size:1.2em;line-height:1;font-weight:bold;}
+.overview img {position:absolute;top:9px;left:24px;/*float:left;*/padding:2px;/*margin:0 6px 0 0;*/background-color:#fff;border:1px solid #ddd;border-top-color:#dfdfdf;border-left-color:#dfdfdf;}
+.overview .auth, .overview .duration {float:left;margin:0 1em 2px 0;color:#777;}
+.overview .short-description {clear:left;}
+.overview .download {position:absolute;top:14px;right:12px;width:180px;}
+.overview .download .date {float:left;}
+.overview .download .links {float:right;}
+.overview .download input {/*padding:0 0.75em;*/width:7em;text-align:center;cursor:pointer;}
+.overview .download .links-toggle {padding-top:1px;text-align:center;}
+.overview .download .links-toggle li {display:inline;padding:0 2px 0 6px;border-left:1px solid #ccc;font-size:90%;text-align:center;}
+.overview .download .links-toggle li:first-child {border-left:none;}
+.overview .download .progressbar {display:none;width:70px;height:15px;}
+.overview .download .ui-corner-all {border-radius:2px;}
+.overview .download .ui-corner-left {border-top-left-radius:2px;border-bottom-left-radius:2px;}
+.overview .release-toggle {position:absolute;top:9px;left:0;padding:0 8px;font-weight:bold;cursor:pointer;color:black;}
+.detail {clear:both;/*padding:9px;*/padding:0 12px 12px;/*background-color:#eee;border-bottom:1px solid #c4c4c4;*/}
+.detail .nav {float:left;width:18%;}
+.detail .nav li {font-size:1.1em;text-align:right;}
+.detail .nav li a {display:block;padding:3px 9px;/*color:#eee;*/background-color:#ddd;}
+.detail .nav li a.current-nav {color:#222;font-weight:bold;text-decoration:none;background-color:#eee;border-bottom:1px solid #c4c4c4;}
+.detail .section {float:left;width:78%;min-height:8em;padding:12px 2%;background-color:#eee;border-bottom:1px solid #c4c4c4;}
+.detail .author-detail li {margin-bottom:3px;}
+.detail .author-detail li h4 {float:left;width:6em;/*text-align:right;*/}
+.detail .author-detail li p {margin-left:7em;}
+.comments textarea {display:block;width:100%;margin-bottom:0.5em;}
+.comments input {margin:0.5em 0 1.5em;text-align:center;}
+.comments li {margin-bottom:12px;}
+.comments li h4 {float:left;margin:0 0 3px 1px;}
+.comments li .reply-link {float:right;margin-right:3px;}
+.comments li .comment-body {clear:both;padding:9px;background-color:#f9f9f9;border-bottom:1px solid #e0e0e0;border-right:1px solid #e0e0e0;}
+#login-dialog li {float:left;width:100%;margin:0.75em 0;}
+#login-dialog li input {float:right;text-align:center;}

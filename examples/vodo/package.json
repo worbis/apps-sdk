@@ -1,0 +1,46 @@
+{
+    "description": "VODO", 
+    "bt:libs": [
+        {
+            "url": "http://10.20.30.79/apps/lib/griffin.pkg", 
+            "name": "griffin"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/jquery.sort.js", 
+            "name": "jquery.sort"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/jquery.poll.js", 
+            "name": "jquery.poll"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/jquery-ui.js", 
+            "name": "jquery-ui"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/jaml.js", 
+            "name": "jaml"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/date.js", 
+            "name": "date"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/underscore.js", 
+            "name": "underscore"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/mixpanel.js", 
+            "name": "mixpanel"
+        }
+    ], 
+    "bt:publisher": "BitTorrent Inc.", 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
+    "site": "http://vodo.net", 
+    "bt:update_url": "http://apps.bittorrent.com/vodo/vodo.btapp", 
+    "version": "1.1", 
+    "bt:description": "VODO brings you great, free movies from creators who want to share their work!", 
+    "keywords": [], 
+    "bt:release_date": "05/31/2010", 
+    "name": "Vodo"
+}
