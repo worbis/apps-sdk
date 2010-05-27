@@ -86,8 +86,17 @@ directory and replace what's there with:
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" type="text/css" media="all">
     <ul id="items"></ul>
 
-Now, open `lib/list.js` so that we can add some javascript to populate that
-list.
+You've probably noticed that we're not editing the `index.html` file sitting
+there in the root directory. This file is auto-generated for you based on the
+dependencies, javascript and css in your project. `html/index.html` gets put
+into `index.html` on load so that you don't need to worry about it (and can
+switch "views" if you so feel like it).
+
+The `lib` directory is where all your javascript should go. Anything in that
+directory will get included as a script in `index.html`. `index.js` inside this
+directory is a little special. It will always be the last script loaded and
+should be where all the main loading logic for your program should go. Now,
+open `lib/index.js` so that we can add some javascript to populate that list.
 
     function render_item(item) {
         var template = [ "li", [ "a", { "href": "{{url}}" }, "{{title}}" ],
@@ -114,12 +123,12 @@ javascript, we're suggesting JUP at this point because of its lightweight
 nature and ease of use. Feel free to use whatever you'd like, it is just
 suggested that some kind of templating library is used.
 
-Run your application in local mode via. `python -m griffin.serve` and take a
+Run your application in local mode via. `griffin serve` and take a
 look in [your browser](http://localhost:8080) (http://localhost:8080). You
 should see a list of links with the torrent title.
 
 To make it so any of these torrents can be added to your client, let's add a
-line to `render_item` in `lib/list.js`:
+line to `render_item` in `lib/index.js`:
 
     $("a", elem).click(function() {
         bt.add.torrent(item.torrents[0].url);
@@ -129,18 +138,20 @@ line to `render_item` in `lib/list.js`:
 Take a couple minutes to see how this looks in your browser. Now, let's test
 the app in your client. Run:
 
-    % python -m griffin.package --debug
+    % griffin --debug package
 
-And, double click on the `media_downloader.btapp` file. In your client, take a
-look at the application and try to add some torrents.
+And, double click on the `dist/media_downloader.btapp` file. In your client,
+take a look at the application and try to add some torrents.
 
 Looking at the app so far in your client, you'll notice that there's a debug
-console on the bottom of the window. The `--debug` option on griffin.package
-includes this console. It works like a normal debug console letting you log to
-it via. `console.log()` and navigate the current DOM from the `HTML` tab.
+console on the bottom of the window. The `--debug` option can be used for any
+`griffin` command and usually enables some extra debugging information. When
+packaging your project, this includes a debug console. It works like a normal
+debug console letting you log to it via. `console.log()` and navigate the
+current DOM from the `HTML` tab.
 
-Now, let's make the app reflect that a torrent was actually started
-downloading. Replace the render item function in `lib/list.js` with:
+Now, let's make the app reflect that an added torrent actually started
+downloading. Replace the render item function in `lib/index.js` with:
 
     function render_item(item) {
         var template = [ "li", [ "a", { "href": "{{url}}" }, "{{title}}" ],
@@ -163,7 +174,7 @@ specific torrent was added (or failed to be added). While status notifications
 can take callbacks, progress updates do not use callbacks (as they'd be
 happening too often). To poll the torrent's progress and update progress bars,
 there will need to be a little more code. Just add it at the bottom of
-`lib/list.js`.
+`lib/index.js`.
 
     function update_progress() {
         var torrents = bt.torrent.all();
@@ -179,7 +190,7 @@ there will need to be a little more code. Just add it at the bottom of
 
 A quick note about sprintf. This function is part of the Griffin SDK's
 dependencies and provides full C/C++ sprintf functionality. Once you've added
-`update_progress` to `lib/list.js`, add the following inside the
+`update_progress` to `lib/index.js`, add the following inside the
 `$(document).ready()` function:
 
     setInterval(update_progress, 100);
@@ -192,15 +203,15 @@ automatically. To get something added to your progress bars, add any torrent on
 the page by clicking on it and then type this into your debugging console
 (Firebug for example):
 
-    >>> bt.torrent.all()[bt.torrent.keys[0]].properties.set('progress', 500)
+    >>> bt.torrent.all()[bt.torrent.keys()[0]].properties.set('progress', 500)
 
 If everything is working correctly, you should see the progress bar of that
-torrent jump to half completed almost at once.
+torrent jump to half completion almost at once.
 
 And, now let's package the app up. Make sure you're in the `media_downloader`
-directory and:
+directory and once again:
 
-    % python -m griffin.package
+    % griffin package
 
 Open up your client and double click on `media_downloader.btapp`. The app
 should be added into your client. Take some time adding torrents to get a feel
@@ -214,7 +225,7 @@ actually add the torrent. During that time, there's no notification to the user
 that something has occurred and is working in the background.
 
 To fix the first problem, let's make the app use something called the stash. At
-the bottom of `lib/list.js`, add some new code right after `$.getJSON` inside
+the bottom of `lib/index.js`, add some new code right after `$.getJSON` inside
 the `$(document).ready()` function:
 
     var items = bt.stash.get('items', []);
@@ -273,7 +284,8 @@ create the file `css/list.css` and add the following to it:
 
 This file will get automatically included in your app, so don't worry about
 adding the link to the css anywhere. To get the area actually working, let's
-add some javascript. Replace `$("a", elem).click` in `render_item` with the following:
+add some javascript. Replace `$("a", elem).click` in `render_item` with the
+following:
 
     $("a", elem).click(function() {
         $("#notification").text(
@@ -293,7 +305,7 @@ add some javascript. Replace `$("a", elem).click` in `render_item` with the foll
 Once a download is completed, it's convenient to give the user of your
 application a button to play or open the file. First, let's get rid of the
 progress bars on torrents that have completed and replace them with play
-buttons. Replace `update_progress` in `lib/list.js` with the following:
+buttons. Replace `update_progress` in `lib/index.js` with the following:
 
     function update_progress() {
         var torrents = bt.torrent.all();
