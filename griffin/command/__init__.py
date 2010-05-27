@@ -11,4 +11,5 @@ __all__ = [ 'add',
             'config',
             'push',
             'generate',
+            'submit',
             ]

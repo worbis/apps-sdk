@@ -30,6 +30,9 @@ class setup(griffin.command.base.Command):
         shutil.copy(pkg_resources.resource_filename(
                 'griffin.data', 'main.html'),
                     os.path.join(self.project.path, 'html', 'index.html'))
+        shutil.copy(pkg_resources.resource_filename(
+                'griffin.data', 'index.js'),
+                    os.path.join(self.project.path, 'lib', 'index.js'))
 
     def run(self):
         if not self.options.get('name', None):

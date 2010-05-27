@@ -42,9 +42,10 @@ class generate(griffin.command.base.Command):
                               handlers[os.path.splitext(lib['url'])[-1]](lib))
         if metadata == self.project.metadata:
             scripts += filter(
-                lambda x: not x in scripts,
+                lambda x: not x in scripts and x != 'lib/index.js',
                 [os.path.join('lib', x) for x in
                  os.listdir(os.path.join(self.project.path, 'lib'))])
+            scripts.append(os.path.join('lib', 'index.js'))
         return scripts
 
     def _list_lib(self, lib):

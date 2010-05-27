@@ -14,7 +14,7 @@ these tools, let's go to the directory that you extracted the SDK to.
 
 To setup your project directory:
 
-    % python -m griffin.setup media_downloader
+    % griffin setup media_downloader
     % cd media_downloader
 
 You'll have a new `media_downloader` directory. Inside this directory, there
@@ -50,12 +50,12 @@ should look like:
 These are the third party dependencies for your project. There is a special
 command to update these to the latest:
 
-    % python -m griffin.update
+    % griffin update
 
 Now, let's add a couple new external dependencies:
 
-    % python -m griffin.add http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js
-    % python -m griffin.add http://10.20.30.79/apps/lib/jup.js
+    % griffin add --file=http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js
+    % griffin add --file=http://10.20.30.79/apps/lib/jup.js
 
 Take a look at `package.json` again. `bt:libs` will look a little different:
 
@@ -75,8 +75,9 @@ Take a look at `package.json` again. `bt:libs` will look a little different:
     ]
 
 As you can see, there are 2 new dependencies that have been added to your
-project under the `packages` directory and will be auto-updated whenever
-requested.
+project under the `packages` directory and can be updated via.
+`griffin update`. To help with packaging and remote linking, when you run
+`griffin add`, the file is downloaded in saved in `packages/`. Instead
 
 Since this is all about downloading media, let's get the main page setup to
 have a list of content. Open `html/index.html` in the media_downloader
