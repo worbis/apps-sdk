@@ -1,6 +1,6 @@
 *.btapp
 .ignore
-.svn/*
+*.svn/*
 .git/*
 .hg/*
 *.egg-info
@@ -9,3 +9,4 @@ test/*
 doc/*
 examples/*
 client/*
+dist/*

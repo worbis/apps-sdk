@@ -6,6 +6,9 @@
 A griffin project.
 """
 
+import json
+import os
+
 class Project(object):
 
     def __init__(self, path):
@@ -14,9 +17,9 @@ class Project(object):
 
     def read_metadata(self):
         try:
-            self.metadata = json.load(open(os.path.join(self.name,
+            self.metadata = json.load(open(os.path.join(self.path,
                                                         'package.json'), 'r'))
-        except:
+        except IOError, err:
             self.metadata = {
                 'name': self.path,
                 'version': '0.1',

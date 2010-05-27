@@ -3,6 +3,7 @@
 #
 
 import json
+import logging
 import mako.template
 import os
 import pkg_resources
@@ -14,6 +15,8 @@ class generate(griffin.command.base.Command):
     help = 'Generate `index.html` for the project.'
 
     def run(self):
+        self.write_metadata()
+        logging.info('\tcreating index.html')
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(
                 'griffin.data', 'index.html'))

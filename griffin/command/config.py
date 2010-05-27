@@ -31,11 +31,10 @@ class config(griffin.command.base.Command):
         if not self.options.get('key', None):
             logging.error('Must include `--key` for the key you\'d like to ' \
                               'set or get')
-            sys.exit(1)
+            return
         if self.options.get('value', None):
             self.config.set(
                 self.options['command'], self.options['key'],
                 self.options['value'],
                 'global' if self.options.get('global', None) else 'local')
-            return
         self.print_value(self.options['command'], self.options['key'])

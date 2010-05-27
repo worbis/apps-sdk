@@ -22,8 +22,8 @@
     "doc": "doc",
     "test": "test"
   },
-  "bt:libs": [ { "name": "firebug",
-                 "url": "http://10.20.30.79/apps/lib/firebug.js" },
+  "bt:libs": [ { "name": "json2",
+                 "url": "http://10.20.30.79/apps/lib/json2.js" },
                { "name": "jquery",
                  "url": "http://10.20.30.79/apps/lib/jquery.js" },
                { "name": "underscore",

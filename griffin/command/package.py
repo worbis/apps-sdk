@@ -11,11 +11,14 @@ import griffin.command.base
 class package(griffin.command.base.Command):
 
     help = 'Package the project into a .btapp file.'
+    user_options = [
+        ('path=', None, 'full path to place the package in.', None) ]
+    option_defaults = { 'path': 'dist' }
     pre_commands = [ 'generate' ]
 
     def run(self):
-        path = self.options.get('path', self.project.path)
-        ignore = [os.path.join(path, x) for x in
+        path = self.options['path']
+        ignore = [os.path.join(self.project.path, x) for x in
                   open(os.path.join(self.project.path,
                                     '.ignore')).read().split('\n')]
         def _filter(fname):
@@ -23,6 +26,10 @@ class package(griffin.command.base.Command):
                 if fnmatch.fnmatch(fname, pat):
                     return False
             return True
+        try:
+            os.makedirs(path)
+        except:
+            pass
         btapp = zipfile.ZipFile(open(os.path.join(path, '%s.btapp' % (
                     self.project.metadata['name'],)), 'w'), 'w')
         for p, dirs, files in os.walk(self.project.path):
