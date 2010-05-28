@@ -13,6 +13,7 @@ import griffin.command.base
 class generate(griffin.command.base.Command):
 
     help = 'Generate `index.html` for the project.'
+    excludes = [ 'packages/firebug.js', 'lib/index.js' ]
 
     def run(self):
         self.write_metadata()
@@ -32,17 +33,20 @@ class generate(griffin.command.base.Command):
                 filter(lambda x: os.path.splitext(x)[1] == '.css',
                        os.listdir(os.path.join(self.project.path, 'css')))]
 
+    def filter(self, existing, lst):
+        return filter(lambda x: not x in existing and not x in self.excludes,
+                      lst)
+
     def _scripts_list(self, metadata):
         handlers = { '.js': self._list_lib,
                      '.pkg': self._list_pkg
                      }
         scripts = []
         for lib in metadata['bt:libs']:
-            scripts += filter(lambda x: not x in scripts,
-                              handlers[os.path.splitext(lib['url'])[-1]](lib))
+            scripts += self.filter(scripts,
+                handlers[os.path.splitext(lib['url'])[-1]](lib))
         if metadata == self.project.metadata:
-            scripts += filter(
-                lambda x: not x in scripts and x != 'lib/index.js',
+            scripts += self.filter(scripts,
                 [os.path.join('lib', x) for x in
                  os.listdir(os.path.join(self.project.path, 'lib'))])
             scripts.append(os.path.join('lib', 'index.js'))
