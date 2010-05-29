@@ -5,8 +5,17 @@
 import BaseHTTPServer
 import logging
 import SimpleHTTPServer
+import os
 
 import griffin.command.base
+
+class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
+
+    def do_POST(req):
+        fp = open(os.path.join('test', req.path[1:]), 'w')
+        fp.write(req.rfile.read(int(req.headers['Content-Length'])))
+        fp.close()
+        req.send_response(200)
 
 class serve(griffin.command.base.Command):
 
@@ -19,6 +28,5 @@ class serve(griffin.command.base.Command):
         logging.info('\tstarting server, access it at http://localhost:%s' % (
                 self.options['port'],))
         httpd = BaseHTTPServer.HTTPServer(
-            ('', int(self.options['port'])),
-            SimpleHTTPServer.SimpleHTTPRequestHandler)
+            ('', int(self.options['port'])), GriffinRequests)
         httpd.serve_forever()

@@ -116,7 +116,7 @@ var vodo = {
       if (!item) return
       var tor_info = _.filter(torrents, function(t) {
         return _(item.torrents).chain().pluck('hash').filter(function(z) {
-          return z === t.hash.toLowerCase().slice(1);
+          return z === t.hash.toLowerCase();
         }).value().length > 0;
       });
       if (!tor_info || tor_info.length == 0)
@@ -299,7 +299,7 @@ var vodo = {
                  userid: bt.stash.get('userid', -1) });
       _(btapp.torrent.all()).chain().filter(function(v) {
         return _(data.torrents).chain().pluck('hash').filter(function(z) {
-          return z === v.hash.toLowerCase().slice(1);
+          return z === v.hash.toLowerCase();
         }).value().length > 0;
       }).each(function(v) {
         var playable = _(v.file.all()).chain().filter(function(v, k) {

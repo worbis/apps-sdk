@@ -13,7 +13,7 @@ import griffin.command.base
 class setup(griffin.command.base.Command):
 
     help = 'Build a project directory and do initial setup.'
-    dirs = [ 'css', 'html', 'lib', 'packages' ]
+    dirs = [ 'css', 'html', 'lib', 'packages', 'temp' ]
     user_options = [ ('name=', None, 'Name of the project to create.', None) ]
     post_commands = [ 'generate' ]
 
