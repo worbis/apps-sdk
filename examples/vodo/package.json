@@ -32,6 +32,10 @@
         {
             "url": "http://10.20.30.79/apps/lib/mixpanel.js", 
             "name": "mixpanel"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/mimic.pkg", 
+            "name": "mimic"
         }
     ], 
     "bt:publisher": "BitTorrent Inc.", 

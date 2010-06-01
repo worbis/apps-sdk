@@ -42,7 +42,7 @@ class generate(griffin.command.base.Command):
                      '.pkg': self._list_pkg
                      }
         scripts = []
-        for lib in metadata['bt:libs']:
+        for lib in metadata.get('bt:libs', []):
             scripts += self.filter(scripts,
                 handlers[os.path.splitext(lib['url'])[-1]](lib))
         if metadata == self.project.metadata:

@@ -33,7 +33,8 @@ class Command(object):
         logging.error('This command has not been implemented yet.')
 
     def update_libs(self, name, url):
-        if not name in [x['name'] for x in self.project.metadata['bt:libs']]:
+        if not name in [x['name'] for x in
+                        self.project.metadata.get('bt:libs', [])]:
             self.project.metadata['bt:libs'].append({ "name": name, "url": url})
         self.write_metadata()
 
@@ -58,7 +59,7 @@ class Command(object):
         except OSError:
             pass
         os.makedirs(pkg_dir)
-        for pkg in self.project.metadata['bt:libs']:
+        for pkg in self.project.metadata.get('bt:libs', []):
             self.add(pkg['url'])
 
     def add(self, url, update=True):
@@ -93,11 +94,12 @@ class Command(object):
             if 'lib' == finfo.filename[:3]:
                 pkg.extract(finfo.filename, tmpdir)
         # This is because I'm lazy ....
+        shutil.rmtree(pkg_root)
         shutil.copytree(os.path.join(tmpdir, 'lib'), pkg_root)
         shutil.rmtree(tmpdir)
         pkg.extract('package.json', pkg_root)
         # Handle the dependencies specifically
         logging.info('\tfetching %s dependencies ...' % (pkg_manifest['name'],))
-        for pkg in pkg_manifest['bt:libs']:
+        for pkg in pkg_manifest.get('bt:libs', []):
             self.add(pkg['url'], False)
         return pkg_manifest['name']
