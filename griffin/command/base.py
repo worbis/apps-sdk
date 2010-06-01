@@ -94,7 +94,7 @@ class Command(object):
             if 'lib' == finfo.filename[:3]:
                 pkg.extract(finfo.filename, tmpdir)
         # This is because I'm lazy ....
-        shutil.rmtree(pkg_root)
+        shutil.rmtree(pkg_root, True)
         shutil.copytree(os.path.join(tmpdir, 'lib'), pkg_root)
         shutil.rmtree(tmpdir)
         pkg.extract('package.json', pkg_root)

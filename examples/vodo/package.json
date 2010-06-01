@@ -1,5 +1,7 @@
 {
     "description": "VODO", 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
+    "bt:publisher": "BitTorrent Inc.", 
     "bt:libs": [
         {
             "url": "http://10.20.30.79/apps/lib/griffin.pkg", 
@@ -38,8 +40,6 @@
             "name": "mimic"
         }
     ], 
-    "bt:publisher": "BitTorrent Inc.", 
-    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
     "site": "http://vodo.net", 
     "bt:update_url": "http://apps.bittorrent.com/vodo/vodo.btapp", 
     "version": "1.1", 
