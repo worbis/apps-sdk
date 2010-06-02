@@ -66,10 +66,12 @@ class Command(object):
         handlers = { '.js': self._add_javascript,
                      '.pkg': self._add_pkg
                      }
-        fp, fname = tempfile.mkstemp()
+        fobj = tempfile.NamedTemporaryFile('wb', delete=False)
+        fname = fobj.name
+        #fp, fname = tempfile.mkstemp()
         try:
             logging.info('\tfetching %s ...' % (url,))
-            fobj = open(fname, 'wb')
+            #fobj = open(fname, 'wb')
             fobj.write(urllib2.urlopen(url).read())
             fobj.close()
         except urllib2.HTTPError:
@@ -77,12 +79,12 @@ class Command(object):
             sys.exit(1)
         name = handlers[os.path.splitext(url)[-1]](fname,
                                                    os.path.split(url)[-1])
+        os.remove(fname)
         if update:
             self.update_libs(name, url)
 
     def _add_javascript(self, source, fname):
         shutil.copy(source, os.path.join(self.project.path, 'packages', fname))
-        os.remove(source)
         return os.path.splitext(fname)[0]
 
     def _add_pkg(self, source, fname):
