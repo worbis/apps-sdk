@@ -42,14 +42,14 @@ class push(griffin.command.base.Command):
     def push_s3(self):
         base_url = self.options['url'][5:]
         bucket, fname = base_url.split('/', 1)
-        if not 'aws_secret' in self.options:
-            logging.error('Must include your aws secret.')
+        if not 'aws-secret' in self.options:
+            logging.error('Must include your aws secret. (--aws-secret)')
             return
-        if not 'aws_key' in self.options:
-            logging.error('Must include your aws key.')
+        if not 'aws-key' in self.options:
+            logging.error('Must include your aws key. (--aws-key)')
             return
-        conn = boto.connect_s3(self.options['aws_key'],
-                               self.options['aws_secret'])
+        conn = boto.connect_s3(self.options['aws-key'],
+                               self.options['aws-secret'])
         try:
             bucket = conn.get_bucket(bucket)
         except:
