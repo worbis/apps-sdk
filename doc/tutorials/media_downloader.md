@@ -16,7 +16,7 @@ XXX - Need to talk through installing python and setuptools probably.
 
 To setup your project directory:
 
-    % griffin setup --name=media_downloader
+    % griffin setup --name media_downloader
     % cd media_downloader
 
 You'll have a new `media_downloader` directory. Inside this directory, there
@@ -114,7 +114,7 @@ open `lib/index.js` so that we can add some javascript to populate that list.
                 for (var i = 0, ii = items.length; i < ii; i++)
                     render_item(items[i]);
             });
-    }
+    });
 
 Most of this code is pretty standard jquery and javascript. However, there's
 the weird `JUP` thing. JUP is a javascript templating library. A lot of apps

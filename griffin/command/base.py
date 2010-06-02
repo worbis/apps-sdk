@@ -9,6 +9,7 @@ import shutil
 import tempfile
 import urllib2
 import zipfile
+import sys
 
 import griffin.project
 
