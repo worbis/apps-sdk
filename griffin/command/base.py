@@ -69,7 +69,9 @@ class Command(object):
         fp, fname = tempfile.mkstemp()
         try:
             logging.info('\tfetching %s ...' % (url,))
-            open(fname, 'w').write(urllib2.urlopen(url).read())
+            fobj = open(fname, 'wb')
+            fobj.write(urllib2.urlopen(url).read())
+            fobj.close()
         except urllib2.HTTPError:
             print 'The file at <%s> is missing.' % (url,)
             sys.exit(1)
@@ -79,7 +81,8 @@ class Command(object):
             self.update_libs(name, url)
 
     def _add_javascript(self, source, fname):
-        shutil.move(source, os.path.join(self.project.path, 'packages', fname))
+        shutil.copy(source, os.path.join(self.project.path, 'packages', fname))
+        os.remove(source)
         return os.path.splitext(fname)[0]
 
     def _add_pkg(self, source, fname):
