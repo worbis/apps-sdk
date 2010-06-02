@@ -42,11 +42,11 @@ class Command(object):
     def write_metadata(self):
         logging.info('\tupdating project metadata')
         json.dump(self.project.metadata,
-                  open(os.path.join(self.project.path, 'package.json'), 'w'),
+                  open(os.path.join(self.project.path, 'package.json'), 'wb'),
                   indent=4)
         keys = [ 'name', 'version', 'bt:publisher', 'bt:update_url',
                  'bt:release_date', 'bt:description' ]
-        btapp = open(os.path.join(self.project.path, 'btapp'), 'w')
+        btapp = open(os.path.join(self.project.path, 'btapp'), 'wb')
         for i in keys:
             btapp.write('%s:%s\n' % (i.split(':')[-1],
                                      self.project.metadata[i]))
