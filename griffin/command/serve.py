@@ -12,6 +12,11 @@ import griffin.command.base
 
 class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
+    def address_string(self):
+        # Non-localhost calls get timeouts in getfqdn
+        # (why does a "Basic" http server do this?)
+        return self.client_address[0]
+
     def translate_path(self, path):
         # Firefox on windows (for some reason) sends /asdf\asdf instead of
         # /asdf/asdf
