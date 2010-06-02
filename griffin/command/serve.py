@@ -6,10 +6,18 @@ import BaseHTTPServer
 import logging
 import SimpleHTTPServer
 import os
+import urllib
 
 import griffin.command.base
 
 class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
+
+    def translate_path(self, path):
+        # Firefox on windows (for some reason) sends /asdf\asdf instead of
+        # /asdf/asdf
+        path = urllib.unquote(path).replace('\\', '/')
+        return SimpleHTTPServer.SimpleHTTPRequestHandler.translate_path(
+            self, path)
 
     def do_POST(req):
         fp = open(os.path.join('test', req.path[1:]), 'w')
