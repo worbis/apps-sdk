@@ -25,7 +25,7 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self, path)
 
     def do_POST(req):
-        fp = open(os.path.join('test', req.path[1:]), 'w')
+        fp = open(os.path.join('test', req.path[1:]), 'wb')
         fp.write(req.rfile.read(int(req.headers['Content-Length'])))
         fp.close()
         req.send_response(200)

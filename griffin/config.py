@@ -50,12 +50,12 @@ class Config(dict):
         if not section in conf.sections():
             conf.add_section(section)
         conf.set(section, opt, val)
-        f = open(self.path[typ], 'w')
+        f = open(self.path[typ], 'wb')
         conf.write(f)
         f.close()
         self.parse_config()
 
     def create(self, path):
-        f = open(path, 'w')
+        f = open(path, 'wb')
         f.write('')
         f.close()
