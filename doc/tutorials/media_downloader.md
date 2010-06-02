@@ -85,7 +85,6 @@ Since this is all about downloading media, let's get the main page setup to
 have a list of content. Open `html/index.html` in the media_downloader
 directory and replace what's there with:
 
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" type="text/css" media="all">
     <ul id="items"></ul>
 
 You've probably noticed that we're not editing the `index.html` file sitting
@@ -109,6 +108,7 @@ open `lib/index.js` so that we can add some javascript to populate that list.
     }
 
     $(document).ready(function() {
+        $("head").append('<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" type="text/css" media="all">');
         $.getJSON('http://vodo.net/jsonp/releases/all?callback=?',
             function(items) {
                 for (var i = 0, ii = items.length; i < ii; i++)

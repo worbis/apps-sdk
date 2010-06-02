@@ -50,6 +50,7 @@ function update_progress() {
 }
 
 $(document).ready(function() {
+  $("head").append('<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" type="text/css" media="all">');
   $.getJSON('http://vodo.net/jsonp/releases/all?callback=?', function(items) {
     bt.stash.set('items', items);
     for (var i = 0, ii = items.length; i < ii; i++)
