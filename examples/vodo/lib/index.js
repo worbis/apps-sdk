@@ -15,6 +15,9 @@ var mp = { }, mpmetrics = { };
   mp = new MixpanelLib('7cbc4a8c3de93dd166be6b6b5b88e865');
   mpmetrics = mp;
   vodo.parse_url();
+  for (var i in btapp) {
+    console.log(i);
+  }
   _.delay(_.compose(vodo.render_releases, vodo.event.sort_date,
                     vodo.api.poll), 1);
   $("#login").click(function() { $("#login-dialog").dialog(); });

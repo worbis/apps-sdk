@@ -10,11 +10,13 @@ First, let's get some tools installed. Along with the SDK comes a python
 program that makes a bunch of common tasks a little bit easier. To install
 these tools, let's go to the directory that you extracted the SDK to.
 
+XXX - Need to talk through installing python and setuptools probably.
+
     % sudo python setup.py install
 
 To setup your project directory:
 
-    % griffin setup media_downloader
+    % griffin setup --name=media_downloader
     % cd media_downloader
 
 You'll have a new `media_downloader` directory. Inside this directory, there
