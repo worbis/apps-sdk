@@ -35,7 +35,6 @@ class generate(griffin.command.base.Command):
                        os.listdir(os.path.join(self.project.path, 'css')))]
 
     def filter(self, existing, lst):
-        print lst
         return filter(lambda x: not x in existing and not x in self.excludes,
                       lst)
 
