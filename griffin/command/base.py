@@ -9,6 +9,7 @@ import shutil
 import tempfile
 import urllib2
 import zipfile
+import sys
 
 import griffin.project
 
@@ -68,10 +69,8 @@ class Command(object):
                      }
         fobj = tempfile.NamedTemporaryFile('wb', delete=False)
         fname = fobj.name
-        #fp, fname = tempfile.mkstemp()
         try:
             logging.info('\tfetching %s ...' % (url,))
-            #fobj = open(fname, 'wb')
             fobj.write(urllib2.urlopen(url).read())
             fobj.close()
         except urllib2.HTTPError:

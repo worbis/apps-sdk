@@ -1,43 +1,75 @@
-{ "name": "griffin",
-  "version": "0.1",
-  "description": "Griffin provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client.",
-  "site": "http://griffin.bittorrent.com",
-  "author": "Thomas Rampelberg <thomas@bittorrent.com>",
-  "maintainers": [ { "name": "Thomas Rampelberg",
-                     "email": "thomas@bittorrent.com"
-                   }
-                 ],
-  "licenses": [ { "type": "New BSD License",
-                  "url": "http://www.opensource.org/licenses/bsd-license.php"
-                }
-              ],
-  "keywords": ["bittorrent", "griffin", "utorrent", "application"],
-  "repositories": [ { "type": "git",
-                      "url": "git@github.com:bittorrent/griffin.git"
-                    }
-                  ],
-  "directories": {
-    "src": "src",
-    "lib": "lib",
-    "doc": "doc",
-    "test": "test"
-  },
-  "bt:libs": [ { "name": "firebug",
-                 "url": "http://10.20.30.79/apps/lib/firebug.js" },
-               { "name": "json2",
-                 "url": "http://10.20.30.79/apps/lib/json2.js" },
-               { "name": "jquery",
-                 "url": "http://10.20.30.79/apps/lib/jquery.js" },
-               { "name": "underscore",
-                 "url": "http://10.20.30.79/apps/lib/underscore.js" },
-               { "name": "jquery.json",
-                 "url": "http://10.20.30.79/apps/lib/jquery.json.js" },
-               { "name": "jstorage",
-                 "url": "http://10.20.30.79/apps/lib/jstorage.js" },
-               { "name": "object",
-                 "url": "http://10.20.30.79/apps/lib/object.js" },
-               { "name": "sprintf",
-                 "url": "http://10.20.30.79/apps/lib/sprintf.js" }
-  ],
-  "bt:publisher": "BitTorrent, Inc."
+{
+    "name": "griffin", 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
+    "bt:publisher": "BitTorrent, Inc.", 
+    "directories": {
+        "test": "test", 
+        "src": "src", 
+        "lib": "lib", 
+        "doc": "doc"
+    }, 
+    "bt:libs": [
+        {
+            "url": "http://10.20.30.79/apps/lib/firebug.js", 
+            "name": "firebug"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/json2.js", 
+            "name": "json2"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/jquery.js", 
+            "name": "jquery"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/underscore.js", 
+            "name": "underscore"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/jquery.json.js", 
+            "name": "jquery.json"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/jstorage.js", 
+            "name": "jstorage"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/object.js", 
+            "name": "object"
+        }, 
+        {
+            "url": "http://10.20.30.79/apps/lib/sprintf.js", 
+            "name": "sprintf"
+        }
+    ], 
+    "repositories": [
+        {
+            "url": "git@github.com:bittorrent/griffin.git", 
+            "type": "git"
+        }
+    ], 
+    "site": "http://griffin.bittorrent.com", 
+    "bt:update_url": "http://griffin.bittorrent.com", 
+    "maintainers": [
+        {
+            "name": "Thomas Rampelberg", 
+            "email": "thomas@bittorrent.com"
+        }
+    ], 
+    "version": "0.1", 
+    "bt:description": "Griffin provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client.", 
+    "keywords": [
+        "bittorrent", 
+        "griffin", 
+        "utorrent", 
+        "application"
+    ], 
+    "licenses": [
+        {
+            "url": "http://www.opensource.org/licenses/bsd-license.php", 
+            "type": "New BSD License"
+        }
+    ], 
+    "bt:release_date": "June 1, 2010", 
+    "description": "Griffin provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client."
 }
