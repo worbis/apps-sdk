@@ -31,7 +31,7 @@ class package(griffin.command.base.Command):
         except:
             pass
         btapp = zipfile.ZipFile(open(os.path.join(path, '%s.btapp' % (
-                    self.project.metadata['name'],)), 'w'), 'w')
+                    self.project.metadata['name'],)), 'wb'), 'w')
         for p, dirs, files in os.walk(self.project.path):
             for f in filter(_filter, [os.path.join(p, x) for x in files]):
                 btapp.write(f)
