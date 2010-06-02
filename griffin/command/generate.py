@@ -13,7 +13,8 @@ import griffin.command.base
 class generate(griffin.command.base.Command):
 
     help = 'Generate `index.html` for the project.'
-    excludes = [ 'packages/firebug.js', 'lib/index.js' ]
+    excludes = [ os.path.join('packages', 'firebug.js'),
+                 os.path.join('lib', 'index.js') ]
 
     def run(self):
         self.write_metadata()
@@ -34,6 +35,7 @@ class generate(griffin.command.base.Command):
                        os.listdir(os.path.join(self.project.path, 'css')))]
 
     def filter(self, existing, lst):
+        print lst
         return filter(lambda x: not x in existing and not x in self.excludes,
                       lst)
 
