@@ -79,6 +79,7 @@ class Vanguard(object):
         parser = distutils.fancy_getopt.FancyGetopt(
             self.global_options + self.display_options)
         parser.set_negative_aliases(self.negative_opt)
+        # XXX - Need to fail gracefully if parsing fails here
         args = parser.getopt(args=self.args, object=self.options)
         order = parser.get_option_order()
         self.setup_logging()
