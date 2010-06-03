@@ -97,7 +97,6 @@ class Command(object):
         # Move over the package specific files
         for finfo in pkg.infolist():
             if re.match('lib/.+', finfo.filename):
-                print finfo.filename
                 pkg.extract(finfo.filename, tmpdir)
         # This is because I'm lazy ....
         shutil.rmtree(pkg_root, True)
