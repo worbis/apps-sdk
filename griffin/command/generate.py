@@ -51,7 +51,8 @@ class generate(griffin.command.base.Command):
         if metadata == self.project.metadata:
             scripts += self.filter(scripts,
                 [os.path.join('lib', x) for x in
-                 os.listdir(os.path.join(self.project.path, 'lib'))])
+                 filter(lambda x: os.path.splitext(x)[1] == '.js',
+                        os.listdir(os.path.join(self.project.path, 'lib')))])
             scripts.append(os.path.join('lib', 'index.js'))
         scripts = [x.replace('\\', '/') for x in scripts]
         return scripts
