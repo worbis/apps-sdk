@@ -37,11 +37,11 @@ class setup(griffin.command.base.Command):
     def run(self):
         if not self.options.get('name', None):
             logging.error('Must use the `--name` option to name the project.')
-            sys.exit(1)
+            return -1
         if os.path.exists(self.project.path):
             logging.error('The project already exists. Remove it if ' \
                               'you\'d like to create it again.')
-            sys.exit(1)
+            return -1
         self.create_dirs()
         self.write_metadata()
         self.move_defaults()
