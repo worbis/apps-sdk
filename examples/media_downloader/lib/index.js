@@ -32,10 +32,10 @@ function update_progress() {
     var progress = tor.properties.get('progress') / 10;
     if (progress != 100) {
       $(".bar", container).progressbar({ value: progress });
-      return
+      continue
     }
     if ($(".play", container).length > 0)
-      return
+      continue
     $(".bar", container).hide();
     $("<button class='play'>Play</button>").appendTo(container).click(function() {
       var files = tor.file.all();
