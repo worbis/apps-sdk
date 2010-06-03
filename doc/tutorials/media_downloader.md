@@ -237,7 +237,7 @@ the `$(document).ready()` function:
 
 !!! You also need to add this line at the beginning of the getJSON handler:
 		bt.stash.set('items', items);
-	
+
 Right when the app comes up, there's a list of torrents to add. Unfortunately,
 the list is getting duplicated by the `$.getJSON` call completing. Let's modify
 `render_item` a little bit to make sure that doesn't happen anymore. Replace
@@ -322,10 +322,10 @@ buttons. Replace `update_progress` in `lib/index.js` with the following:
             var progress = tor.properties.get('progress') / 10;
             if (progress != 100) {
                 $(".bar", container).progressbar({ value: progress });
-                return
+                continue
             }
             if ($(".play", container).length > 0)
-                return
+                continue
             $(".bar", container).hide();
             $("<button class='play'>Play</button>").appendTo(container).click(
                 function() {
