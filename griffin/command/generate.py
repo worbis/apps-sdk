@@ -30,9 +30,11 @@ class generate(griffin.command.base.Command):
         index.close()
 
     def _styles_list(self):
-        return [os.path.join('css', x).replace('\\', '/') for x in
-                filter(lambda x: os.path.splitext(x)[1] == '.css',
-                       os.listdir(os.path.join(self.project.path, 'css')))]
+        path = os.path.join(self.project.path, 'css');
+        if os.path.exists(path):
+            return [os.path.join('css', x).replace('\\', '/') for x in
+                    filter(lambda x: os.path.splitext(x)[1] == '.css',
+                           os.listdir(path))]
 
     def filter(self, existing, lst):
         return filter(lambda x: not x in existing and not x in self.excludes,
@@ -49,7 +51,8 @@ class generate(griffin.command.base.Command):
         if metadata == self.project.metadata:
             scripts += self.filter(scripts,
                 [os.path.join('lib', x) for x in
-                 os.listdir(os.path.join(self.project.path, 'lib'))])
+                 filter(lambda x: os.path.splitext(x)[1] == '.js',
+                        os.listdir(os.path.join(self.project.path, 'lib')))])
             scripts.append(os.path.join('lib', 'index.js'))
         scripts = [x.replace('\\', '/') for x in scripts]
         return scripts
