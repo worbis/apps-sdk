@@ -24,7 +24,7 @@ setup(
     install_requires = [ 'mako', 'boto', 'pydns' ],
     include_package_data = True,
     package_data = {
-        "": ['data/*'],
+        "": ['data/*', 'data/.*'],
         },
     entry_points = {
         'console_scripts': [
