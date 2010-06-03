@@ -30,7 +30,7 @@ class generate(griffin.command.base.Command):
         index.close()
 
     def _styles_list(self):
-        return [os.path.join('css', x) for x in
+        return [os.path.join('css', x).replace('\\', '/') for x in
                 filter(lambda x: os.path.splitext(x)[1] == '.css',
                        os.listdir(os.path.join(self.project.path, 'css')))]
 
@@ -51,6 +51,7 @@ class generate(griffin.command.base.Command):
                 [os.path.join('lib', x) for x in
                  os.listdir(os.path.join(self.project.path, 'lib'))])
             scripts.append(os.path.join('lib', 'index.js'))
+        scripts = [x.replace('\\', '/') for x in scripts]
         return scripts
 
     def _list_lib(self, lib):
