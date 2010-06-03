@@ -5,6 +5,7 @@
 import json
 import logging
 import os
+import re
 import shutil
 import tempfile
 import urllib2
@@ -95,7 +96,8 @@ class Command(object):
                                                    'packages'))
         # Move over the package specific files
         for finfo in pkg.infolist():
-            if 'lib' == finfo.filename[:3]:
+            if re.match('lib/.+', finfo.filename):
+                print finfo.filename
                 pkg.extract(finfo.filename, tmpdir)
         # This is because I'm lazy ....
         shutil.rmtree(pkg_root, True)
