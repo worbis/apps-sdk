@@ -22,7 +22,8 @@ class generate(griffin.command.base.Command):
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(
                 'griffin.data', 'index.html'))
-        index = open(os.path.join(self.project.path, 'index.html'), 'wb')
+        index = open(os.path.join(self.project.path, 'build', 'index.html'),
+                     'wb')
         index.write(template.render(scripts=self._scripts_list(
                     self.project.metadata),
                                     styles=self._styles_list(),
