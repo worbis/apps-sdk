@@ -47,7 +47,7 @@ class Command(object):
                   indent=4)
         keys = [ 'name', 'version', 'bt:publisher', 'bt:update_url',
                  'bt:release_date', 'bt:description' ]
-        btapp = open(os.path.join(self.project.path, 'btapp'), 'wb')
+        btapp = open(os.path.join(self.project.path, 'build', 'btapp'), 'wb')
         for i in keys:
             btapp.write('%s:%s\n' % (i.split(':')[-1],
                                      self.project.metadata[i]))
