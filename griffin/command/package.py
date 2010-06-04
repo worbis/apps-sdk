@@ -39,8 +39,8 @@ class package(griffin.command.base.Command):
                 # they mirror the normal path and are only in the build
                 # directory to keep it out of the way of users.
                 fpath = os.path.split(f)
-                print fpath
-                arcname = os.path.join(*fpath[1:]) if re.match('\..build', fpath[0]) \
+                arcname = os.path.join(*fpath[1:]) if re.match('\..build',
+                                                               fpath[0]) \
                     else os.path.join(*fpath)
                 btapp.write(f, arcname)
         btapp.close()
