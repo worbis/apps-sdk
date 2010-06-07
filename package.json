@@ -1,13 +1,5 @@
 {
     "name": "griffin", 
-    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
-    "bt:publisher": "BitTorrent, Inc.", 
-    "directories": {
-        "test": "test", 
-        "src": "src", 
-        "lib": "lib", 
-        "doc": "doc"
-    }, 
     "bt:libs": [
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/firebug.js", 
@@ -42,6 +34,14 @@
             "name": "sprintf"
         }
     ], 
+    "bt:publisher": "BitTorrent, Inc.", 
+    "directories": {
+        "test": "test", 
+        "src": "src", 
+        "lib": "lib", 
+        "doc": "doc"
+    }, 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
     "repositories": [
         {
             "url": "git://github.com/bittorrent/libutp.git", 
