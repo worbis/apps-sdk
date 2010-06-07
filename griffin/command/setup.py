@@ -13,7 +13,7 @@ import griffin.command.base
 class setup(griffin.command.base.Command):
 
     help = 'Build a project directory and do initial setup.'
-    dirs = [ 'css', 'html', 'lib', 'packages', 'temp' ]
+    dirs = [ 'css', 'html', 'lib', 'packages', 'test', 'build' ]
     user_options = [ ('name=', None, 'Name of the project to create.', None) ]
     post_commands = [ 'generate' ]
 
@@ -37,11 +37,11 @@ class setup(griffin.command.base.Command):
     def run(self):
         if not self.options.get('name', None):
             logging.error('Must use the `--name` option to name the project.')
-            return
+            return -1
         if os.path.exists(self.project.path):
             logging.error('The project already exists. Remove it if ' \
                               'you\'d like to create it again.')
-            return
+            return -1
         self.create_dirs()
         self.write_metadata()
         self.move_defaults()

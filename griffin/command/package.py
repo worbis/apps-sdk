@@ -4,6 +4,7 @@
 
 import fnmatch
 import os
+import re
 import zipfile
 
 import griffin.command.base
@@ -34,5 +35,12 @@ class package(griffin.command.base.Command):
                     self.project.metadata['name'],)), 'wb'), 'w')
         for p, dirs, files in os.walk(self.project.path):
             for f in filter(_filter, [os.path.join(p, x) for x in files]):
-                btapp.write(f)
+                # Files in the build/ directory are auto-created for users,
+                # they mirror the normal path and are only in the build
+                # directory to keep it out of the way of users.
+                fpath = os.path.split(f)
+                arcname = os.path.join(*fpath[1:]) if re.match('\..build',
+                                                               fpath[0]) \
+                    else os.path.join(*fpath)
+                btapp.write(f, arcname)
         btapp.close()

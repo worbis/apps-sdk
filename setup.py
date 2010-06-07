@@ -16,13 +16,16 @@ from setuptools import setup, find_packages
 
 setup(
     name = "griffin",
-    version = __version__,
+    version = '0.1',
     packages = find_packages(),
     author = __author__,
     author_email = __author_email__,
     description = "Build tool to develop, build and package griffin apps.",
     install_requires = [ 'mako', 'boto', 'pydns' ],
     include_package_data = True,
+    package_data = {
+        "": ['data/*', 'data/.*'],
+        },
     entry_points = {
         'console_scripts': [
             'griffin = griffin.vanguard:run',

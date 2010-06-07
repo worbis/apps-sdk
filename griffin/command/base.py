@@ -21,6 +21,9 @@ class Command(object):
     option_defaults = {}
     pre_commands = []
     post_commands = []
+    # Most of the 'bt:' namespace goes into the btapp file. There are a couple
+    # in that namespace that are used by commands which don't belong.
+    btapp_excludes = ['libs']
 
     def __init__(self, vanguard):
         self.vanguard = vanguard
@@ -45,9 +48,10 @@ class Command(object):
         json.dump(self.project.metadata,
                   open(os.path.join(self.project.path, 'package.json'), 'wb'),
                   indent=4)
-        keys = [ 'name', 'version', 'bt:publisher', 'bt:update_url',
-                 'bt:release_date', 'bt:description' ]
-        btapp = open(os.path.join(self.project.path, 'btapp'), 'wb')
+        keys = [ 'name', 'version' ] + filter(
+            lambda x: x[:3] == 'bt:' and not x[3:] in self.btapp_excludes,
+            self.project.metadata.keys())
+        btapp = open(os.path.join(self.project.path, 'build', 'btapp'), 'wb')
         for i in keys:
             btapp.write('%s:%s\n' % (i.split(':')[-1],
                                      self.project.metadata[i]))

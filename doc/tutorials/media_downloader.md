@@ -12,7 +12,7 @@ these tools, let's go to the directory that you extracted the SDK to.
 
 XXX - Need to talk through installing python and setuptools probably.
 
-    % sudo python setup.py install
+    % sudo python setup.py develop
 
 To setup your project directory:
 

@@ -156,7 +156,8 @@ class Vanguard(object):
         for pre in command.pre_commands:
             self.run_command(pre)
         logging.info('running `%s` ...' % (command_name,))
-        command(self).run()
+        if command(self).run() == -1:
+            sys.exit(1)
         self.ran.append(command_name)
         for post in command.post_commands:
             self.run_command(post)
