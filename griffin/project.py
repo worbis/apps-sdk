@@ -33,7 +33,7 @@ class Project(object):
                 'bt:description': 'This is the default app.',
                 'bt:libs': [
                     { 'name': 'griffin',
-                      'url': 'http://10.20.30.79/apps/lib/griffin.pkg' }
+                      'url': 'http://staging.apps.bittorrent.com/pkgs/griffin.pkg' }
                     ]
                 }
 
