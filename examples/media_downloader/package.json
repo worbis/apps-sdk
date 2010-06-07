@@ -4,7 +4,7 @@
     "bt:publisher": "Default Publisher", 
     "bt:libs": [
         {
-            "url": "http://10.20.30.79/apps/lib/griffin.pkg", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/griffin.pkg", 
             "name": "griffin"
         }, 
         {
@@ -12,7 +12,7 @@
             "name": "jquery-ui"
         }, 
         {
-            "url": "http://10.20.30.79/apps/lib/jup.js", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/jup.js", 
             "name": "jup"
         }
     ], 

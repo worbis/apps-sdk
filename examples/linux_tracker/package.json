@@ -2,11 +2,11 @@
     "description": "The default project.", 
     "bt:libs": [
         {
-            "url": "http://10.20.30.79/apps/lib/griffin.pkg", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/griffin.pkg", 
             "name": "griffin"
         }, 
         {
-            "url": "http://10.20.30.79/apps/lib/underscore.js", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/underscore.js", 
             "name": "underscore"
         }
     ], 

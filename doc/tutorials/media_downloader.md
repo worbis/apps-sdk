@@ -44,7 +44,7 @@ should look like:
 
     "bt:libs": [
         {
-            "url": "http://10.20.30.79/apps/lib/griffin.pkg",
+            "url": "http://staging.apps.bittorrent.com/pkgs/griffin.pkg",
             "name": "griffin"
         }
     ]
@@ -57,13 +57,13 @@ command to update these to the latest:
 Now, let's add a couple new external dependencies:
 
     % griffin add --file=http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js
-    % griffin add --file=http://10.20.30.79/apps/lib/jup.js
+    % griffin add --file=http://staging.apps.bittorrent.com/pkgs/jup.js
 
 Take a look at `package.json` again. `bt:libs` will look a little different:
 
     "bt:libs": [
         {
-            "url": "http://10.20.30.79/apps/lib/griffin.pkg",
+            "url": "http://staging.apps.bittorrent.com/pkgs/griffin.pkg",
             "name": "griffin"
         },
         {
@@ -71,7 +71,7 @@ Take a look at `package.json` again. `bt:libs` will look a little different:
             "name": "jquery-ui"
         },
         {
-            "url": "http://10.20.30.79/apps/lib/jup.js",
+            "url": "http://staging.apps.bittorrent.com/pkgs/jup.js",
             "name": "jup"
         }
     ]

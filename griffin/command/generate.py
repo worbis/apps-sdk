@@ -36,6 +36,7 @@ class generate(griffin.command.base.Command):
             return [os.path.join('css', x).replace('\\', '/') for x in
                     filter(lambda x: os.path.splitext(x)[1] == '.css',
                            os.listdir(path))]
+        return []
 
     def filter(self, existing, lst):
         return filter(lambda x: not x in existing and not x in self.excludes,

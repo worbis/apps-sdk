@@ -10,41 +10,41 @@
     }, 
     "bt:libs": [
         {
-            "url": "http://10.20.30.79/apps/lib/firebug.js", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/firebug.js", 
             "name": "firebug"
         }, 
         {
-            "url": "http://10.20.30.79/apps/lib/json2.js", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/json2.js", 
             "name": "json2"
         }, 
         {
-            "url": "http://10.20.30.79/apps/lib/jquery.js", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/jquery.js", 
             "name": "jquery"
         }, 
         {
-            "url": "http://10.20.30.79/apps/lib/underscore.js", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/underscore.js", 
             "name": "underscore"
         }, 
         {
-            "url": "http://10.20.30.79/apps/lib/jquery.json.js", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/jquery.json.js", 
             "name": "jquery.json"
         }, 
         {
-            "url": "http://10.20.30.79/apps/lib/jstorage.js", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/jstorage.js", 
             "name": "jstorage"
         }, 
         {
-            "url": "http://10.20.30.79/apps/lib/object.js", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/object.js", 
             "name": "object"
         }, 
         {
-            "url": "http://10.20.30.79/apps/lib/sprintf.js", 
+            "url": "http://staging.apps.bittorrent.com/pkgs/sprintf.js", 
             "name": "sprintf"
         }
     ], 
     "repositories": [
         {
-            "url": "git@github.com:bittorrent/griffin.git", 
+            "url": "git://github.com/bittorrent/libutp.git", 
             "type": "git"
         }
     ], 

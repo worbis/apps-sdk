@@ -1,0 +1,16 @@
+*.btapp
+.ignore
+*.svn/*
+.git/*
+.hg/*
+*.egg-info
+griffin/*
+test/*
+doc/*
+examples/*
+client/*
+dist/*
+packages/*
+*.md
+.gitignore
+setup.py
