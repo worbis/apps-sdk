@@ -3,7 +3,6 @@ dist
 *~
 *.diff
 *.patch
-test/qunit
 build/
 .DS_Store
 *.pyc
