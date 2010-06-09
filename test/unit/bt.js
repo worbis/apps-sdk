@@ -8,67 +8,55 @@
 
 module('bt');
 
-test('stub.add.torrent (callback)', function() {
-  expect(2);
+test('bt.add.torrent', function() {
+  expect(4);
 
-  var url1 = 'http://example.com/foobar2.torrent';
-  stub.add.torrent(url1);
-  function tester() {
-    equals(stub.torrent.get(stub.torrent.keys()[0]).properties.get(
-      'download_url'), url1, 'Added torrent without callback.');
-
-    stub.events.set('torrent', function(resp) {
-      equals(stub.torrent.get(stub.torrent.keys()[1]).properties.get(
-        'download_url'), url2, 'Added torrent after callback');
-      start();
-      // Reset the events
-      stub.events._registered = {};
-    });
-    var url2 = 'http://example.com/foobar.torrent';
-    stub.add.torrent(url2);
-  }
-  setTimeout(tester, 1100);
+  var url = 'http://example.com/add.torrent';
+  // Just in case.
+  bt.events.set('torrent', bt._handlers.torrent);
   stop();
+  bt.add.torrent(url, function(resp) {
+    equals(resp.url, url, 'Url\'s set right');
+    equals(resp.status, 200, 'Status is okay');
+    equals(resp.message, 'success', 'Message is okay');
+    var download_urls = _.map(bt.torrent.all(), function(v) {
+      return v.properties.get('download_url');
+    });
+    ok(download_urls.indexOf(url) >= 0, 'Torrent added successfully');
+    start();
+  });
 });
 
-test('stub.events', function() {
-  expect(3);
-
-  stub.events.set('foo', 'bar');
-  equals(stub.events.get('foo'), 'bar', 'Correctly set and got an event.');
-  same(stub.events.keys(), ['foo'], 'Keys works.');
-  same(stub.events.all(), { foo: 'bar' }, 'all() works');
-});
-
-test('stub.stash', function() {
-  // XXX - It should probably be noted that this unit test sucks, since there's
-  // no way to tell if jstorage is actually working or not.
-  expect(5);
+test('bt.stash', function() {
+  expect();
 
   var objs = { foo: 'bar',
-               bar: 'baz',
-               baz: 'foo'
-             };
+              bar: [1, 2, '3'],
+              baz: { a: 1 }
+            };
   _.each(objs, function(v, k) {
-    stub.stash.set(k, v);
-    equals(stub.stash.get(k), v, 'Got a value .. ' + v);
+    bt.stash.set(k, v);
+    same(bt.stash.get(k), v, 'Parsing works');
+    equals(stub.stash.get(k), JSON.stringify(v), 'Serialization works');
   });
-  same(stub.stash.keys(), _.keys(objs), 'keys() works');
-  same(stub.stash.all(), objs, 'all() works');
+  same(bt.stash.keys(), _.keys(objs), 'keys() works');
+  same(bt.stash.all(), objs, 'all() works');
 });
 
-test('stub.torrent', function() {
+test('bt.events', function() {
   expect();
+
+
 });
 
-test('stub.resource', function() {
+test('bt.torrent', function() {
   expect();
+
+
 });
 
-test('stub.rss_feed', function() {
+test('bt.resource', function() {
   expect();
-});
 
-test('bt.add.torrent', function() {
-  expect();
+
 });
