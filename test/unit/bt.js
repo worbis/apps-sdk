@@ -49,6 +49,8 @@ test('bt.add.torrent', function() {
 test('bt.stash', function() {
   expect(8);
 
+  if (btapp.stash._clear)
+    btapp.stash._clear();
   var objs = { foo: 'bar',
               bar: [1, 2, '3'],
               baz: { a: 1 }
