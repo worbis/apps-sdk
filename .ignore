@@ -14,3 +14,4 @@ packages/*
 *.md
 .gitignore
 setup.py
+testapp/*
