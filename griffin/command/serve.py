@@ -36,6 +36,9 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 self.end_headers()
                 return None
             for index in "index.html", "index.htm":
+                # XXX - Modification
+                if self.path == '/':
+                    path = os.path.join(path, 'build')
                 index = os.path.join(path, index)
                 if os.path.exists(index):
                     path = index
