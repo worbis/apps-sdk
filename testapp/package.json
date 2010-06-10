@@ -1,5 +1,7 @@
 {
     "description": "A way to unit test the javascript interface of the griffin client", 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
+    "bt:publisher": "BitTorrent Inc.", 
     "bt:libs": [
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/griffin.pkg", 
@@ -10,8 +12,6 @@
             "name": "qunit"
         }
     ], 
-    "bt:publisher": "BitTorrent Inc.", 
-    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
     "site": "http://griffin.bittorrent.com", 
     "bt:update_url": "http://staging.apps.bittorrent.com/testing/testapp.btapp", 
     "version": "0.1", 

@@ -47,20 +47,23 @@ test('bt.add.torrent', function() {
 });
 
 test('bt.stash', function() {
-  expect(8);
+  expect(14);
 
   if (btapp.stash._clear)
     btapp.stash._clear();
   var objs = { foo: 'bar',
-              bar: [1, 2, '3'],
-              baz: { a: 1 }
+               bar: [1, 2, '3'],
+               baz: { a: 1 },
+               btinstall_lastmodified: "",
+               lastmodified: "",
+               productcode: ""
             };
   _.each(objs, function(v, k) {
     bt.stash.set(k, v);
     same(bt.stash.get(k), v, 'Parsing works');
     equals(stub.stash.get(k), JSON.stringify(v), 'Serialization works');
   });
-  same(bt.stash.keys(), _.keys(objs), 'keys() works');
+  same(bt.stash.keys().sort(), _.keys(objs).sort(), 'keys() works');
   same(bt.stash.all(), objs, 'all() works');
 });
 
@@ -75,15 +78,23 @@ test('bt.events', function() {
 });
 
 test('bt.torrent', function() {
-  expect(4);
+  expect(5);
 
+  bt.events.set('torrent', bt._handlers.torrent);
   var url = 'http://example.com/add.torrent';
+  var magnet = 'magnet:?xt=urn:sha1:6de6a83d402817ef5116d28072f9dd6b0600c6d6&dn=OOo_2.1.0_LinuxIntel_install_en-US.tar.gz&xs=http://mirror.switch.ch/ftp/mirror/OpenOffice/stable/2.1.0/OOo_2.1.0_LinuxIntel_install_en-US.tar.gz';
   var tor = bt.torrent.get(url);
   equals(tor.properties.get('download_url'), url, 'Got the right torrent');
   equals(bt.torrent.get(tor.hash).properties.get('hash'), tor.hash,
          'Can get by hash too');
   ok(bt.torrent.keys().indexOf(tor.hash) >= 0, 'Keys has the right hashes');
   same(bt.torrent.all()[tor.hash], tor, 'all() has at least one right key');
+  stop();
+  bt.add.torrent(magnet, function(resp) {
+    var tor = bt.torrent.get(magnet);
+    equals(tor.properties.get('download_url'), magnet, 'Got the right torrent');
+    start();
+  });
 });
 
 test('bt.resource', function() {
