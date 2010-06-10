@@ -56,7 +56,7 @@ are read only, an exception will be thrown when you try to set that property.
 
 Add a variety of elements to the client.
 
-    >> btapp.add.torrent('http://default.com/test.torrent') // Add a torrent by url, file path or magnet link
+    >> btapp.add.torrent('http://example.com/test.torrent') // Add a torrent by url, file path or magnet link
     >> btapp.add.rss_feed() // Add a rss feed by url
     >> btapp.add.rss_filter() // Add an rss filter
 
@@ -66,14 +66,14 @@ something like:
 
     >> function result(status) { console.log(status.message); }
     >> btapp.events.set('torrent', result);
-    >> btapp.add.torrent('http://default.com/test.torrent');
+    >> btapp.add.torrent('http://example.com/test.torrent');
 
 If the torrent can be added successfully, your registered callback will be
 called with an object that looks like:
 
     { "status": 404, // HTTP error code
       "message": "error",
-      "url": "http://default.com/test.torrent",
+      "url": "http://example.com/test.torrent",
       "hash": "" }
 
 RSS Feeds that are added from within your application will show up within the
@@ -130,14 +130,14 @@ something like:
     >> var my_torrent = btapp.torrent.get("1234567890");
     >> my_torrent.properties.all() // All the properties and their values
     { "progress": 1000,
-      "download_url": "http://default.com/test.torrent" }
+      "download_url": "http://example.com/test.torrent" }
     >> my_torrent.properties.keys() // The names of all the available properties
     [ "progress", "download_url" ]
     >> my_torrent.properties.set("trackers", [ "tracker1", "tracker2" ])
     >> my_torrent.properties.get("progress") // Percentage progress in 0-1000
     1000
     >> my_torrent.properties.get("download_url") // URL the torrent was fetched from
-    "http://default.com/test.torrent"
+    "http://example.com/test.torrent"
 
 There are actually a lot more parameters than the examples above show. It is
 suggested that developers use `my_torrent.properties.keys()` to find all the
@@ -341,7 +341,7 @@ like:
 
     >> var my_feed = btapp.rss_feed.get("1")
     >> my_feed.properties.all() // All the properties and their values
-    { "enabled": true, "url": "http://rss.default.com" }
+    { "enabled": true, "url": "http://rss.example.com" }
     >> my_feed.properties.keys() // The names of all the available properties
     [ "enabled", "url" ]
     >> my_feed.properties.get("enabled") // Get a specific property's value
@@ -394,7 +394,7 @@ access via. the `my_feed.properties` methods.
     >> var my_feed = btapp.rss_feed.get("1")
     >> var my_item = my_feed.item.get("1")
     >> my_item.properties.all() // Object containing all the property/value pairs
-    { "name": "test", "url": "http://default.com/test.torrent" }
+    { "name": "test", "url": "http://example.com/test.torrent" }
     >> my_item.properties.keys() // List of all the available properties
     [ "name", "url" ]
     >> my_item.properties.get("name") // Get a property value
@@ -421,7 +421,7 @@ Sometimes, websites provide RSS feeds instead of JSON compatible sources for
 consumption. It is possible to take this RSS data and render your entire
 application around it. The entire process would look something like this:
 
-    >> btapp.add.rss_feed("http://default.com/rss.xml")
+    >> btapp.add.rss_feed("http://example.com/rss.xml")
     >> var my_feed = btapp.rss_feed.get("1")
     >> my_feed.force_update()
     >> var items = my_feed.item.all()
@@ -528,7 +528,7 @@ added a torrent, you can do something like:
      >    else alert('failure: ' + status.code);
      > }
     >> btapp.events.set('torrent', notify)
-    >> btapp.add.torrent('http://default.com/test.torrent')
+    >> btapp.add.torrent('http://example.com/test.torrent')
 
 # Stash
 
