@@ -41,10 +41,10 @@ bt.fn = bt.prototype = {
       return this._settings;
     },
     keys: function() { },
-    get: function(name) { 
+    get: function(name) {
       return this._settings[name];
     },
-    set: function(name, value) { 
+    set: function(name, value) {
       this._settings[name] = value;
     }
   },
@@ -86,7 +86,7 @@ bt.fn = bt.prototype = {
      */
     all: function() { },
     keys: function() { },
-    get: function(name) { 
+    get: function(name) {
       return {
         name: 'My Torrent', // This is meant to be the primary key and is
                             // immutable.
@@ -106,7 +106,7 @@ bt.fn = bt.prototype = {
            * Access a specific torrent's properties. If a property is read
            * only, a ReadOnlyException will be thrown.
            *
-           * all() -> object containing the key/value pairs of all 
+           * all() -> object containing the key/value pairs of all
            *          properties.
            * keys() -> list of all the property names.
            * get(name) -> get a specific property
@@ -165,7 +165,7 @@ bt.fn = bt.prototype = {
            */
           all: function() { },
           keys: function() { },
-          get: function(id) { 
+          get: function(id) {
             return {
               torrent: { },
               id: 'foobar',
@@ -174,7 +174,7 @@ bt.fn = bt.prototype = {
                  * Access a specific peer's properties. If a property is read
                  * only, a ReadOnlyException will be thrown.
                  *
-                 * all() -> object containing the key/value pairs of all 
+                 * all() -> object containing the key/value pairs of all
                  *          properties.
                  * keys() -> list of all the property names.
                  * get(name) -> get a specific property
@@ -226,7 +226,7 @@ bt.fn = bt.prototype = {
            */
           all: function() { },
           keys: function() { },
-          get: function(index) { 
+          get: function(index) {
             return {
               torrent: {}, // The parent torrent object.
               index: 1, // Immutable index of the file
@@ -235,7 +235,7 @@ bt.fn = bt.prototype = {
                  * Access a specific file's properties. If a property is read
                  * only, a ReadOnlyException will be thrown.
                  *
-                 * all() -> object containing the key/value pairs of all 
+                 * all() -> object containing the key/value pairs of all
                  *          properties.
                  * keys() -> list of all the property names.
                  * get(name) -> get a specific property
@@ -297,7 +297,7 @@ bt.fn = bt.prototype = {
            * Access a specific feed's properties. If a property is read only, a
            * ReadOnlyException will be thrown.
            *
-           * all() -> object containing the key/value pairs of all 
+           * all() -> object containing the key/value pairs of all
            *          properties.
            * keys() -> list of all the property names.
            * get(name) -> get a specific property
@@ -333,10 +333,10 @@ bt.fn = bt.prototype = {
            * all() -> dictionary of name/object pairs
            * keys() -> list of all rss feed item names.
            * get(name) -> specific item object
-           */ 
+           */
           all: function() { },
           keys: function() { },
-          get: function(name) { 
+          get: function(name) {
             return {
               feed: {}, // The parent rss_Feed object.
               id: 1,
@@ -345,7 +345,7 @@ bt.fn = bt.prototype = {
                  * Access a specific feed item's properties. If a property is
                  * read only, a ReadOnlyException will be thrown.
                  *
-                 * all() -> object containing the key/value pairs of all 
+                 * all() -> object containing the key/value pairs of all
                  *          properties.
                  * keys() -> list of all the property names.
                  * get(name) -> get a specific property
@@ -433,11 +433,11 @@ bt.fn = bt.prototype = {
            * add_stopped: true,
            * postpone_mode: false,
            * feed: 1,
-           */      
+           */
           all: function() { },
           keys: function() { },
           get: function(name) { },
-          set: function(name, value) { }    
+          set: function(name, value) { }
         },
         remove: function() {}
       }
@@ -471,6 +471,11 @@ bt.fn = bt.prototype = {
     keys: function() { },
     get: function(name) { },
     set: function(name, callback) { }
+  },
+  resource: function(path) {
+    /*
+     * Fetch the binary representation of a resource inside the btapp package.
+     */
   }
 }
 

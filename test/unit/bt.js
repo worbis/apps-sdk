@@ -46,6 +46,18 @@ test('bt.add.torrent', function() {
   });
 });
 
+test('bt.add.rss_feed', function() {
+  expect();
+
+  // XXX - Fill out the unit tests
+});
+
+test('bt.add.rss_filter', function() {
+  expect();
+
+  // XXX - Fill out the unit tests
+});
+
 test('bt.stash', function() {
   expect(14);
 
@@ -102,4 +114,10 @@ test('bt.resource', function() {
 
   var txt = 'test123\n';
   equal(bt.resource('data/foobar'), txt, 'Fetched the right data');
+});
+
+test('bt.settings', function() {
+  expect();
+
+  // XXX - Fill out the unit tests
 });

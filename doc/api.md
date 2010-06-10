@@ -557,3 +557,12 @@ Among other things, the stash allows you to save your application's state
 between application restarts. Any kind of network operation should have its
 results saved to the stash so that users can see results as quickly as possible
 when starting your application.
+
+# Resources
+
+To access arbitrary resources inside the btapp package itself, you can get a
+string representation of them by:
+
+    >> btapp.resource('my_path')
+    "Text inside the file my_path"
+

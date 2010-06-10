@@ -25,7 +25,7 @@ class Project(object):
                 'version': '0.1',
                 'description': 'The default project.',
                 'site': 'http://griffin.bittorrent.com',
-                'author': 'Default Author <default@default.com>',
+                'author': 'Default Author <default@example.com>',
                 'keywords': [ 'default' ],
                 'bt:publisher': 'Default Publisher',
                 'bt:update_url': "http://localhost/default",

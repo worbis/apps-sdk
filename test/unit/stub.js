@@ -31,6 +31,18 @@ test('stub.add.torrent (callback)', function() {
   stop();
 });
 
+test('stub.add.rss_feed', function() {
+  expect();
+
+  // XXX - Fill out the unit tests
+});
+
+test('stub.add.rss_filter', function() {
+  expect();
+
+  // XXX - Fill out the unit tests
+});
+
 test('stub.events', function() {
   expect(3);
 
@@ -73,4 +85,10 @@ test('stub.resource', function() {
 
   var txt = 'test123\n';
   equal(stub.resource('data/foobar'), txt, 'Fetched the right data');
+});
+
+test('stub.settings', function() {
+  expect();
+
+  // XXX - Fill out the unit tests
 });
