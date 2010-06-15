@@ -32,8 +32,8 @@ class Project(object):
                 'bt:release_date': '00/00/0000',
                 'bt:description': 'This is the example app.',
                 'bt:libs': [
-                    { 'name': 'griffin',
-                      'url': 'http://staging.apps.bittorrent.com/pkgs/apps.pkg' }
+                    { 'name': 'apps-sdk',
+                      'url': 'http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg' }
                     ]
                 }
 

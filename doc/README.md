@@ -32,11 +32,11 @@ To build Griffin itself, you'll need the following tools:
 Also, if you'd like to stay up to date with the latest developments as well as
 contribute your work back to the Griffin community, you'll want to install Git:
 
-    http://git-scm.com/. 
+    http://git-scm.com/.
 
 The entire Griffin project can be found at:
 
-    http://github.com/bittorrent/griffin/
+    http://github.com/bittorrent/apps-sdk/
 
 ## Getting Started
 
@@ -44,7 +44,7 @@ These instructions are for building a development copy of Griffin. If you'd
 just like to get started using Griffin for your web apps, you should instead
 download a pre-packaged and compiled copy from:
 
-    http://griffin.bittorrent.com/download/
+    http://apps-sdk.bittorrent.com/download/
 
 To build Griffin from source, type "make" from within the root of the Griffin
 directory. This will build a release copy of the kit. Typing "make debug" will
@@ -55,23 +55,23 @@ associated tools for general use.
 
 If you need help with Griffin, you can get help from the following sources:
 
-  - FAQ:            http://griffin.bittorrent.com/faq
-  - Documentation:  http://griffin.bittorrent.com/doc
-  - Wiki:           http://griffin.bittorrent.com/wikis
-  - Forums:         http://griffin.bittorrent.com/forums
-  - IRC:            irc://irc.freenode.net#griffin
-  - Feedback:       griffin@bittorrent.com
+  - FAQ:            http://apps-sdk.bittorrent.com/faq
+  - Documentation:  http://apps-sdk.bittorrent.com/doc
+  - Wiki:           http://apps-sdk.bittorrent.com/wikis
+  - Forums:         http://apps-sdk.bittorrent.com/forums
+  - IRC:            irc://irc.freenode.net#apps-sdk
+  - Feedback:       apps-sdk@bittorrent.com
 
 If you discover any bugs, please file a ticket at:
 
-  http://griffin.bittorrent.com/issues
+  http://apps-sdk.bittorrent.com/issues
 
 ## More Information
 
-  - Tutorials:          http://griffin.bittorrent.com/doc/tutorials
-  - Programming Guide:  http://griffin.bittorrent.com/doc/programming_guide
-  - API:                http://griffin.bittorrent.com/doc/api
-  - Design:             http://griffin.bittorrent.com/doc/design
+  - Tutorials:          http://apps-sdk.bittorrent.com/doc/tutorials
+  - Programming Guide:  http://apps-sdk.bittorrent.com/doc/programming_guide
+  - API:                http://apps-sdk.bittorrent.com/doc/api
+  - Design:             http://apps-sdk.bittorrent.com/doc/design
 
 ## License
 

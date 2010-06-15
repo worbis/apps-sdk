@@ -4,7 +4,7 @@ like a native application than a web page. The focus is on media and
 specialized feeds that aren't RSS.
 
 If, at any time you'd like to see a complete version of the app that this
-tutorial builds, take a look at [Media Downloader](http://github.com/bittorrent/griffin/tree/master/examples/media_downloader).
+tutorial builds, take a look at [Media Downloader](http://github.com/bittorrent/apps-sdk/tree/master/examples/media_downloader).
 
 First, let's get some tools installed. Along with the SDK comes a python
 program that makes a bunch of common tasks a little bit easier. To install
@@ -44,8 +44,8 @@ should look like:
 
     "bt:libs": [
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/griffin.pkg",
-            "name": "griffin"
+            "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg",
+            "name": "apps-sdk"
         }
     ]
 
@@ -63,8 +63,8 @@ Take a look at `package.json` again. `bt:libs` will look a little different:
 
     "bt:libs": [
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/griffin.pkg",
-            "name": "griffin"
+            "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg",
+            "name": "apps-sdk"
         },
         {
             "url": "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js",
@@ -190,7 +190,7 @@ there will need to be a little more code. Just add it at the bottom of
         }
     }
 
-A quick note about sprintf. This function is part of the Griffin SDK's
+A quick note about sprintf. This function is part of the app-sdk's
 dependencies and provides full C/C++ sprintf functionality. Once you've added
 `update_progress` to `lib/index.js`, add the following inside the
 `$(document).ready()` function:
