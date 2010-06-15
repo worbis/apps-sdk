@@ -3,11 +3,6 @@
 #
 
 """
-Utilities to aid in packaging of griffin apps.
+Utilities to aid in packaging of apps sdk projects.
 """
-
-__author__ = 'Thomas Rampelberg'
-__date__ = "%date%"
-__version__ = "%version%"
-
 

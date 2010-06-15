@@ -8,9 +8,9 @@ import mako.template
 import os
 import pkg_resources
 
-import griffin.command.base
+import apps.command.base
 
-class generate(griffin.command.base.Command):
+class generate(apps.command.base.Command):
 
     help = 'Generate `index.html` for the project.'
     excludes = [ os.path.join('packages', 'firebug.js'),
@@ -21,7 +21,7 @@ class generate(griffin.command.base.Command):
         logging.info('\tcreating index.html')
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(
-                'griffin.data', 'index.html'), cache_enabled=False)
+                'apps.data', 'index.html'), cache_enabled=False)
         index = open(os.path.join(self.project.path, 'build', 'index.html'),
                      'wb')
         index.write(template.render(scripts=self._scripts_list(

@@ -12,7 +12,7 @@ import urllib2
 import zipfile
 import sys
 
-import griffin.project
+import apps.project
 
 class Command(object):
 
@@ -32,7 +32,7 @@ class Command(object):
         for k,v in self.option_defaults.iteritems():
             if not self.options.get(k, None):
                 self.options[k] = v
-        self.project = griffin.project.Project(self.options.get('name', '.'))
+        self.project = apps.project.Project(self.options.get('name', '.'))
 
     def run(self):
         logging.error('This command has not been implemented yet.')

@@ -11,7 +11,7 @@ import os
 
 class Config(dict):
 
-    config_filename = '.griffin.cfg'
+    config_filename = '.apps.cfg'
 
     def __init__(self):
         self.path = { 'local': self.config_filename,

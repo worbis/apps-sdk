@@ -3,7 +3,7 @@
 #
 
 """
-A griffin project.
+An apps sdk project.
 """
 
 import json
@@ -24,16 +24,16 @@ class Project(object):
                 'name': self.path,
                 'version': '0.1',
                 'description': 'The default project.',
-                'site': 'http://griffin.bittorrent.com',
+                'site': 'http://apps.bittorrent.com',
                 'author': 'Default Author <default@example.com>',
-                'keywords': [ 'default' ],
-                'bt:publisher': 'Default Publisher',
-                'bt:update_url': "http://localhost/default",
+                'keywords': [ 'example' ],
+                'bt:publisher': 'Example Publisher',
+                'bt:update_url': "http://localhost/example",
                 'bt:release_date': '00/00/0000',
-                'bt:description': 'This is the default app.',
+                'bt:description': 'This is the example app.',
                 'bt:libs': [
                     { 'name': 'griffin',
-                      'url': 'http://staging.apps.bittorrent.com/pkgs/griffin.pkg' }
+                      'url': 'http://staging.apps.bittorrent.com/pkgs/apps.pkg' }
                     ]
                 }
 

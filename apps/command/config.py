@@ -6,15 +6,15 @@ import ConfigParser
 import logging
 import sys
 
-import griffin.config
-import griffin.command.base
+import apps.config
+import apps.command.base
 
-class config(griffin.command.base.Command):
+class config(apps.command.base.Command):
 
-    help = 'View and modify configuration of your project and griffin.'
+    help = 'View and modify configuration of your project and apps.'
     user_options = [
         ('global', 'g',
-         'set the options globally ($HOME/.griffin.cfg)', None),
+         'set the options globally ($HOME/.apps.cfg)', None),
         ('key=', None, 'the config name to update', None),
         ('value=', None, 'the value to update the config to', None),
         ('command=', None, 'the command to push the change to.', None)
@@ -27,7 +27,7 @@ class config(griffin.command.base.Command):
                 self.config.get(section, {}).get(opt, 'unset')))
 
     def run(self):
-        self.config = griffin.config.Config()
+        self.config = apps.config.Config()
         if not self.options.get('key', None):
             logging.error('Must include `--key` for the key you\'d like to ' \
                               'set or get')

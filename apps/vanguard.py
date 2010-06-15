@@ -4,7 +4,7 @@
 #
 
 """
-Run the actual Griffin program (and parse out input).
+Run the actual apps sdk build tool (and parse out input).
 """
 
 import ConfigParser
@@ -14,21 +14,21 @@ import logging
 import os
 import sys
 
-import griffin.command
-import griffin.config
+import apps.command
+import apps.config
 
 # These aren't needed and simply reside here to help py2exe figure out
 # dependencies.
-import griffin.command.base
-import griffin.command.add
-import griffin.command.config
-import griffin.command.generate
-import griffin.command.package
-import griffin.command.push
-import griffin.command.serve
-import griffin.command.setup
-import griffin.command.submit
-import griffin.command.update
+import apps.command.base
+import apps.command.add
+import apps.command.config
+import apps.command.generate
+import apps.command.package
+import apps.command.push
+import apps.command.serve
+import apps.command.setup
+import apps.command.submit
+import apps.command.update
 
 class Options(dict):
 
@@ -67,10 +67,10 @@ class Vanguard(object):
         """Parse the default config files.
 
         The order of resolution is:
-        - project/.griffin.cfg
-        - $HOME/.griffin.cfg
+        - project/.apps.cfg
+        - $HOME/.apps.cfg
         """
-        config_handler = griffin.config.Config()
+        config_handler = apps.config.Config()
         self.command_options = config_handler
 
         for k, v in self._command_opts('general').iteritems():
@@ -116,7 +116,7 @@ class Vanguard(object):
         return True
 
     def get_command(self, name):
-        module_name = 'griffin.command.%s' % (name,)
+        module_name = 'apps.command.%s' % (name,)
         try:
             __import__(module_name)
             module = sys.modules[module_name]
@@ -157,7 +157,7 @@ class Vanguard(object):
 
     def print_commands(self):
         logging.error('Commands:')
-        for command in griffin.command.__all__:
+        for command in apps.command.__all__:
             logging.error('%5s%-15s%-60s' % (
                     '', command, self.get_command(command).help))
 
@@ -202,9 +202,9 @@ class Vanguard(object):
                     command.__name__,))
             self._print_help(command.user_options)
         logging.error('')
-        logging.error('usage: griffin [global_opts] cmd1 ' \
+        logging.error('usage: apps [global_opts] cmd1 ' \
                           '[cmd1_opts] [cmd2 [cmd2_opts] ... ]')
-        logging.error('   or: griffin --help [cmd1 cmd2 ...]')
+        logging.error('   or: apps --help [cmd1 cmd2 ...]')
 
     def _print_help(self, options):
         for opt in options:
