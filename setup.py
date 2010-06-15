@@ -13,6 +13,7 @@ __date__ = "%date%"
 __version__ = "%version%"
 
 from setuptools import setup, find_packages
+import py2exe
 
 setup(
     name = "griffin",
@@ -30,5 +31,6 @@ setup(
         'console_scripts': [
             'griffin = griffin.vanguard:run',
             ],
-        }
+        },
+    console = ['griffin/vanguard.py']
     )
