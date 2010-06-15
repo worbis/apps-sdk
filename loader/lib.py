@@ -1,6 +1,6 @@
 import os
 import zipfile
-eggpacks = [ 'griffin' ]
+eggpacks = [ 'apps' ]
 oldzipfile = "dist/library.zip"
 newzipfile = "dist/small-library.zip"
 oldzip = zipfile.ZipFile(oldzipfile, "r")

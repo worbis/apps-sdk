@@ -3,7 +3,7 @@
 #
 
 """
-The main package for the Griffin SDK.
+The main package for the Apps SDK.
 """
 
 __version__ = '%version%'

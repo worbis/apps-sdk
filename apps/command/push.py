@@ -7,9 +7,9 @@ import logging
 import os
 import urllib
 
-import griffin.command.base
+import apps.command.base
 
-class push(griffin.command.base.Command):
+class push(apps.command.base.Command):
 
     help = 'Push the packaged project to a remote resource.'
     user_options = [

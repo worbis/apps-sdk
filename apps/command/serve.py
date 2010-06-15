@@ -8,7 +8,7 @@ import SimpleHTTPServer
 import os
 import urllib
 
-import griffin.command.base
+import apps.command.base
 
 class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
@@ -79,7 +79,7 @@ class GriffinRequests(SimpleHTTPServer.SimpleHTTPRequestHandler):
         fp.close()
         self.send_response(200)
 
-class serve(griffin.command.base.Command):
+class serve(apps.command.base.Command):
 
     help = 'Run a development server to debug the project.'
     user_options = [ ('port=', 'p', 'Port to listen on.', None) ]

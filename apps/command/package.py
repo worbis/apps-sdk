@@ -7,9 +7,9 @@ import os
 import re
 import zipfile
 
-import griffin.command.base
+import apps.command.base
 
-class package(griffin.command.base.Command):
+class package(apps.command.base.Command):
 
     help = 'Package the project into a .btapp file.'
     user_options = [

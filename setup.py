@@ -13,15 +13,14 @@ __date__ = "%date%"
 __version__ = "%version%"
 
 from setuptools import setup, find_packages
-import py2exe
 
 setup(
-    name = "griffin",
+    name = "apps",
     version = '0.1',
     packages = find_packages(),
     author = __author__,
     author_email = __author_email__,
-    description = "Build tool to develop, build and package griffin apps.",
+    description = "Build tool to develop, build and package apps.",
     install_requires = [ 'mako', 'boto', 'pydns' ],
     include_package_data = True,
     package_data = {
@@ -29,8 +28,7 @@ setup(
         },
     entry_points = {
         'console_scripts': [
-            'griffin = griffin.vanguard:run',
+            'apps = apps.vanguard:run',
             ],
-        },
-    console = ['griffin/vanguard.py']
+        }
     )

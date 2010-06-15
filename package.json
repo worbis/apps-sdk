@@ -1,5 +1,5 @@
 {
-    "name": "griffin", 
+    "name": "apps-sdk", 
     "bt:libs": [
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/firebug.js", 
@@ -44,12 +44,12 @@
     "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
     "repositories": [
         {
-            "url": "git://github.com/bittorrent/libutp.git", 
+            "url": "git://github.com/bittorrent/apps-sdk.git", 
             "type": "git"
         }
     ], 
-    "site": "http://griffin.bittorrent.com", 
-    "bt:update_url": "http://griffin.bittorrent.com", 
+    "site": "http://apps-sdk.bittorrent.com", 
+    "bt:update_url": "http://apps-sdk.bittorrent.com", 
     "maintainers": [
         {
             "name": "Thomas Rampelberg", 
@@ -57,12 +57,14 @@
         }
     ], 
     "version": "0.1", 
-    "bt:description": "Griffin provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client.", 
+    "bt:description": "The apps sdk provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client.", 
     "keywords": [
         "bittorrent", 
         "griffin", 
         "utorrent", 
-        "application"
+        "application", 
+        "apps", 
+        "sdk"
     ], 
     "licenses": [
         {
@@ -71,5 +73,5 @@
         }
     ], 
     "bt:release_date": "June 1, 2010", 
-    "description": "Griffin provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client."
+    "description": "The apps sdk provides a framework for building rich javascript, html, css applications to be run from within the BitTorrent client."
 }

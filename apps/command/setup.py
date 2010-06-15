@@ -8,9 +8,9 @@ import pkg_resources
 import shutil
 import sys
 
-import griffin.command.base
+import apps.command.base
 
-class setup(griffin.command.base.Command):
+class setup(apps.command.base.Command):
 
     help = 'Build a project directory and do initial setup.'
     dirs = [ 'css', 'html', 'lib', 'packages', 'test', 'build' ]
@@ -22,16 +22,16 @@ class setup(griffin.command.base.Command):
             os.makedirs(os.path.join(self.project.path, i))
 
     def move_defaults(self):
-        shutil.copy(pkg_resources.resource_filename('griffin.data', '.ignore'),
+        shutil.copy(pkg_resources.resource_filename('apps.data', '.ignore'),
                     os.path.join(self.project.path, '.ignore'))
         shutil.copy(pkg_resources.resource_filename(
-                'griffin.data', 'icon.bmp'),
+                'apps.data', 'icon.bmp'),
                     os.path.join(self.project.path, 'icon.bmp'))
         shutil.copy(pkg_resources.resource_filename(
-                'griffin.data', 'main.html'),
+                'apps.data', 'main.html'),
                     os.path.join(self.project.path, 'html', 'index.html'))
         shutil.copy(pkg_resources.resource_filename(
-                'griffin.data', 'index.js'),
+                'apps.data', 'index.js'),
                     os.path.join(self.project.path, 'lib', 'index.js'))
 
     def run(self):

@@ -1,24 +1,25 @@
 {
-    "description": "The default project.", 
+    "description": "The RSS feed example (using linux torrents)",
     "bt:libs": [
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/griffin.pkg", 
-            "name": "griffin"
-        }, 
-        {
-            "url": "http://staging.apps.bittorrent.com/pkgs/underscore.js", 
-            "name": "underscore"
+            "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg",
+            "name": "apps-sdk"
         }
-    ], 
-    "bt:publisher": "Default Publisher", 
-    "author": "Default Author <default@default.com>", 
-    "site": "http://griffin.bittorrent.com", 
-    "bt:update_url": "http://localhost/default", 
-    "version": "0.1", 
-    "bt:description": "This is the default app.", 
+    ],
+    "bt:publisher": "BitTorrent Inc.",
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>",
+    "site": "http://apps-sdk.bittorrent.com",
+    "bt:update_url": "http://localhost/linux_tracker.btapp",
+    "version": "0.1",
+    "bt:description": "The RSS feed example (using linux torrents)",
     "keywords": [
-        "default"
-    ], 
-    "bt:release_date": "00/00/0000", 
+        "example",
+        "downloader",
+        "catalog",
+        "linux",
+        "distributions",
+        "software"
+    ],
+    "bt:release_date": "06/30/2010",
     "name": "linux_tracker"
 }

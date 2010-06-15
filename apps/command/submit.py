@@ -9,9 +9,9 @@ import email.mime.application
 import os
 import smtplib
 
-import griffin.command.base
+import apps.command.base
 
-class submit(griffin.command.base.Command):
+class submit(apps.command.base.Command):
 
     user_options = [ ('user=', None, 'username to submit under', None),
                      ('rcpt=', None, 'location to submit to', None),
