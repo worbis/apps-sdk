@@ -17,6 +17,8 @@ import sys
 import griffin.command
 import griffin.config
 
+# These aren't needed and simply reside here to help py2exe figure out
+# dependencies.
 import griffin.command.base
 import griffin.command.add
 import griffin.command.config
@@ -96,6 +98,11 @@ class Vanguard(object):
         self.setup_logging()
 
         if self.is_display_option(order, parser):
+            return
+
+        if not args:
+            logging.error('Must include a command to run.\n')
+            self.print_commands()
             return
 
         while args:
