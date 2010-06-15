@@ -16,7 +16,7 @@ XXX - Need to talk through installing python and setuptools probably.
 
 To setup your project directory:
 
-    % griffin setup --name media_downloader
+    % apps setup --name media_downloader
     % cd media_downloader
 
 You'll have a new `media_downloader` directory. Inside this directory, there
@@ -52,12 +52,12 @@ should look like:
 These are the third party dependencies for your project. There is a special
 command to update these to the latest:
 
-    % griffin update
+    % apps update
 
 Now, let's add a couple new external dependencies:
 
-    % griffin add --file=http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js
-    % griffin add --file=http://staging.apps.bittorrent.com/pkgs/jup.js
+    % apps add --file=http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js
+    % apps add --file=http://staging.apps.bittorrent.com/pkgs/jup.js
 
 Take a look at `package.json` again. `bt:libs` will look a little different:
 
@@ -78,8 +78,8 @@ Take a look at `package.json` again. `bt:libs` will look a little different:
 
 As you can see, there are 2 new dependencies that have been added to your
 project under the `packages` directory and can be updated via.
-`griffin update`. To help with packaging and remote linking, when you run
-`griffin add`, the file is downloaded in saved in `packages/`. Instead
+`apps update`. To help with packaging and remote linking, when you run
+`apps add`, the file is downloaded in saved in `packages/`. Instead
 
 Since this is all about downloading media, let's get the main page setup to
 have a list of content. Open `html/index.html` in the media_downloader
@@ -125,7 +125,7 @@ javascript, we're suggesting JUP at this point because of its lightweight
 nature and ease of use. Feel free to use whatever you'd like, it is just
 suggested that some kind of templating library is used.
 
-Run your application in local mode via. `griffin serve` and take a
+Run your application in local mode via. `apps serve` and take a
 look in [your browser](http://localhost:8080) (http://localhost:8080). You
 should see a list of links with the torrent title.
 
@@ -140,14 +140,14 @@ line to `render_item` in `lib/index.js`:
 Take a couple minutes to see how this looks in your browser. Now, let's test
 the app in your client. Run:
 
-    % griffin --debug package
+    % apps --debug package
 
 And, double click on the `dist/media_downloader.btapp` file. In your client,
 take a look at the application and try to add some torrents.
 
 Looking at the app so far in your client, you'll notice that there's a debug
 console on the bottom of the window. The `--debug` option can be used for any
-`griffin` command and usually enables some extra debugging information. When
+`apps` command and usually enables some extra debugging information. When
 packaging your project, this includes a debug console. It works like a normal
 debug console letting you log to it via. `console.log()` and navigate the
 current DOM from the `HTML` tab.
@@ -213,7 +213,7 @@ torrent jump to half completion almost at once.
 And, now let's package the app up. Make sure you're in the `media_downloader`
 directory and once again:
 
-    % griffin package
+    % apps package
 
 Open up your client and double click on `media_downloader.btapp`. The app
 should be added into your client. Take some time adding torrents to get a feel
@@ -236,7 +236,7 @@ the `$(document).ready()` function:
     }
 
 !!! You also need to add this line at the beginning of the getJSON handler:
-		bt.stash.set('items', items); 
+		bt.stash.set('items', items);
 
 Right when the app comes up, there's a list of torrents to add. Unfortunately,
 the list is getting duplicated by the `$.getJSON` call completing. Let's modify
