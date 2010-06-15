@@ -2,8 +2,8 @@
     "description": "VODO", 
     "bt:libs": [
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/griffin.pkg", 
-            "name": "griffin"
+            "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg", 
+            "name": "apps-sdk"
         }, 
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/jquery.sort.js", 
@@ -40,7 +40,15 @@
     "bt:update_url": "http://apps.bittorrent.com/vodo/vodo.btapp", 
     "version": "1.1", 
     "bt:description": "VODO brings you great, free movies from creators who want to share their work!", 
-    "keywords": [], 
+    "keywords": [
+        "vodo", 
+        "media", 
+        "catalog", 
+        "example", 
+        "downloader", 
+        "movies", 
+        "indie"
+    ], 
     "bt:release_date": "05/31/2010", 
     "name": "Vodo"
 }

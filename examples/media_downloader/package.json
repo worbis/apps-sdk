@@ -1,9 +1,9 @@
 {
-    "description": "The default project.", 
+    "description": "The example media downloader project.", 
     "bt:libs": [
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/griffin.pkg", 
-            "name": "griffin"
+            "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg", 
+            "name": "apps-sdk"
         }, 
         {
             "url": "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js", 
@@ -14,15 +14,19 @@
             "name": "jup"
         }
     ], 
-    "bt:publisher": "Default Publisher", 
-    "author": "Default Author <default@default.com>", 
-    "site": "http://griffin.bittorrent.com", 
-    "bt:update_url": "http://localhost/default", 
+    "bt:publisher": "BitTorrent, Inc.", 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
+    "site": "http://apps-sdk.bittorrent.com", 
+    "bt:update_url": "http://localhost/media_downloader.btapp", 
     "version": "0.1", 
-    "bt:description": "This is the default app.", 
+    "bt:description": "This is an example media downloader.", 
     "keywords": [
-        "default"
+        "example", 
+        "media", 
+        "vodo", 
+        "downloader", 
+        "catalog"
     ], 
-    "bt:release_date": "00/00/0000", 
+    "bt:release_date": "06/01/2010", 
     "name": "media_downloader"
 }
