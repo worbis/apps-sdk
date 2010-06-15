@@ -17,6 +17,17 @@ import sys
 import griffin.command
 import griffin.config
 
+import griffin.command.base
+import griffin.command.add
+import griffin.command.config
+import griffin.command.generate
+import griffin.command.package
+import griffin.command.push
+import griffin.command.serve
+import griffin.command.setup
+import griffin.command.submit
+import griffin.command.update
+
 class Options(dict):
 
     def __getattr__(self, k):
@@ -104,8 +115,7 @@ class Vanguard(object):
             module = sys.modules[module_name]
             return getattr(module, name)
         except ImportError, UnboundLocalError:
-            logging.error('The command %s does not exist.' % (name,))
-            self.print_commands()
+            logging.error('The command "%s" does not exist.' % (name,))
             sys.exit(1)
 
     def _parse_command_opts(self, parser, args):

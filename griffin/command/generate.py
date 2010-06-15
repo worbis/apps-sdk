@@ -21,7 +21,7 @@ class generate(griffin.command.base.Command):
         logging.info('\tcreating index.html')
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(
-                'griffin.data', 'index.html'))
+                'griffin.data', 'index.html'), cache_enabled=False)
         index = open(os.path.join(self.project.path, 'build', 'index.html'),
                      'wb')
         index.write(template.render(scripts=self._scripts_list(
