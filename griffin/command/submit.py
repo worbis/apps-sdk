@@ -35,7 +35,7 @@ class submit(griffin.command.base.Command):
                 self.options['user'],self.project.metadata['name']))
         btapp = email.mime.application.MIMEApplication(
             open(os.path.join('dist', '%s.btapp' % (
-                        self.project.metadata['name'],))).read(),
+                        self.project.metadata['name'],)), 'rb').read(),
             'zip', name='%s.btapp' % self.project.metadata['name'])
         msg = email.mime.base.MIMEBase('multipart', 'mixed')
         msg.add_header('Subject', 'Submission of %s for %s' % (

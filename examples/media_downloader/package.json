@@ -1,7 +1,5 @@
 {
     "description": "The default project.", 
-    "author": "Default Author <default@default.com>", 
-    "bt:publisher": "Default Publisher", 
     "bt:libs": [
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/griffin.pkg", 
@@ -16,6 +14,8 @@
             "name": "jup"
         }
     ], 
+    "bt:publisher": "Default Publisher", 
+    "author": "Default Author <default@default.com>", 
     "site": "http://griffin.bittorrent.com", 
     "bt:update_url": "http://localhost/default", 
     "version": "0.1", 
