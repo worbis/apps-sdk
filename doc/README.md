@@ -17,7 +17,7 @@ delivering a standard framework to write applications in, anyone can develop a
 rich javascript application that looks and feels just like a standard desktop
 application.
 
-For more information, see http://griffin.bittorrent.com.
+For more information, see http://apps-sdk.bittorrent.com.
 
 ## System Requirements
 
