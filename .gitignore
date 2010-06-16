@@ -10,3 +10,5 @@ build/
 .#*
 packages/
 *.svn/
+loader/installer/bin/
+loader/installer/obj/
