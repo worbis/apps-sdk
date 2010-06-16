@@ -1,0 +1,48 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.5</ProductVersion>
+    <ProjectGuid>{a776bd62-d020-4211-8600-51acf7f7039c}</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>BtAppLoader</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.5\Wix2010.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.5\Wix2010.targets</WixTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug;BeakerDir=..\beaker-1.5.3-py2.6.egg;BotoDir=..\boto-1.9b-py2.6.egg;MakoDir=..\mako-0.3.3-py2.6.egg;PyDnsDir=..\pydns-2.3.4-py2.6.egg</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="beaker.wxs" />
+    <Compile Include="boto.wxs" />
+    <Compile Include="mako.wxs" />
+    <Compile Include="Product.wxs" />
+    <Compile Include="Product.Generated.wxs">
+      <DependentUpon>Product.wxs</DependentUpon>
+      <GenerateComponentGroups>True</GenerateComponentGroups>
+    </Compile>
+    <Compile Include="pydns.wxs" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+  <PropertyGroup>
+    <PreBuildEvent>"%WIX%\bin\heat" dir $(ProjectDir)..\beaker-1.5.3-py2.6.egg -gg -cg Beaker153 -dr INSTALLLOCATION -sfrag -template:fragment -var var.BeakerDir -out "$(ProjectDir)beaker.wxs"
+"%WIX%\bin\heat" dir $(ProjectDir)..\boto-1.9b-py2.6.egg -gg -cg Boto19 -dr INSTALLLOCATION -sfrag -template:fragment -var var.BotoDir -out "$(ProjectDir)boto.wxs"
+"%WIX%\bin\heat" dir $(ProjectDir)..\mako-0.3.3-py2.6.egg -gg -cg Mako033 -dr INSTALLLOCATION -sfrag -template:fragment -var var.MakoDir -out "$(ProjectDir)mako.wxs"
+"%WIX%\bin\heat" dir $(ProjectDir)..\pydns-2.3.4-py2.6.egg -gg -cg Pydns234 -dr INSTALLLOCATION -sfrag -template:fragment -var var.PyDnsDir -out "$(ProjectDir)pydns.wxs"</PreBuildEvent>
+  </PropertyGroup>
+</Project>

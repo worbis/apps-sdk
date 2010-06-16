@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  
+	<Product Id="beccd8a0-7636-4251-a79e-07180eb05b48" Name="Apps SDK Tools" Language="1033" Version="1.0.0.0" Manufacturer="BitTorrent, Inc." UpgradeCode="8b3a360e-36bb-4722-aa08-ad82a8b73028">
+		<Package InstallerVersion="200" Compressed="yes" />
+
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLLOCATION" Name="apps-sdk">
+          <Component Id="BtAppLoaderComponent" Guid="{2195B83F-85D9-427a-BF1A-5C4480152111}">
+            <Environment Id="PathInstall" Action="set" Name="PATH" Part="last" Permanent="no" Value="[INSTALLLOCATION]"/>
+            <File Id="_ctypes.pyd" Name="_ctypes.pyd" Source="../_ctypes.pyd"/>
+            <File Id="_hashlib.pyd" Name="_hashlib.pyd" Source="../_hashlib.pyd"/>
+            <File Id="_socket.pyd" Name="_socket.pyd" Source="../_socket.pyd"/>
+            <File Id="_ssl.pyd" Name="_ssl.pyd" Source="../_ssl.pyd"/>
+            <File Id="apps.exe" Name="apps.exe" Source="../apps.exe"/>
+            <File Id="bz2.pyd" Name="bz2.pyd" Source="../bz2.pyd"/>
+            <File Id="easy_install_pth" Name="easy-install.pth" Source="../easy-install.pth"/>
+            <File Id="apps_0_1_py2_6_egg" Name="apps-0.1-py2.6.egg" Source="../apps-0.1-py2.6.egg"/>
+            <File Id="library.zip" Name="library.zip" Source="../library.zip"/>
+            <File Id="pyexpat.pyd" Name="pyexpat.pyd" Source="../pyexpat.pyd"/>
+            <File Id="python26.dll" Name="python26.dll" Source="../python26.dll"/>
+            <File Id="pywintypes26.dll" Name="pywintypes26.dll" Source="../pywintypes26.dll"/>
+            <File Id="select.pyd" Name="select.pyd" Source="../select.pyd"/>
+            <File Id="site.py" Name="site.py" Source="../site.py"/>
+            <File Id="unicodedata.pyd" Name="unicodedata.pyd" Source="../unicodedata.pyd"/>
+            <File Id="w9xpopen.exe" Name="w9xpopen.exe" Source="../w9xpopen.exe"/>
+            <File Id="win32api.pyd" Name="win32api.pyd" Source="../win32api.pyd"/>
+            <File Id="win32evtlog.pyd" Name="win32evtlog.pyd" Source="../win32evtlog.pyd"/>
+            <File Id="win32pipe.pyd" Name="win32pipe.pyd" Source="../win32pipe.pyd"/>
+            <File Id="win32wnet.pyd" Name="win32wnet.pyd" Source="../win32wnet.pyd"/>
+          </Component>
+        </Directory>
+			</Directory>
+		</Directory>
+
+		<Feature Id="ProductFeature" Title="BtAppLoader" Level="1">
+			<!-- TODO: Remove the comments around this ComponentRef element and the Component above in order to add resources to this installer. -->
+			<ComponentRef Id="BtAppLoaderComponent" />
+      <ComponentGroupRef Id="Beaker153"/>
+      <ComponentGroupRef Id="Boto19"/>
+      <ComponentGroupRef Id="Mako033"/>
+      <ComponentGroupRef Id="Pydns234"/>
+
+			<!-- Note: The following ComponentGroupRef is required to pull in generated authoring from project references. -->
+			<ComponentGroupRef Id="Product.Generated" />
+		</Feature>
+	</Product>
+</Wix>
