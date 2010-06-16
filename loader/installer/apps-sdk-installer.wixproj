@@ -15,7 +15,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug;BeakerDir=..\dist\beaker-1.5.3-py2.6.egg;BotoDir=..\dist\boto-1.9b-py2.6.egg;MakoDir=..\dist\mako-0.3.3-py2.6.egg;PyDnsDir=..\dist\pydns-2.3.4-py2.6.egg</DefineConstants>
+    <DefineConstants>Debug;BeakerDir=..\dist\beaker-1.5.3-py2.6.egg;BotoDir=..\dist\boto-1.9b-py2.6.egg;MakoDir=..\dist\mako-0.3.3-py2.6.egg;PyDnsDir=..\dist\pydns-2.3.4-py2.6.egg;ExeDir=..\dist</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -24,6 +24,7 @@
   <ItemGroup>
     <Compile Include="beaker.wxs" />
     <Compile Include="boto.wxs" />
+    <Compile Include="exe.wxs" />
     <Compile Include="mako.wxs" />
     <Compile Include="Product.wxs" />
     <Compile Include="Product.Generated.wxs">
@@ -34,8 +35,7 @@
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PreBuildEvent>"%WIX%\bin\heat" dir "$(ProjectDir)..\dist" -gg -cg Exe001 -dr INSTALLLOCATION -sfrag -template:fragment -var var.ExeDir -out "$(ProjectDir)exe.wxs"
-"%WIX%\bin\heat" dir "$(ProjectDir)..\dist\beaker-1.5.3-py2.6.egg" -gg -cg Beaker153 -dr INSTALLLOCATION -sfrag -template:fragment -var var.BeakerDir -out "$(ProjectDir)beaker.wxs"
+    <PreBuildEvent>"%WIX%\bin\heat" dir "$(ProjectDir)..\dist\beaker-1.5.3-py2.6.egg" -gg -cg Beaker153 -dr INSTALLLOCATION -sfrag -template:fragment -var var.BeakerDir -out "$(ProjectDir)beaker.wxs"
 "%WIX%\bin\heat" dir "$(ProjectDir)..\dist\boto-1.9b-py2.6.egg" -gg -cg Boto19 -dr INSTALLLOCATION -sfrag -template:fragment -var var.BotoDir -out "$(ProjectDir)boto.wxs"
 "%WIX%\bin\heat" dir "$(ProjectDir)..\dist\mako-0.3.3-py2.6.egg" -gg -cg Mako033 -dr INSTALLLOCATION -sfrag -template:fragment -var var.MakoDir -out "$(ProjectDir)mako.wxs"
 "%WIX%\bin\heat" dir "$(ProjectDir)..\dist\pydns-2.3.4-py2.6.egg" -gg -cg Pydns234 -dr INSTALLLOCATION -sfrag -template:fragment -var var.PyDnsDir -out "$(ProjectDir)pydns.wxs"</PreBuildEvent>

@@ -4,145 +4,145 @@
         <DirectoryRef Id="INSTALLLOCATION">
             <Directory Id="dir767782B5526B803A45A84D13EB4727FB" Name="beaker-1.5.3-py2.6.egg">
                 <Directory Id="dir65127459301D2E96BA53CD5B73168464" Name="beaker">
-                    <Component Id="cmp47452F748030AC6CBC508D90033D0FA6" Guid="{53257070-9F82-407E-9D0A-3DBBC53E5567}">
+                    <Component Id="cmp47452F748030AC6CBC508D90033D0FA6" Guid="{FB7CB0FD-8877-42BA-8724-E53F358C9090}">
                         <File Id="fil270AF50F74502139534B5B0760AECC58" KeyPath="yes" Source="$(var.BeakerDir)\beaker\cache.py" />
                     </Component>
-                    <Component Id="cmpF54E3607C6341C2560943C98FC4B1B03" Guid="{69C9B20A-5067-467C-B20D-EFBD977A0F57}">
+                    <Component Id="cmpF54E3607C6341C2560943C98FC4B1B03" Guid="{BC868098-9B34-41E8-965B-2A92EE4D8AD6}">
                         <File Id="fil3708026E890499ABCA7ECBCD5BEE0AFD" KeyPath="yes" Source="$(var.BeakerDir)\beaker\cache.pyc" />
                     </Component>
-                    <Component Id="cmp21E354B799BCD603769EAB3FE67A52CE" Guid="{67300637-ABCC-498A-954C-B9FB78B66D9B}">
+                    <Component Id="cmp21E354B799BCD603769EAB3FE67A52CE" Guid="{49A7278F-1489-4AA0-A9E4-3C2F07FB9BF8}">
                         <File Id="filFA14F963847EF9149546161496B26772" KeyPath="yes" Source="$(var.BeakerDir)\beaker\container.py" />
                     </Component>
-                    <Component Id="cmp0DC82D5CF95866AF5B258004D87F14CE" Guid="{88732B3C-E33B-4A6D-8F8B-5CC5DE8AF9EA}">
+                    <Component Id="cmp0DC82D5CF95866AF5B258004D87F14CE" Guid="{307437A6-6E00-484E-88BF-1D724A53158C}">
                         <File Id="fil2BC2BE1AED42E7B8CB5DD63E35A01E50" KeyPath="yes" Source="$(var.BeakerDir)\beaker\container.pyc" />
                     </Component>
-                    <Component Id="cmp7FA44069653E44DB7ED90FE68849F27C" Guid="{99480A95-C1E6-4C84-87A3-8B48171C36E4}">
+                    <Component Id="cmp7FA44069653E44DB7ED90FE68849F27C" Guid="{88559774-0400-46F4-828F-1B53392CB2E5}">
                         <File Id="fil8A93FD24D3374B72E5E73E8290341A97" KeyPath="yes" Source="$(var.BeakerDir)\beaker\converters.py" />
                     </Component>
-                    <Component Id="cmpFD70E102097ADDD436D85B2D9006A071" Guid="{6DF01F2C-EBF9-4667-8854-0D2C9C5677AC}">
+                    <Component Id="cmpFD70E102097ADDD436D85B2D9006A071" Guid="{08A8B046-53B3-45F8-884E-C4F12F481085}">
                         <File Id="filD2894B995ECA669E2FBDA6B9388EC2BE" KeyPath="yes" Source="$(var.BeakerDir)\beaker\converters.pyc" />
                     </Component>
-                    <Component Id="cmp3C11DD4F8DE42BDD33B8FA96C5BE441F" Guid="{06904D67-D205-431E-A1C7-40428B2ECE92}">
+                    <Component Id="cmp3C11DD4F8DE42BDD33B8FA96C5BE441F" Guid="{9E7B07DE-D011-4DDE-89F2-FBE6966741E1}">
                         <File Id="fil824F9FE732EE0748C42BA956BA282C39" KeyPath="yes" Source="$(var.BeakerDir)\beaker\exceptions.py" />
                     </Component>
-                    <Component Id="cmpD93BB586078E312B89BF5FA3444669EF" Guid="{2B114DDB-C6A3-4839-B0FF-DCC297579633}">
+                    <Component Id="cmpD93BB586078E312B89BF5FA3444669EF" Guid="{E6421905-CA78-4C4F-96AE-1BDD7E8A0DB3}">
                         <File Id="fil59F6825C1CD9226E027E9075082BD27C" KeyPath="yes" Source="$(var.BeakerDir)\beaker\exceptions.pyc" />
                     </Component>
-                    <Component Id="cmpB282DC54A101446473FAE1BC5344B52B" Guid="{170DC946-69DA-49BB-821E-B016D242097C}">
+                    <Component Id="cmpB282DC54A101446473FAE1BC5344B52B" Guid="{78AD5507-8862-477B-8381-D354C64C4060}">
                         <File Id="filDF30055C5D7CEFEB6F0592DB16727F0E" KeyPath="yes" Source="$(var.BeakerDir)\beaker\middleware.py" />
                     </Component>
-                    <Component Id="cmpF4006083295DE2C300017F3A30E8E5B7" Guid="{8B920335-E794-4707-A481-FF4AAB3FBD2C}">
+                    <Component Id="cmpF4006083295DE2C300017F3A30E8E5B7" Guid="{DA21FC49-A845-4A86-9C17-9526AC545E39}">
                         <File Id="fil21D4E13906FF79C76538AEC105D09240" KeyPath="yes" Source="$(var.BeakerDir)\beaker\middleware.pyc" />
                     </Component>
-                    <Component Id="cmp2FE9BC4B6C854770D9092EF96A48F615" Guid="{77E59BE9-7E05-4396-A056-F3DD89A3737B}">
+                    <Component Id="cmp2FE9BC4B6C854770D9092EF96A48F615" Guid="{1933E974-AFD5-4922-B5E1-598CA1FB70B8}">
                         <File Id="fil267C867BD44B406F022F26EE450C0201" KeyPath="yes" Source="$(var.BeakerDir)\beaker\session.py" />
                     </Component>
-                    <Component Id="cmpE1D6EC2C6326CAAB0F2F1937CF46C96B" Guid="{92423815-F08D-4448-BC21-FF6C2D70233F}">
+                    <Component Id="cmpE1D6EC2C6326CAAB0F2F1937CF46C96B" Guid="{60764543-B0F1-4D78-A17C-9AE9272834EC}">
                         <File Id="fil569DDC22A40D01A0F8BA099284E8EF48" KeyPath="yes" Source="$(var.BeakerDir)\beaker\session.pyc" />
                     </Component>
-                    <Component Id="cmp6A45312FEEBCD072C8D19818408B57D1" Guid="{BFA60C1D-840D-41E3-99B3-6D60272C80E7}">
+                    <Component Id="cmp6A45312FEEBCD072C8D19818408B57D1" Guid="{629CA3A0-924F-4414-9DA5-0F0A0A1BA4DA}">
                         <File Id="fil53F7B9968B69242613CC98E83787D410" KeyPath="yes" Source="$(var.BeakerDir)\beaker\synchronization.py" />
                     </Component>
-                    <Component Id="cmpBE63D04EB7751B1E4A361B3B79198952" Guid="{85298822-5973-4B63-A28A-ED4D30ED9200}">
+                    <Component Id="cmpBE63D04EB7751B1E4A361B3B79198952" Guid="{D074336B-DFAB-4629-BF5B-A48EE0629235}">
                         <File Id="fil458E28F03C172060B47DA64D8AAA437E" KeyPath="yes" Source="$(var.BeakerDir)\beaker\synchronization.pyc" />
                     </Component>
-                    <Component Id="cmp1346FDF069F1EBEC2CE460C47D7473B7" Guid="{7AC8931D-212C-4A32-AB53-EA4FA65DE1D0}">
+                    <Component Id="cmp1346FDF069F1EBEC2CE460C47D7473B7" Guid="{B933253B-505C-49F5-B1E4-BB10BAB2E2FC}">
                         <File Id="fil6DE1AA721770B06EEE6E8BB4D5EA7743" KeyPath="yes" Source="$(var.BeakerDir)\beaker\util.py" />
                     </Component>
-                    <Component Id="cmp2BEC4CCBEF43997AA6FB110B003BC611" Guid="{AE6A568D-6BAC-48C3-8674-C2278B36F39A}">
+                    <Component Id="cmp2BEC4CCBEF43997AA6FB110B003BC611" Guid="{6E8CAA38-6AA1-4C4A-85FE-5FA6D19CA730}">
                         <File Id="filB6A2A8BF33507B7CCA84A0F432D59246" KeyPath="yes" Source="$(var.BeakerDir)\beaker\util.pyc" />
                     </Component>
-                    <Component Id="cmp5A63DC8D3B35A245B17A6276450BD5EE" Guid="{CBE9EF45-F963-4C13-B819-5BBBC3CB83E5}">
+                    <Component Id="cmp5A63DC8D3B35A245B17A6276450BD5EE" Guid="{BE651764-A8E3-4CBC-8D2F-A132EAFC9E06}">
                         <File Id="fil2E80FFC5956D06F551ED193AAE32E76C" KeyPath="yes" Source="$(var.BeakerDir)\beaker\__init__.py" />
                     </Component>
-                    <Component Id="cmp878C9D41911AC042EF300C0D6888EF3C" Guid="{A2F2283E-3A8C-4339-A954-E664544B4593}">
+                    <Component Id="cmp878C9D41911AC042EF300C0D6888EF3C" Guid="{888B31B3-EE8A-4F3B-B795-73A58F82143A}">
                         <File Id="filD495224CF886CBD48FA93562DE3A95D1" KeyPath="yes" Source="$(var.BeakerDir)\beaker\__init__.pyc" />
                     </Component>
                     <Directory Id="dir0175C25EA9445E0638A0F259B19B3249" Name="crypto">
-                        <Component Id="cmpA3FC2BFE5042054EDF0721CECF471BE1" Guid="{EE48D1A3-9602-4A00-A13C-E75030A0B075}">
+                        <Component Id="cmpA3FC2BFE5042054EDF0721CECF471BE1" Guid="{C71C55C2-A9D9-4064-814E-E88B60D083A1}">
                             <File Id="filC3A8B51462AC2B1E1561C8EA647EEF8F" KeyPath="yes" Source="$(var.BeakerDir)\beaker\crypto\jcecrypto.py" />
                         </Component>
-                        <Component Id="cmp115E76EA4C5B5E9D95E8705E7116032E" Guid="{01E5DECC-AD8A-4ACF-93D8-508EBCB6215A}">
+                        <Component Id="cmp115E76EA4C5B5E9D95E8705E7116032E" Guid="{AE367694-91B9-4563-9850-C07A194AE470}">
                             <File Id="filCD9FFC08B6B733A1C56A6F760A4BCFDE" KeyPath="yes" Source="$(var.BeakerDir)\beaker\crypto\jcecrypto.pyc" />
                         </Component>
-                        <Component Id="cmp2F455440C9CFBC8CDFBAFA19FA03818A" Guid="{BA8C0E83-C0E7-4088-9B8C-2D5E8235CB7A}">
+                        <Component Id="cmp2F455440C9CFBC8CDFBAFA19FA03818A" Guid="{DEDFC83C-9E22-4105-8BD3-483278F5AAF1}">
                             <File Id="fil81887991385898194114A1D62970D762" KeyPath="yes" Source="$(var.BeakerDir)\beaker\crypto\pbkdf2.py" />
                         </Component>
-                        <Component Id="cmp1074B268B95C5F50D834B2F1403855C7" Guid="{0834FBDE-5481-4DB9-B70D-8C8ACE22A112}">
+                        <Component Id="cmp1074B268B95C5F50D834B2F1403855C7" Guid="{7C1DDB44-69CC-45DB-8915-7A77A8C36DC1}">
                             <File Id="fil7F7A928612480D4077158E309C3252AD" KeyPath="yes" Source="$(var.BeakerDir)\beaker\crypto\pbkdf2.pyc" />
                         </Component>
-                        <Component Id="cmpCCAB61FFE6DE159C9F3BA3BD14C1C421" Guid="{E79D6462-A710-4D1C-BA95-FD3F5B489166}">
+                        <Component Id="cmpCCAB61FFE6DE159C9F3BA3BD14C1C421" Guid="{C63B81D7-7888-499C-A5C2-0A1EAD629411}">
                             <File Id="fil209F26AC709BD2DE333304E5C120D365" KeyPath="yes" Source="$(var.BeakerDir)\beaker\crypto\pycrypto.py" />
                         </Component>
-                        <Component Id="cmp46E796BD027DE17AF088BBBE56D83B28" Guid="{A0521927-8677-4300-AD39-C49FD2ACEF53}">
+                        <Component Id="cmp46E796BD027DE17AF088BBBE56D83B28" Guid="{E0B25317-B3C0-4ADB-94F5-F56A1259380A}">
                             <File Id="fil0179EA55B3DB7273A0441BD509E0D44B" KeyPath="yes" Source="$(var.BeakerDir)\beaker\crypto\pycrypto.pyc" />
                         </Component>
-                        <Component Id="cmp72A53E74C98C125AC32F52BF09B30772" Guid="{5176F4BD-3EAB-491A-A86C-81F43571811D}">
+                        <Component Id="cmp72A53E74C98C125AC32F52BF09B30772" Guid="{6C89F8DA-17BD-42C4-9E12-F837ED53F3CF}">
                             <File Id="filC57660007C07D5FC47B01760D04C637D" KeyPath="yes" Source="$(var.BeakerDir)\beaker\crypto\util.py" />
                         </Component>
-                        <Component Id="cmpF823A231C09F26A71FC890006F874DE0" Guid="{A08FB5C4-C3FD-4410-83A1-52E25268EAF4}">
+                        <Component Id="cmpF823A231C09F26A71FC890006F874DE0" Guid="{A95AA5B5-DB27-4E49-B690-4541E1B1C854}">
                             <File Id="fil530C9F1A4539812499A05C49426633AE" KeyPath="yes" Source="$(var.BeakerDir)\beaker\crypto\util.pyc" />
                         </Component>
-                        <Component Id="cmpC9555EB516C2192071BE74134A33A507" Guid="{8B44378E-BEF4-4C58-A1BE-8E763797C68C}">
+                        <Component Id="cmpC9555EB516C2192071BE74134A33A507" Guid="{F0677B59-072F-41F6-B142-31511AEE8ABD}">
                             <File Id="fil9D509E33A262884DE7EA7FCBAFC4167E" KeyPath="yes" Source="$(var.BeakerDir)\beaker\crypto\__init__.py" />
                         </Component>
-                        <Component Id="cmpFFC3ACA1E3B124988535FBBC14DBAC35" Guid="{C43078C5-5A2C-4C33-B049-D0D97DB40D10}">
+                        <Component Id="cmpFFC3ACA1E3B124988535FBBC14DBAC35" Guid="{D922F991-BF25-4B29-B0BC-FFFE12427B18}">
                             <File Id="filD6F2DC12CF4BB479D2E9DBAD41F48561" KeyPath="yes" Source="$(var.BeakerDir)\beaker\crypto\__init__.pyc" />
                         </Component>
                     </Directory>
                     <Directory Id="dirF2AF6618C3430B98DF11A9A839BC7EEF" Name="ext">
-                        <Component Id="cmpD9C01EFD1639517B982EAC0BBB467023" Guid="{86972CD1-9622-4445-90D2-A097A3822E7D}">
+                        <Component Id="cmpD9C01EFD1639517B982EAC0BBB467023" Guid="{874E2457-945B-4A0C-8276-06A99ACD4925}">
                             <File Id="filC126790AE5D0CCE1EA9F5C27011D37CA" KeyPath="yes" Source="$(var.BeakerDir)\beaker\ext\database.py" />
                         </Component>
-                        <Component Id="cmp1092E7DFBBEE76B6DA9DFFF22B0F28B3" Guid="{3387F2D2-805F-4E64-8191-2D0B28F116D8}">
+                        <Component Id="cmp1092E7DFBBEE76B6DA9DFFF22B0F28B3" Guid="{2EF89689-7524-4B0F-AC79-6FBB594CF791}">
                             <File Id="fil6FB13554CDA04781DA1AAFBAD31B09CE" KeyPath="yes" Source="$(var.BeakerDir)\beaker\ext\database.pyc" />
                         </Component>
-                        <Component Id="cmp039A5CC8E3F3DAC98DCFE4EE46066A62" Guid="{895C256A-0753-4620-BB7F-48ACBC950AAF}">
+                        <Component Id="cmp039A5CC8E3F3DAC98DCFE4EE46066A62" Guid="{3AFBF455-209C-4799-A482-27610E8E9C76}">
                             <File Id="filC1535806BD98F491572EB8E96F43074B" KeyPath="yes" Source="$(var.BeakerDir)\beaker\ext\google.py" />
                         </Component>
-                        <Component Id="cmp715FADB31765FF08920D94D20E8AF10F" Guid="{21BDDFA4-F3A8-4848-BCA9-BA9EFA9D23F9}">
+                        <Component Id="cmp715FADB31765FF08920D94D20E8AF10F" Guid="{ED479BAF-4732-4510-8694-25BEBD10B938}">
                             <File Id="fil2CEE72D7A0A48AFEC1D615CC4AA7A1D8" KeyPath="yes" Source="$(var.BeakerDir)\beaker\ext\google.pyc" />
                         </Component>
-                        <Component Id="cmpCC3877640AB9691BD838F3D57D669241" Guid="{BE30561A-9716-460A-9DD2-09515D6CCB81}">
+                        <Component Id="cmpCC3877640AB9691BD838F3D57D669241" Guid="{4C744A7B-BC6C-4AD1-A8EA-DFE4D2548F2E}">
                             <File Id="filF33F89E38F7D1A282EAEFB00A649D236" KeyPath="yes" Source="$(var.BeakerDir)\beaker\ext\memcached.py" />
                         </Component>
-                        <Component Id="cmpB3EAEE426C01EC1A6A7D76D784EBBF83" Guid="{5848BEB6-F8A9-44CA-A028-8488298A48F3}">
+                        <Component Id="cmpB3EAEE426C01EC1A6A7D76D784EBBF83" Guid="{33A42D96-B4C5-4DB8-9094-10EBA237AC43}">
                             <File Id="fil97A267862257A769433BBB3B9C941345" KeyPath="yes" Source="$(var.BeakerDir)\beaker\ext\memcached.pyc" />
                         </Component>
-                        <Component Id="cmp738964CF47D0243513144F9F303BFA5D" Guid="{56BFF79D-8CDA-4DCE-8135-255E01A53F2B}">
+                        <Component Id="cmp738964CF47D0243513144F9F303BFA5D" Guid="{D2264E9B-2AA0-4D0B-9C3A-AAACB8DAEF83}">
                             <File Id="fil9882BC51054794311DD2D833CF6885E1" KeyPath="yes" Source="$(var.BeakerDir)\beaker\ext\sqla.py" />
                         </Component>
-                        <Component Id="cmpF69F0BDE08AA32E0F39CB36CE94ECC40" Guid="{B2BA318D-7ACD-4920-BCA7-BF5C546C31B4}">
+                        <Component Id="cmpF69F0BDE08AA32E0F39CB36CE94ECC40" Guid="{9EC00047-8C96-466F-89CF-BCB97E2066FD}">
                             <File Id="filF03C1615E25D54FB22A1B62892BCD727" KeyPath="yes" Source="$(var.BeakerDir)\beaker\ext\sqla.pyc" />
                         </Component>
-                        <Component Id="cmp327A16920BE21ECB0166D34AB9BEFF4C" Guid="{1CE025AE-AFB5-445D-B1BF-F99A91753592}">
+                        <Component Id="cmp327A16920BE21ECB0166D34AB9BEFF4C" Guid="{1A9549C4-321F-47B4-BFEA-12E9A15455C4}">
                             <File Id="fil9FAD47F0310D3296EF728AAF5B95EA56" KeyPath="yes" Source="$(var.BeakerDir)\beaker\ext\__init__.py" />
                         </Component>
-                        <Component Id="cmp4076AACAFA00FBFC55363111E14EFD37" Guid="{1D54F21D-ACA4-4CC1-9AFC-BD2FB96BAB9B}">
+                        <Component Id="cmp4076AACAFA00FBFC55363111E14EFD37" Guid="{9FA8DC65-545A-47CB-8057-1ECBD7859E97}">
                             <File Id="filFF836615C3081D986BFDECCB3B389920" KeyPath="yes" Source="$(var.BeakerDir)\beaker\ext\__init__.pyc" />
                         </Component>
                     </Directory>
                 </Directory>
                 <Directory Id="dirF2CB40A0A6A2A1B8A5BEF0B009A6A995" Name="EGG-INFO">
-                    <Component Id="cmp3DEE770BC452E8FCB8605DE653F0AF09" Guid="{BB0B6DE2-CC2A-44C9-8695-979C28C57466}">
+                    <Component Id="cmp3DEE770BC452E8FCB8605DE653F0AF09" Guid="{6B275AE2-E27E-4FA9-A155-F9DB8845AE86}">
                         <File Id="filF03B834989F011BBADC45932F81D6AF9" KeyPath="yes" Source="$(var.BeakerDir)\EGG-INFO\dependency_links.txt" />
                     </Component>
-                    <Component Id="cmpF0CD728D503AAB1C7A5984D23E653F1E" Guid="{24C60E4C-C98A-4A72-93F9-3BC692CCAB26}">
+                    <Component Id="cmpF0CD728D503AAB1C7A5984D23E653F1E" Guid="{1716C514-CB1C-4FC6-A13E-35380DF0A56F}">
                         <File Id="fil5D8A490883D69DA9A265572C4E2DF3B0" KeyPath="yes" Source="$(var.BeakerDir)\EGG-INFO\entry_points.txt" />
                     </Component>
-                    <Component Id="cmp4FADF8654E07809A24D2D2511DC52403" Guid="{472DB54F-A946-4461-94A2-BB656BB9EB3B}">
+                    <Component Id="cmp4FADF8654E07809A24D2D2511DC52403" Guid="{16369B6A-495F-4F7C-8E9F-3D8805851511}">
                         <File Id="fil5750BB1B4BC224D563BEB79ECF96B188" KeyPath="yes" Source="$(var.BeakerDir)\EGG-INFO\not-zip-safe" />
                     </Component>
-                    <Component Id="cmp18770296DBD8D037E1752C945F1E394A" Guid="{AFA03A1B-643D-48C4-8B06-C03907F2480C}">
+                    <Component Id="cmp18770296DBD8D037E1752C945F1E394A" Guid="{D05784FE-EAF1-4EE9-B14C-9BAB1CA609A9}">
                         <File Id="filE7F2F398902CA4E31EB29266169D41BD" KeyPath="yes" Source="$(var.BeakerDir)\EGG-INFO\PKG-INFO" />
                     </Component>
-                    <Component Id="cmp902A4A47D9D23AC697FD0AC644E8E63B" Guid="{A40455FE-2491-4118-B085-DDC4D7C73332}">
+                    <Component Id="cmp902A4A47D9D23AC697FD0AC644E8E63B" Guid="{3E1E1C69-9217-4E78-81D3-43C057424AF4}">
                         <File Id="fil633CD3D3FF485D4E45B4F0D2E4271978" KeyPath="yes" Source="$(var.BeakerDir)\EGG-INFO\requires.txt" />
                     </Component>
-                    <Component Id="cmp337B674D81C84EE0B3A77C0649CCF634" Guid="{45989A30-7505-4042-8FC1-A3BC5D295FC9}">
+                    <Component Id="cmp337B674D81C84EE0B3A77C0649CCF634" Guid="{90A265CB-F885-4F78-8062-BDF198146FEC}">
                         <File Id="filF660EBF69512F4BF43E17F68EAF2F331" KeyPath="yes" Source="$(var.BeakerDir)\EGG-INFO\SOURCES.txt" />
                     </Component>
-                    <Component Id="cmp5B0F42F512AEA538D0547CD7D712D836" Guid="{7B19D8E3-412C-4AA0-BE26-0DEF231B965A}">
+                    <Component Id="cmp5B0F42F512AEA538D0547CD7D712D836" Guid="{DA4D453F-290C-4853-ACCD-F462ECDBB3DC}">
                         <File Id="fil8B67EEBFFD5BE415F713BAEA9434E37E" KeyPath="yes" Source="$(var.BeakerDir)\EGG-INFO\top_level.txt" />
                     </Component>
                 </Directory>
