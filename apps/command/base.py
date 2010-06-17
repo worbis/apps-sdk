@@ -2,6 +2,7 @@
 # Copyright (c) 2010 BitTorrent Inc.
 #
 
+import fnmatch
 import json
 import logging
 import os
@@ -33,6 +34,23 @@ class Command(object):
             if not self.options.get(k, None):
                 self.options[k] = v
         self.project = apps.project.Project(self.options.get('name', '.'))
+
+    def file_list(self):
+        ignore = [os.path.join(self.project.path, x) for x in
+                  open(os.path.join(self.project.path,
+                                    '.ignore')).read().split('\n')]
+
+        def _filter(fname):
+            for pat in ignore:
+                if fnmatch.fnmatch(fname, pat):
+                    return False
+            return True
+
+        file_list = []
+        for p, dirs, files in os.walk(self.project.path):
+            for f in filter(_filter, [os.path.join(p, x) for x in files]):
+                file_list.append(f)
+        return file_list
 
     def run(self):
         logging.error('This command has not been implemented yet.')

@@ -19,6 +19,7 @@ class generate(apps.command.base.Command):
     def run(self):
         self.write_metadata()
         logging.info('\tcreating index.html')
+        self.excludes += self.file_list()
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(
                 'apps.data', 'index.html'), cache_enabled=False)
