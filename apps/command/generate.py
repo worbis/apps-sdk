@@ -21,6 +21,7 @@ class generate(apps.command.base.Command):
         logging.info('\tcreating index.html')
         # Remove the ./ from the beginning of these paths for use in filter
         self.flist = [x[2:] for x in self.file_list()]
+        #self.flist = self.file_list()
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(
                 'apps.data', 'index.html'), cache_enabled=False)
@@ -52,7 +53,8 @@ class generate(apps.command.base.Command):
         scripts = []
         for lib in metadata.get('bt:libs', []):
             scripts += self.filter(scripts,
-                handlers[os.path.splitext(lib['url'])[-1]](lib))
+                [x.replace('/', os.path.sep) for x in
+                 handlers[os.path.splitext(lib['url'])[-1]](lib)])
         if metadata == self.project.metadata:
             scripts += self.filter(scripts,
                 [os.path.join('lib', x) for x in
