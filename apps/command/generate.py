@@ -19,7 +19,8 @@ class generate(apps.command.base.Command):
     def run(self):
         self.write_metadata()
         logging.info('\tcreating index.html')
-        self.excludes += self.file_list()
+        # Remove the ./ from the beginning of these paths for use in filter
+        self.flist = [x[2:] for x in self.file_list()]
         template = mako.template.Template(
             filename=pkg_resources.resource_filename(
                 'apps.data', 'index.html'), cache_enabled=False)
@@ -40,7 +41,8 @@ class generate(apps.command.base.Command):
         return []
 
     def filter(self, existing, lst):
-        return filter(lambda x: not x in existing and not x in self.excludes,
+        return filter(lambda x: not x in existing and not x in self.excludes \
+                          and x in self.flist,
                       lst)
 
     def _scripts_list(self, metadata):
