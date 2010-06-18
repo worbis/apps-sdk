@@ -29,6 +29,7 @@ import apps.command.serve
 import apps.command.setup
 import apps.command.submit
 import apps.command.update
+import apps.command.localize
 
 class Options(dict):
 
