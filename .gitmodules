@@ -1,3 +1,6 @@
 [submodule "test/qunit"]
 	path = test/qunit
 	url = git://github.com/jquery/qunit.git
+[submodule "test/narwhal"]
+	path = test/narwhal
+	url = git://github.com/tlrobinson/narwhal.git
