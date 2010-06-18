@@ -1,0 +1,7 @@
+#notification {
+    display: none;
+    border: 1px solid;
+    margin: 2px;
+    padding: 2px;
+    text-align: center;
+}

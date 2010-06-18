@@ -1,0 +1,48 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Media downloader\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-06-15 16:06-0700\n"
+"PO-Revision-Date: 2010-06-15 16:12-0800\n"
+"Last-Translator: Skye Riley <skye@bittorrent.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+
+#: index.js:2
+msgid "French"
+msgstr "Français"
+
+#: index.js:2
+msgid "English"
+msgstr "Anglais"
+
+#: index.js:2
+msgid "Japanese"
+msgstr "Japonais"
+
+#: index.js:7
+#, python-format
+msgid "Current language: %s"
+msgstr "Langage courant: %s"
+
+#: index.js:24
+msgid "Adding a torrent, please be patient..."
+msgstr "Ajout d'un torrent, patientez s'il vous plaît."
+
+#: index.js:30
+msgid "There was a problem adding the torrent."
+msgstr "Il y avait un problème en ajoutant le torrent."
+
+#: index.js:77
+msgid "Play"
+msgstr "Lire"
+
