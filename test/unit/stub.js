@@ -92,3 +92,9 @@ test('stub.settings', function() {
 
   // XXX - Fill out the unit tests
 });
+
+test('stub.log', function() {
+  expect();
+
+  // XXX - Fill out the unit tests
+});
