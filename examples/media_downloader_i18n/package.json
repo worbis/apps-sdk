@@ -21,7 +21,7 @@
     "bt:publisher": "BitTorrent, Inc.", 
     "author": "Skye Riley <skye@bittorrent.com>", 
     "site": "http://apps-sdk.bittorrent.com", 
-    "bt:update_url": "http://localhost/media_downloader_i18n.btapp", 
+    "bt:update_url": "http://apps-sdk.bittorrent.com", 
     "version": "0.1", 
     "bt:description": "This is an example media downloader with multi-language support.", 
     "keywords": [
