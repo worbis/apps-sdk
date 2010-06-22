@@ -121,3 +121,9 @@ test('bt.settings', function() {
 
   // XXX - Fill out the unit tests
 });
+
+test('bt.log', function() {
+  expect();
+
+  // XXX - Fill out the unit tests
+});
