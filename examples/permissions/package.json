@@ -1,0 +1,25 @@
+{
+    "description": "Working with elevated app permissions.", 
+    "author": "Skye Riley <skye@bittorrent.com>", 
+    "bt:publisher": "BitTorrent, Inc.", 
+    "bt:libs": [
+        {
+            "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg", 
+            "name": "apps-sdk"
+        }, 
+        {
+            "url": "http://staging.apps.bittorrent.com/pkgs/jup.js", 
+            "name": "jup"
+        }
+    ], 
+    "site": "http://apps.bittorrent.com", 
+    "bt:update_url": "http://apps.bittorrent.com", 
+    "version": "0.1", 
+    "bt:description": "Working with elevated app permissions.", 
+    "keywords": [
+        "permissions", "access", "tutorial"
+    ], 
+    "bt:access": "list_restricted", 
+    "bt:release_date": "06/22/2010", 
+    "name": "permissions"
+}
