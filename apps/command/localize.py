@@ -5,7 +5,7 @@
 import apps.command.base
 import apps.config
 import os, logging, shutil, codecs, gettext
-import simplejson as enc
+import json as enc
 
 class localize(apps.command.base.Command):
 
