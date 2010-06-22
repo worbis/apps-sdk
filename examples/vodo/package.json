@@ -1,7 +1,5 @@
 {
     "description": "VODO", 
-    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
-    "bt:publisher": "BitTorrent Inc.", 
     "bt:libs": [
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg", 
@@ -28,14 +26,12 @@
             "name": "date"
         }, 
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/underscore.js", 
-            "name": "underscore"
-        }, 
-        {
             "url": "http://staging.apps.bittorrent.com/pkgs/mixpanel.js", 
             "name": "mixpanel"
         }
     ], 
+    "bt:publisher": "BitTorrent Inc.", 
+    "author": "Thomas Rampelberg <thomas@bittorrent.com>", 
     "site": "http://vodo.net", 
     "bt:update_url": "http://apps.bittorrent.com/vodo/vodo.btapp", 
     "version": "1.1", 
