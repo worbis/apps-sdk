@@ -1,9 +1,10 @@
 ---
 title: Apps for BitTorrent SDK
 layout: default
+foo: bar
 ---
 
-## Getting Started
+# Getting Started
 
 The easiest way to get up and running is by running the [SDK
 installer](https://github.com/bittorrent/apps-sdk/raw/master/client/apps-sdk-installer.msi).
@@ -24,12 +25,12 @@ client:
 And, double click `dist/hello-world.btapp`. The app should now show up in your
 &micro;Torrent client.
 
-### Next Steps
+## Next Steps
 
 - [Tutorials](doc/tutorials)
 - [API](doc/api.html)
 
-## Help
+# Help
 
 - [FAQ](doc/FAQ.html)
 - [Documentation](doc/)
@@ -39,7 +40,7 @@ And, double click `dist/hello-world.btapp`. The app should now show up in your
 - [Feedback](mailto:apps-sdk@bittorrent.com): <span style="float:right">apps-sdk@bittorrent.com</span>
 - [Issue Tracker](https://github.com/bittorrent/apps-sdk/issues)
 
-## Download
+# Download
 
 You can download the source, tools, documentation and examples in either
 [zip](http://github.com/bittorrent/apps-sdk/zipball/master) or
