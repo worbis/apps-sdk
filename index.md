@@ -32,7 +32,6 @@ And, double click `dist/hello-world.btapp`. The app should now show up in your
 
 # Help
 
-- [FAQ](doc/FAQ.html)
 - [Documentation](doc/)
 - [Wiki](https://github.com/bittorrent/apps-sdk/wikis)
 - [Forums](http://forum.utorrent.com/viewforum.php?id=33)
