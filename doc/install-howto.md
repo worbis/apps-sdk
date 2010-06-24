@@ -8,7 +8,7 @@ title: Tool Installation Howto
 ### Normal
 
 Installation in windows is a snap. Just download and install the [tools
-installer](https://github.com/bittorrent/apps-sdk/raw/master/client/apps-sdk-installer.msi).
+installer](/apps-sdk/client/apps-sdk-installer.msi).
 
 ### Development
 
