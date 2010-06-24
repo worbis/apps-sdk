@@ -34,9 +34,8 @@ And, you're ready to go!
 The prerequisites for the build tools are Python 2.6 and setuptools. Install
 those using your operating system's package manager.
 
-Fetch and extract the [project's
-tarball](http://github.com/bittorrent/apps-sdk/tarball/master) and run:
+Once you have python and setuptools installed, you can just run:
 
-    $ python setup.py install
+    $ easy_install http://staging.apps.bittorrent.com/pkgs/apps-0.1-py2.6.egg
 
 You should now be ready to go.
