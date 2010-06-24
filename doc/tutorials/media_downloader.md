@@ -13,7 +13,7 @@ tutorial builds, take a look at [Media Downloader](http://github.com/bittorrent/
 
 First, let's get some tools installed. If you've already done this step, feel
 free to skip ahead. For windows, there is a convenient installer. Download [the
-installer](https://github.com/bittorrent/apps-sdk/raw/master/client/apps-sdk-installer.msi)
+installer](/apps-sdk/client/apps-sdk-installer.msi)
 and install it. For operating systems other than windows, take a look at the
 [install howto](../install-howto.html) for a walkthrough on how to get setup.
 
