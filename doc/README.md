@@ -1,9 +1,3 @@
----
-title: Apps for BitTorrent SDK
-layout: default
-foo: bar
----
-
 # Getting Started
 
 The easiest way to get up and running is by running the [SDK
