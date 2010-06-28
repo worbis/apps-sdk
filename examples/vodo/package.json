@@ -28,10 +28,6 @@
             "name": "date"
         }, 
         {
-            "url": "http://staging.apps.bittorrent.com/pkgs/underscore.js", 
-            "name": "underscore"
-        }, 
-        {
             "url": "http://staging.apps.bittorrent.com/pkgs/mixpanel.js", 
             "name": "mixpanel"
         }

@@ -23,13 +23,13 @@ import apps.command.base
 import apps.command.add
 import apps.command.config
 import apps.command.generate
+import apps.command.localize
 import apps.command.package
 import apps.command.push
 import apps.command.serve
 import apps.command.setup
 import apps.command.submit
 import apps.command.update
-import apps.command.localize
 
 class Options(dict):
 

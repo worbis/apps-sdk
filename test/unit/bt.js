@@ -11,14 +11,14 @@ module('bt');
 test('bt.add.torrent', function() {
   expect(9);
 
-  var url = 'http://example.com/add.torrent';
+  var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
   var url_nocb = 'http://example.com/cb.torrent';
   var url_def = 'http://example.com/def.torrent';
   var url_cbdef = 'http://example.com/cbdef.torrent';
   var defs = { label: 'foobar',
                name: 'foobar' };
   // Just in case.
-  bt.events.set('torrent', bt._handlers.torrent);
+  bt.events.set('torrentStatus', bt._handlers.torrent);
   stop();
   bt.add.torrent(url_nocb);
   bt.add.torrent(url_def, defs);
@@ -29,18 +29,22 @@ test('bt.add.torrent', function() {
     var download_urls = _.map(bt.torrent.all(), function(v) {
       return v.properties.get('download_url');
     });
-    ok(download_urls.indexOf(url) >= 0, 'Torrent added successfully');
+    ok(download_urls.indexOf(url) >= 0,
+       'Torrent added successfully');
 
-    ok(download_urls.indexOf(url_nocb) >= 0, 'No cb or defaults added okay');
+    ok(download_urls.indexOf(url_nocb) >= 0,
+       'No cb or defaults added okay');
     var tor = bt.torrent.get(url_def);
-    _.each(defs, function(v, k) {
-      equals(tor.properties.get(k), v, 'Defaults are set');
-    });
+    if (tor)
+      _.each(defs, function(v, k) {
+        equals(tor.properties.get(k), v, 'Defaults are set');
+      });
     bt.add.torrent(url_cbdef, defs, function(resp) {
       var tor = bt.torrent.get(url_cbdef);
-      _.each(defs, function(v, k) {
-        equals(tor.properties.get(k), v, 'Callback + defaults works');
-      });
+      if (tor)
+        _.each(defs, function(v, k) {
+          equals(tor.properties.get(k), v, 'Callback + defaults works');
+        });
       start();
     });
   });
