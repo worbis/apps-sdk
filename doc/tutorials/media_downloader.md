@@ -1,3 +1,8 @@
+---
+layout: default
+title: Media Downloader
+---
+
 This is a tutorial that will introduce consumption of remote resources from
 within an application as well as how to make the application feel a little more
 like a native application than a web page. The focus is on media and
@@ -6,15 +11,13 @@ specialized feeds that aren't RSS.
 If, at any time you'd like to see a complete version of the app that this
 tutorial builds, take a look at [Media Downloader](http://github.com/bittorrent/apps-sdk/tree/master/examples/media_downloader).
 
-First, let's get some tools installed. Along with the SDK comes a python
-program that makes a bunch of common tasks a little bit easier. To install
-these tools, let's go to the directory that you extracted the SDK to.
+First, let's get some tools installed. If you've already done this step, feel
+free to skip ahead. For windows, there is a convenient installer. Download [the
+installer](/apps-sdk/client/apps-sdk-installer.msi)
+and install it. For operating systems other than windows, take a look at the
+[install howto](../install-howto.html) for a walkthrough on how to get setup.
 
-XXX - Need to talk through installing python and setuptools probably.
-
-    % sudo python setup.py develop
-
-To setup your project directory:
+Once the tools are setup, its time to setup your project directory:
 
     % apps setup --name media_downloader
     % cd media_downloader

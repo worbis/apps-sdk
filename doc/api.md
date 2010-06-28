@@ -1,3 +1,8 @@
+---
+title: API Specification
+layout: default
+---
+
 # Overview
 
 The apps api provides applications a method to interface with the BitTorrent
@@ -17,21 +22,21 @@ anything are output from the interpreter.
 
 # Sandbox
 
-All applications live inside a sandbox. This means that, by default, your 
-application will only be able to access torrents and rss feeds that it added 
-to the client itself. Currently, there are two permissions levels which can be 
+All applications live inside a sandbox. This means that, by default, your
+application will only be able to access torrents and rss feeds that it added
+to the client itself. Currently, there are two permissions levels which can be
 set to override this restriction.
 
-These permissions levels are accessed by setting the bt:access peroperty in 
+These permissions levels are accessed by setting the bt:access peroperty in
 package.json to the following options:
 
-list_restricted: The application gains read access to the properties of all of 
+list_restricted: The application gains read access to the properties of all of
 the user's torrents regardless of origin
 
-restricted: The application gains read and write access to the properties of 
+restricted: The application gains read and write access to the properties of
 all torrents regardless of origin
 
-The application's events and stash are also specific to the application and 
+The application's events and stash are also specific to the application and
 cannot be accessed from another application.
 
 # btapp object
