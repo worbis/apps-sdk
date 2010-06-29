@@ -29,7 +29,7 @@ class setup(apps.command.base.Command):
                     os.path.join(self.project.path, 'icon.bmp'))
         shutil.copy(pkg_resources.resource_filename(
                 'apps.data', 'main.html'),
-                    os.path.join(self.project.path, 'html', 'index.html'))
+                    os.path.join(self.project.path, 'html', 'main.html'))
         shutil.copy(pkg_resources.resource_filename(
                 'apps.data', 'index.js'),
                     os.path.join(self.project.path, 'lib', 'index.js'))
