@@ -30,14 +30,21 @@ set to override this restriction.
 These permissions levels are accessed by setting the bt:access peroperty in
 package.json to the following options:
 
-list_restricted: The application gains read access to the properties of all of
-the user's torrents regardless of origin
+- list_restricted
 
-restricted: The application gains read and write access to the properties of
-all torrents regardless of origin
+The application gains read access to the properties of all of the user's torrents regardless of origin
 
-The application's events and stash are also specific to the application and
-cannot be accessed from another application.
+- restricted
+
+The application gains read and write access to the properties of all torrents
+regardless of origin
+
+On app install, users are prompted as to whether they want to allow elevated
+access to your application. If they do not want to allow elevated permissions,
+the app will not be installed.
+
+Note that it is not possible to access registered events and stash data from
+one app to another.
 
 # btapp object
 
