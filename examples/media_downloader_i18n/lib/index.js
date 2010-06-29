@@ -1,3 +1,4 @@
+var languages = {"fr":"French", "en":"English", "ja":"Japanese"};
 function render_item(item) {
   item.torrents[0].url = item.torrents[0].url.replace(/ /g, '');
   if ($(sprintf("li a[href=%s]", item.torrents[0].url)).length > 0)
@@ -49,7 +50,10 @@ function update_progress() {
 }
 
 $(document).ready(function() {
-  $("head").append('<link id="lang" rel="gettext" href="lang/en/en.json" lang="en">');
+  var link_template = ["link", {"class":"lang", "rel":"gettext", "href":"lang/"+"{{l}}"+"/"+"{{l}}"+".po", "lang":"{{l}}"}];
+  $.each(languages, function(i, item){
+	$("head").append($(JUP.html({ l:i }, link_template)));
+  });
   $("head").append('<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" type="text/css" media="all">');
   $.getJSON('http://vodo.net/jsonp/releases/all?callback=?', function(items) {
     bt.stash.set('items', items);
@@ -62,24 +66,21 @@ $(document).ready(function() {
   for (var i=0; i < items.length; i++) {
     render_item(items[i]);
   }
+  bt.Gettext.initialize();
+  bt.Gettext.lang = 'en';
   render_languagebar();
   $("a.lang").live('click', function(){
 	  var lang = $(this).attr("name");
-	  var link = $("link#lang");
-	  link.attr("lang", lang);
-	  link.attr("href", "lang/"+lang+"/"+lang+".js");
-	  $.gt.load();
-	  $.gt.setLang(lang);
+	  bt.Gettext.lang = lang;
 	  render_languagebar();
   });
 });
-
 function render_languagebar(){
-	var langs = {"fr":$.gt.gettext("French"), "en":$.gt.gettext("English"), "ja":$.gt.gettext("Japanese")}
-	var link = $("link#lang");
 	$("#other").html("");
-	$.each(langs, function(i, item){
-		if(i==link.attr("lang")) $("#current").html(sprintf($.gt.gettext("Current language: %s"), item));
-		else $("#other").append(" <a class=\"lang\" href=# name=\""+i+"\">"+item+"</a> ");
+	$.each(languages, function(i, item){
+		if(i==bt.Gettext.lang){
+			var langstr = bt.Gettext.gettext(item);
+			$("#current").html(bt.Gettext.gettext("Current language: %s", langstr));
+		}else $("#other").append(" <a class=\"lang\" href=# name=\""+i+"\">"+bt.Gettext.gettext(item)+"</a> ");
 	});
 }

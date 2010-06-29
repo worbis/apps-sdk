@@ -2,9 +2,7 @@
 # Copyright (c) 2010 BitTorrent Inc.
 #
 
-import codecs
 import gettext
-import json
 import logging
 import os
 import shutil
@@ -18,7 +16,7 @@ class localize(apps.command.base.Command):
         ('remove', 'r', 'remove .po files from original location', None)
                    ]
     option_defaults = { 'dir': 'lang' }
-    help = 'Generate JSON for localization from a directory of .po and .mo files.'
+    help = 'Generate translation directory structure from a directory of .po and .mo files.'
 
     def run(self):
 
@@ -33,26 +31,7 @@ class localize(apps.command.base.Command):
                 os.makedirs(os.path.join(path, lang, "LC_MESSAGES"))
             if ext == ".po":
                 shutil.copy(os.path.join(path, item), os.path.join(path, lang, item))
-                if self.options.get('remove', None):
-                    os.remove(os.path.join(path, item))
             elif ext == ".mo":
                 shutil.copy(os.path.join(path, item), os.path.join(path, lang, "LC_MESSAGES", item))
-                if self.options.get('remove', None):
-                    os.remove(os.path.join(path, item))
-
-                fobj = codecs.open(os.path.join(path, lang, lang+".js"), "wb", "utf-8")
-                tr = gettext.translation(lang, path, [lang])
-                keys = tr._catalog.keys()
-                keys.sort()
-                ret = {}
-                for k in keys:
-                    v = tr._catalog[k]
-                    if type(k) is tuple:
-                        if k[0] not in ret:
-                            ret[k[0]] = []
-                        ret[k[0]].append(v)
-                    else:
-                        ret[k] = v
-                fobj.write(json.dumps(ret, ensure_ascii = False, indent = False))
-                fobj.close()
-                logging.info("Successfully processed JSON for language: "+lang)
+            if self.options.get('remove', None):
+                os.remove(os.path.join(path, item))
