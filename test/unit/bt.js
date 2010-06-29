@@ -9,12 +9,12 @@
 module('bt');
 
 test('bt.add.torrent', function() {
-  expect(9);
+  expect(10);
 
   var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
-  var url_nocb = 'http://example.com/cb.torrent';
-  var url_def = 'http://example.com/def.torrent';
-  var url_cbdef = 'http://example.com/cbdef.torrent';
+  var url_nocb = 'http://vodo.net/media/torrents/Everything.Unspoken.2004.Xvid-VODO.torrent';
+  var url_def = 'http://vodo.net/media/torrents/Smalltown.Boy.2007.Xvid-VODO.torrent';
+  var url_cbdef = 'http://vodo.net/media/torrents/Warring.Factions.2010.Xvid-VODO.torrent';
   var defs = { label: 'foobar',
                name: 'foobar' };
   // Just in case.
@@ -25,14 +25,15 @@ test('bt.add.torrent', function() {
   bt.add.torrent(url, function(resp) {
     equals(resp.url, url, 'Url\'s set right');
     equals(resp.status, 200, 'Status is okay');
-    equals(resp.message, 'success', 'Message is okay');
+    equals(resp.state, 1, 'State is okay');
+    equals(resp.message, '', 'Message is okay');
     var download_urls = _.map(bt.torrent.all(), function(v) {
       return v.properties.get('download_url');
     });
-    ok(download_urls.indexOf(url) >= 0,
+    ok(_.indexOf(download_urls, url) >= 0,
        'Torrent added successfully');
 
-    ok(download_urls.indexOf(url_nocb) >= 0,
+    ok(_.indexOf(download_urls, url_nocb) >= 0,
        'No cb or defaults added okay');
     var tor = bt.torrent.get(url_def);
     if (tor)
@@ -45,6 +46,9 @@ test('bt.add.torrent', function() {
         _.each(defs, function(v, k) {
           equals(tor.properties.get(k), v, 'Callback + defaults works');
         });
+      _.each(bt.torrent.all(), function(v) {
+        v.remove();
+      });
       start();
     });
   });
@@ -89,7 +93,8 @@ test('bt.events', function() {
   var fn = function() { };
   bt.events.set('torrent', fn);
   same(bt.events.get('torrent'), fn, 'Callback set correctly');
-  ok(bt.events.keys().indexOf('torrent') >= 0, 'Torrent shows up in the keys');
+  ok(_.indexOf(bt.events.keys(), 'torrent') >= 0,
+     'Torrent shows up in the keys');
   same(bt.events.all()['torrent'], fn, 'All is returning the right data');
 });
 
@@ -103,7 +108,7 @@ test('bt.torrent', function() {
   equals(tor.properties.get('download_url'), url, 'Got the right torrent');
   equals(bt.torrent.get(tor.hash).properties.get('hash'), tor.hash,
          'Can get by hash too');
-  ok(bt.torrent.keys().indexOf(tor.hash) >= 0, 'Keys has the right hashes');
+  ok(_.indexOf(bt.torrent.keys(), tor.hash) >= 0, 'Keys has the right hashes');
   same(bt.torrent.all()[tor.hash], tor, 'all() has at least one right key');
   stop();
   bt.add.torrent(magnet, function(resp) {

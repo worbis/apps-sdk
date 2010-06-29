@@ -26,7 +26,7 @@ test('open_close2', function() {
 	stop();
 	var window2 = popup({path:"", windowName:"Window1", callback:function(){ok(true, "t2: Window 1 has been closed.");}});
 	window2._oauthWindow.close();
-	var window3 = popup({path:"", windowName:"Window2", callback:function(){ok(true, "t2: Window 2 has been closed.");}});	
+	var window3 = popup({path:"", windowName:"Window2", callback:function(){ok(true, "t2: Window 2 has been closed.");}});
 	window3._oauthWindow.close();
 	setTimeout(function(){start();}, 4000);
 });
