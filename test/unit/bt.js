@@ -9,14 +9,13 @@
 module('bt');
 
 test('bt.add.torrent', function() {
-  expect(10);
+  expect(8);
 
   var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
   var url_nocb = 'http://vodo.net/media/torrents/Everything.Unspoken.2004.Xvid-VODO.torrent';
   var url_def = 'http://vodo.net/media/torrents/Smalltown.Boy.2007.Xvid-VODO.torrent';
   var url_cbdef = 'http://vodo.net/media/torrents/Warring.Factions.2010.Xvid-VODO.torrent';
-  var defs = { label: 'foobar',
-               name: 'foobar' };
+  var defs = { label: 'foobar' };
   // Just in case.
   bt.events.set('torrentStatus', bt._handlers.torrent);
   stop();
@@ -67,7 +66,7 @@ test('bt.add.rss_filter', function() {
 });
 
 test('bt.stash', function() {
-  expect(14);
+  expect(16);
 
   if (btapp.stash._clear)
     btapp.stash._clear();
@@ -76,6 +75,8 @@ test('bt.stash', function() {
                baz: { a: 1 },
                btinstall_lastmodified: "",
                lastmodified: "",
+               productcode: "",
+               addcount: 4,
                productcode: ""
             };
   _.each(objs, function(v, k) {
@@ -91,11 +92,11 @@ test('bt.events', function() {
   expect(3);
 
   var fn = function() { };
-  bt.events.set('torrent', fn);
-  same(bt.events.get('torrent'), fn, 'Callback set correctly');
-  ok(_.indexOf(bt.events.keys(), 'torrent') >= 0,
+  bt.events.set('torrentStatus', fn);
+  same(bt.events.get('torrentStatus'), fn, 'Callback set correctly');
+  ok(_.indexOf(bt.events.keys(), 'torrentStatus') >= 0,
      'Torrent shows up in the keys');
-  same(bt.events.all()['torrent'], fn, 'All is returning the right data');
+  same(bt.events.all()['torrentStatus'], fn, 'All is returning the right data');
 });
 
 test('bt.torrent', function() {
