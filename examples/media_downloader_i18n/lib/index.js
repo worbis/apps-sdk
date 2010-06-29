@@ -1,4 +1,5 @@
 var languages = {"fr":"French", "en":"English", "ja":"Japanese"};
+
 function render_item(item) {
   item.torrents[0].url = item.torrents[0].url.replace(/ /g, '');
   if ($(sprintf("li a[href=%s]", item.torrents[0].url)).length > 0)
@@ -66,21 +67,19 @@ $(document).ready(function() {
   for (var i=0; i < items.length; i++) {
     render_item(items[i]);
   }
-  bt.Gettext.initialize();
-  bt.Gettext.lang = 'en';
-  render_languagebar();
+  var b = new bt.Gettext();
+  render_languagebar(b);
   $("a.lang").live('click', function(){
-	  var lang = $(this).attr("name");
-	  bt.Gettext.lang = lang;
-	  render_languagebar();
+	  b.lang = $(this).attr("name");
+	  render_languagebar(b);
   });
 });
-function render_languagebar(){
+function render_languagebar(b){
 	$("#other").html("");
 	$.each(languages, function(i, item){
-		if(i==bt.Gettext.lang){
-			var langstr = bt.Gettext.gettext(item);
-			$("#current").html(bt.Gettext.gettext("Current language: %s", langstr));
-		}else $("#other").append(" <a class=\"lang\" href=# name=\""+i+"\">"+bt.Gettext.gettext(item)+"</a> ");
+		if(i==b.lang){
+			var langstr = b.gettext(item);
+			$("#current").html(b.gettext("Current language: %s", langstr));
+		}else $("#other").append(" <a class=\"lang\" href=# name=\""+i+"\">"+b.gettext(item)+"</a> ");
 	});
 }

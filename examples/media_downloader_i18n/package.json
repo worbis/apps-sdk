@@ -1,5 +1,7 @@
 {
     "description": "The example media downloader project.", 
+    "author": "Skye Riley <skye@bittorrent.com>", 
+    "bt:publisher": "BitTorrent, Inc.", 
     "bt:libs": [
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/apps-sdk.pkg", 
@@ -14,8 +16,6 @@
             "name": "jup"
         }
     ], 
-    "bt:publisher": "BitTorrent, Inc.", 
-    "author": "Skye Riley <skye@bittorrent.com>", 
     "site": "http://apps-sdk.bittorrent.com", 
     "bt:update_url": "http://apps-sdk.bittorrent.com", 
     "version": "0.1", 

@@ -91,13 +91,13 @@ We'll have to reorganize the language container every time a new language is
 chosen to show the options in the right language, of course. This function 
 will handle printing out all of the options:
 
-function render_languagebar(){
+function render_languagebar(b){
 	$("#other").html("");
 	$.each(languages, function(i, item){
-		if(i==bt.Gettext.lang){
-			var langstr = bt.Gettext.gettext(item);
-			$("#current").html(bt.Gettext.gettext("Current language: %s", langstr));
-		}else $("#other").append(" <a class=\"lang\" href=# name=\""+i+"\">"+bt.Gettext.gettext(item)+"</a> ");
+		if(i==b.lang){
+			var langstr = b.gettext(item);
+			$("#current").html(b.gettext("Current language: %s", langstr));
+		}else $("#other").append(" <a class=\"lang\" href=# name=\""+i+"\">"+b.gettext(item)+"</a> ");
 	});
 }
 
@@ -107,14 +107,12 @@ language so that the labels evaluate correctly.
 We'll set the language any time we click a link with the 'lang' class. Add
 this code at the end of `$(document).ready()`:
 
-    bt.Gettext.initialize();
-    bt.Gettext.lang = 'en';
-    render_languagebar();
-    $("a.lang").live('click', function(){
-    	var lang = $(this).attr("name");
-	    bt.Gettext.lang = lang;
-	    render_languagebar();
-    });
+  var b = new bt.Gettext();
+  render_languagebar(b);
+  $("a.lang").live('click', function(){
+	  b.lang = $(this).attr("name");
+	  render_languagebar(b);
+  });
 
 The `.live()` function ensures that this code is attached to any new links we
 create, since they are destroyed and recreated every time we choose the
