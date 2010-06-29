@@ -12,10 +12,6 @@
         {
             "url": "http://staging.apps.bittorrent.com/pkgs/jup.js", 
             "name": "jup"
-        }, 
-        {
-            "url": "http://plugins.jquery.com/files/gettext.js", 
-            "name": "gettext"
         }
     ], 
     "bt:publisher": "BitTorrent, Inc.", 
