@@ -102,21 +102,25 @@ test('bt.events', function() {
 test('bt.torrent', function() {
   expect(5);
 
-  bt.events.set('torrent', bt._handlers.torrent);
+  bt.events.set('torrentStatus', bt._handlers.torrent);
   var url = 'http://example.com/add.torrent';
-  var magnet = 'magnet:?xt=urn:sha1:6de6a83d402817ef5116d28072f9dd6b0600c6d6&dn=OOo_2.1.0_LinuxIntel_install_en-US.tar.gz&xs=http://mirror.switch.ch/ftp/mirror/OpenOffice/stable/2.1.0/OOo_2.1.0_LinuxIntel_install_en-US.tar.gz';
-  var tor = bt.torrent.get(url);
-  equals(tor.properties.get('download_url'), url, 'Got the right torrent');
-  equals(bt.torrent.get(tor.hash).properties.get('hash'), tor.hash,
-         'Can get by hash too');
-  ok(_.indexOf(bt.torrent.keys(), tor.hash) >= 0, 'Keys has the right hashes');
-  same(bt.torrent.all()[tor.hash], tor, 'all() has at least one right key');
-  stop();
-  bt.add.torrent(magnet, function(resp) {
-    var tor = bt.torrent.get(magnet);
-    equals(tor.properties.get('download_url'), magnet, 'Got the right torrent');
-    start();
+  bt.add.torrent(url, function(resp) {
+    var magnet = 'magnet:?xt=urn:sha1:6de6a83d402817ef5116d28072f9dd6b0600c6d6&dn=OOo_2.1.0_LinuxIntel_install_en-US.tar.gz&xs=http://mirror.switch.ch/ftp/mirror/OpenOffice/stable/2.1.0/OOo_2.1.0_LinuxIntel_install_en-US.tar.gz';
+    var tor = bt.torrent.get(url);
+    equals(tor.properties.get('download_url'), url, 'Got the right torrent');
+    equals(bt.torrent.get(tor.hash).properties.get('hash'), tor.hash,
+           'Can get by hash too');
+    ok(_.indexOf(bt.torrent.keys(), tor.hash) >= 0,
+       'Keys has the right hashes');
+    same(bt.torrent.all()[tor.hash], tor, 'all() has at least one right key');
+    bt.add.torrent(magnet, function(resp) {
+      var tor = bt.torrent.get(magnet);
+      equals(tor.properties.get('download_url'), magnet,
+             'Got the right torrent');
+      start();
+    });
   });
+  stop();
 });
 
 test('bt.resource', function() {
