@@ -197,9 +197,7 @@ var vodo = {
                   type: $('.default-download', item).text(),
                   userid: bt.stash.get('userid', -1) });
       var tor = $('.default-download', item).attr('href');
-      bt.add.torrent(tor, function(resp) {
-        console.log(resp);
-      });
+      bt.add.torrent(tor);
       // If an object in the list that is also a promo was
       // clicked, hide the bars
       if (obj.promo) {
