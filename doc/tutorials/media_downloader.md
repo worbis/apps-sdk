@@ -15,7 +15,15 @@ installer. Download and run[the tools
 installer](/apps-sdk/client/apps-sdk-installer.msi). For other operating
 systems, follow the instructions in the [install howto](../install-howto.html).
 
-Once the tools have been installed and setup, create your project directory:
+To see all the commands that the tools provide, run:
+
+    % apps --help-commands
+
+For any command, you can get specific help by running:
+
+    % apps setup --help
+
+Now that the tools have been installed and setup, create your project directory:
 
     % apps setup --name media_downloader
     % cd media_downloader
