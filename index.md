@@ -23,8 +23,8 @@ To see the other ways that you can install the SDK tools, check out the
     $ cd hello-world
     $ apps serve
 
-Open http://localhost:8080/ in your browser. If you'd like to see this in the
-&micro;Torrent client, run:
+Open [http://localhost:8080/](http://localhost:8080/) in your browser. If you'd
+like to see this in the &micro;Torrent client, run:
 
     $ apps package
 
