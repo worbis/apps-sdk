@@ -1,9 +1,3 @@
----
-title: Apps for BitTorrent SDK
-layout: default
-foo: bar
----
-
 # Overview
 
 The [Apps for BitTorrent SDK](/) is a collection of tools, libraries and
