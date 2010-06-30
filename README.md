@@ -4,9 +4,15 @@ layout: default
 foo: bar
 ---
 
-# Getting Started
+# Overview
 
-The easiest way to get up and running is by running the [SDK
+The [Apps for BitTorrent SDK](/) is a collection of tools, libraries and
+documentation to make the process of creating, authoring and testing apps as
+easy as possible.
+
+# Installation
+
+The easiest way to get up and running on Windows, is by running the [SDK
 installer](client/apps-sdk-installer.msi).
 To see the other ways that you can install the SDK tools, check out the
 [howto](doc/install-howto.html).
@@ -17,13 +23,13 @@ To see the other ways that you can install the SDK tools, check out the
     $ cd hello-world
     $ apps serve
 
-Open http://localhost:8080/ in your browser. If you'd like to see this in your
-client:
+Open http://localhost:8080/ in your browser. If you'd like to see this in the
+&micro;Torrent client, run:
 
     $ apps package
 
-And, double click `dist/hello-world.btapp`. The app should now show up in your
-&micro;Torrent client.
+and, double click `dist/hello-world.btapp`. The app should now show up in your
+client under "Apps" in the left bar.
 
 ## Next Steps
 
