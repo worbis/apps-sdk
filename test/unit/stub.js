@@ -17,7 +17,7 @@ test('stub.add.torrent (callback)', function() {
     equals(stub.torrent.get(stub.torrent.keys()[0]).properties.get(
       'download_url'), url1, 'Added torrent without callback.');
 
-    stub.events.set('torrent', function(resp) {
+    stub.events.set('torrentStatus', function(resp) {
       equals(stub.torrent.get(stub.torrent.keys()[1]).properties.get(
         'download_url'), url2, 'Added torrent after callback');
       start();
