@@ -41,7 +41,7 @@ client under "Apps" in the left bar.
 - [Documentation](doc/)
 - [Wiki](https://github.com/bittorrent/apps-sdk/wikis)
 - [Forums](http://forum.utorrent.com/viewforum.php?id=33)
-- [IRC](irc://irc.freenode.net#apps-sdk): <span style="float:right">irc://irc.freenode.net#apps-sdk</span>
+- [IRC](irc://irc.freenode.net#btapps-sdk): <span style="float:right">irc://irc.freenode.net#btapps-sdk</span>
 - [Feedback](mailto:apps-sdk@bittorrent.com): <span style="float:right">apps-sdk@bittorrent.com</span>
 - [Issue Tracker](https://github.com/bittorrent/apps-sdk/issues)
 
