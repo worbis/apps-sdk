@@ -28,6 +28,7 @@ client under "Apps" in the left bar.
 ## Next Steps
 
 - [Tutorials](doc/tutorials)
+- [Examples](examples/)
 - [API](doc/api.html)
 
 # Help
