@@ -4,159 +4,159 @@
         <DirectoryRef Id="INSTALLLOCATION">
             <Directory Id="dir4109511857FC5BBDBF460AF340AD678B" Name="mako-0.3.3-py2.6.egg">
                 <Directory Id="dir64075F27E6DE70677E34C8FFD3FE51BD" Name="EGG-INFO">
-                    <Component Id="cmp4DA5BBAD7F5DC5784BBCDB1688E40012" Guid="{129BDD84-B6AA-482B-9C58-1E15F58335A5}">
+                    <Component Id="cmp4DA5BBAD7F5DC5784BBCDB1688E40012" Guid="{C480FD2C-EB45-4D14-8CCA-BEFF64EA08DB}">
                         <File Id="fil7E719D35DE6097CF3A1FE59F21107C82" KeyPath="yes" Source="$(var.MakoDir)\EGG-INFO\dependency_links.txt" />
                     </Component>
-                    <Component Id="cmp9DA9B4AF053AF23C256A194749EFA8EF" Guid="{C5A3351A-ACC2-4F13-9648-71E4E24BC6FF}">
+                    <Component Id="cmp9DA9B4AF053AF23C256A194749EFA8EF" Guid="{51273F11-21AD-4AE2-962F-C0C44830CDEE}">
                         <File Id="fil0A2222EC15B72D1B4C36356A5B03EF26" KeyPath="yes" Source="$(var.MakoDir)\EGG-INFO\entry_points.txt" />
                     </Component>
-                    <Component Id="cmp5741C15015B7D6D5A48941E739BBCAB4" Guid="{2266AE89-1189-456A-B00D-95E546C83F9F}">
+                    <Component Id="cmp5741C15015B7D6D5A48941E739BBCAB4" Guid="{4B12DFB5-A0EA-4E64-8450-ED9956BB6C5E}">
                         <File Id="filAABABD0ED3931F726D5504139B6FCD53" KeyPath="yes" Source="$(var.MakoDir)\EGG-INFO\not-zip-safe" />
                     </Component>
-                    <Component Id="cmpAAF692F25D7DCB6F18FD4A821778088E" Guid="{6F301593-99C7-45E9-A410-E9D3EED1C96B}">
+                    <Component Id="cmpAAF692F25D7DCB6F18FD4A821778088E" Guid="{EAEA9DFB-64A2-4A18-86D5-89D884D636A8}">
                         <File Id="fil02D6A1614F57EB490702CCDAB28823F2" KeyPath="yes" Source="$(var.MakoDir)\EGG-INFO\PKG-INFO" />
                     </Component>
-                    <Component Id="cmp3494B0DF2B22EF34FEBECE982E74B9F0" Guid="{217B6BDD-3227-4D4F-BCAB-C6906B040964}">
+                    <Component Id="cmp3494B0DF2B22EF34FEBECE982E74B9F0" Guid="{A227D96F-E43E-4722-9C68-AA11EBBEAB40}">
                         <File Id="fil0451B5D0DCD17EE688EE7BA6409DB0BF" KeyPath="yes" Source="$(var.MakoDir)\EGG-INFO\requires.txt" />
                     </Component>
-                    <Component Id="cmp05D9F725B57351B6FF342507FA9EFAE4" Guid="{4FDBEBE6-78D5-46F1-9575-3414FDF816D5}">
+                    <Component Id="cmp05D9F725B57351B6FF342507FA9EFAE4" Guid="{836CD30F-85A3-4613-A247-38A54706CB97}">
                         <File Id="fil9B7A1A6EF586E2A6B84D6F61D7DE9B17" KeyPath="yes" Source="$(var.MakoDir)\EGG-INFO\SOURCES.txt" />
                     </Component>
-                    <Component Id="cmp6D536DA14115BBCD12982339D61838E5" Guid="{6B41BE0F-0467-47F0-B10A-728717BC43A2}">
+                    <Component Id="cmp6D536DA14115BBCD12982339D61838E5" Guid="{A43C68A3-06D2-4D11-9007-42B7F2E9E549}">
                         <File Id="filAE0AF61911B60450291330F27453CE96" KeyPath="yes" Source="$(var.MakoDir)\EGG-INFO\top_level.txt" />
                     </Component>
                     <Directory Id="dir0D71037C4CC582E540E5F13B52DFAF20" Name="scripts">
-                        <Component Id="cmp691DBB37AA66818469D630CB77E01679" Guid="{ADC234D7-B478-4DD9-B02E-BDC4C5ED0226}">
+                        <Component Id="cmp691DBB37AA66818469D630CB77E01679" Guid="{B1E5CCFF-8DDD-470D-970A-7487B366909D}">
                             <File Id="filF5B3E2C3DB9641BCCE439E627AA41548" KeyPath="yes" Source="$(var.MakoDir)\EGG-INFO\scripts\mako-render" />
                         </Component>
                     </Directory>
                 </Directory>
                 <Directory Id="dirDCC4E6E68F070D47F5B365BA2E9B2891" Name="mako">
-                    <Component Id="cmpE7BB46814977F86D2798BA5C549BD5FB" Guid="{64AFB0F7-3B95-4D31-9A4D-D8386A3AB7A4}">
+                    <Component Id="cmpE7BB46814977F86D2798BA5C549BD5FB" Guid="{AEA23DBA-5C8D-47F5-AFEA-E8D604BA4149}">
                         <File Id="filD95606F9F9D9AB84DD18CBBEBCF72361" KeyPath="yes" Source="$(var.MakoDir)\mako\ast.py" />
                     </Component>
-                    <Component Id="cmpBC6992FF47DD0B89DCC33402490223B5" Guid="{794D276A-D7B5-40FA-906E-A2F8612B9B40}">
+                    <Component Id="cmpBC6992FF47DD0B89DCC33402490223B5" Guid="{C557F1AB-6FC9-418A-A400-19DD8F5D93AF}">
                         <File Id="fil78D38662C28A12D7B37A3F3BB2707C90" KeyPath="yes" Source="$(var.MakoDir)\mako\ast.pyc" />
                     </Component>
-                    <Component Id="cmp2C1229D7A190DBAD2CF097FE65F2E9D1" Guid="{5521DEA9-9CF0-446C-933E-631DDC236522}">
+                    <Component Id="cmp2C1229D7A190DBAD2CF097FE65F2E9D1" Guid="{5E8F52E1-C9A4-4354-9997-7C51A9563133}">
                         <File Id="fil78CDF0EE1ED282FF0FCFC464502A184D" KeyPath="yes" Source="$(var.MakoDir)\mako\cache.py" />
                     </Component>
-                    <Component Id="cmp9C1B3533ED88A24D954AF7C8C6F1D5C4" Guid="{BAB659CA-B153-40D5-BB09-23DB1DC961D0}">
+                    <Component Id="cmp9C1B3533ED88A24D954AF7C8C6F1D5C4" Guid="{D75C059D-977E-408A-9BC7-27B61EE85F48}">
                         <File Id="fil57C43195A7693481FF71DDA2E090CBDF" KeyPath="yes" Source="$(var.MakoDir)\mako\cache.pyc" />
                     </Component>
-                    <Component Id="cmp4D8632A575BD219B2FD80ACF55C2B2DC" Guid="{3B46045F-98A6-4EC7-830A-2DC6115D29D1}">
+                    <Component Id="cmp4D8632A575BD219B2FD80ACF55C2B2DC" Guid="{855C3F74-9486-4DD4-B643-CC8EFCDD9B28}">
                         <File Id="fil1593D52290B8F3638936BD87D9955E73" KeyPath="yes" Source="$(var.MakoDir)\mako\codegen.py" />
                     </Component>
-                    <Component Id="cmpEA961AC07461CAF4ABF6B690B0605739" Guid="{C55D233D-C079-464C-A4BB-8661B70E76C6}">
+                    <Component Id="cmpEA961AC07461CAF4ABF6B690B0605739" Guid="{29DBF2BD-824B-44A0-AA58-CB59A5490D0A}">
                         <File Id="filBDC1260BBE10CB08F6670CACBBC7EE6F" KeyPath="yes" Source="$(var.MakoDir)\mako\codegen.pyc" />
                     </Component>
-                    <Component Id="cmp55DD3E332C020EC1DFF203A271F50D6E" Guid="{E28AF4C7-C7BF-4C30-A78D-B25029CD481A}">
+                    <Component Id="cmp55DD3E332C020EC1DFF203A271F50D6E" Guid="{A6B5AC89-5606-494B-88AB-E258B2A9E9D1}">
                         <File Id="filEEAC14EEBE789E804D28130CBEE3A834" KeyPath="yes" Source="$(var.MakoDir)\mako\exceptions.py" />
                     </Component>
-                    <Component Id="cmpC28E65E030C729B709EACB9BE24E181F" Guid="{81F76A49-C367-4C3E-ABF5-1196D89132F2}">
+                    <Component Id="cmpC28E65E030C729B709EACB9BE24E181F" Guid="{AD75AC43-E591-4F4B-84DB-0014BDFFC159}">
                         <File Id="filFA18F43B65D9ECEA284ECFE75E1101FE" KeyPath="yes" Source="$(var.MakoDir)\mako\exceptions.pyc" />
                     </Component>
-                    <Component Id="cmpD9E08356EF475B6C9D2DB4A047E4C830" Guid="{4D6C2272-BD4D-4A0D-BB79-7845E89A8EE1}">
+                    <Component Id="cmpD9E08356EF475B6C9D2DB4A047E4C830" Guid="{2BF5037C-4E47-4AC1-AECD-EB8CC6D97625}">
                         <File Id="fil54A9E939FCFE4DD210354FD9D7EAB494" KeyPath="yes" Source="$(var.MakoDir)\mako\filters.py" />
                     </Component>
-                    <Component Id="cmpC431238B727035CE0B150E303E4A6E02" Guid="{E52865F0-65EB-4369-965A-E395BA32D179}">
+                    <Component Id="cmpC431238B727035CE0B150E303E4A6E02" Guid="{73511C5A-181C-485C-9F82-5C1407D1ACB2}">
                         <File Id="filDE01C119B952496A3B3C496CEE050547" KeyPath="yes" Source="$(var.MakoDir)\mako\filters.pyc" />
                     </Component>
-                    <Component Id="cmpAD2D00BD0EDF7AF14C10A7FB20861050" Guid="{D461CD3D-69E4-49EE-A5F3-F5F5DDDE68B1}">
+                    <Component Id="cmpAD2D00BD0EDF7AF14C10A7FB20861050" Guid="{21F44243-4486-448F-964A-B2B6103356A4}">
                         <File Id="filBF108697A6B114A67E811D780B6DADE5" KeyPath="yes" Source="$(var.MakoDir)\mako\lexer.py" />
                     </Component>
-                    <Component Id="cmpA72CF8E57825B8608D14505D52892200" Guid="{4F4F90BA-58E0-4E27-8B08-B186CE568C67}">
+                    <Component Id="cmpA72CF8E57825B8608D14505D52892200" Guid="{F26A72F9-69F0-47EE-ADE6-7B851DE7771E}">
                         <File Id="filA79C45E521F97E307602FBEB841EC0FB" KeyPath="yes" Source="$(var.MakoDir)\mako\lexer.pyc" />
                     </Component>
-                    <Component Id="cmp7F1B5DB836BE6C8594BB59050353545F" Guid="{50556233-3208-42B9-976B-F23575A68F7B}">
+                    <Component Id="cmp7F1B5DB836BE6C8594BB59050353545F" Guid="{E49D0343-2CE9-4110-8AC7-0C431D230871}">
                         <File Id="filD6EFE93CA477C0891502E67963E714E0" KeyPath="yes" Source="$(var.MakoDir)\mako\lookup.py" />
                     </Component>
-                    <Component Id="cmpE5B31D49C271858D23C2D15B3390B753" Guid="{C96ADC80-967F-4A71-B739-884C4E034B3F}">
+                    <Component Id="cmpE5B31D49C271858D23C2D15B3390B753" Guid="{2EBE7F35-24C2-49F3-9151-A8211E38A5FF}">
                         <File Id="fil9C404EC146FC996EF00DDA1F995B57DF" KeyPath="yes" Source="$(var.MakoDir)\mako\lookup.pyc" />
                     </Component>
-                    <Component Id="cmp7B8885AB188FF56CA2E366B15A9CE936" Guid="{C5F32DDB-3D9E-48E7-8C19-4DB1D273EA91}">
+                    <Component Id="cmp7B8885AB188FF56CA2E366B15A9CE936" Guid="{0A10E406-1A77-4639-8FBB-8D52D6017764}">
                         <File Id="fil27BA31692EE24908827D2A274E3271C7" KeyPath="yes" Source="$(var.MakoDir)\mako\parsetree.py" />
                     </Component>
-                    <Component Id="cmp2C663AAF9A726748E5B6BBCC22D14D6C" Guid="{4BC87234-8E39-403B-9870-F1BABE3DF370}">
+                    <Component Id="cmp2C663AAF9A726748E5B6BBCC22D14D6C" Guid="{57D02EE1-1D43-4CB1-A6CA-554B3B4EA2DC}">
                         <File Id="filF650F166A4432A9C909E473A643244A9" KeyPath="yes" Source="$(var.MakoDir)\mako\parsetree.pyc" />
                     </Component>
-                    <Component Id="cmp5E8E69FA4D42A130616FC84DA5898242" Guid="{36EEFE2B-20E9-466F-9124-D47348FE029B}">
+                    <Component Id="cmp5E8E69FA4D42A130616FC84DA5898242" Guid="{C5C1E783-069E-402E-A033-BA1774783E5E}">
                         <File Id="filF1AF4AB49362C1983D522CD20D2BFAF4" KeyPath="yes" Source="$(var.MakoDir)\mako\pygen.py" />
                     </Component>
-                    <Component Id="cmp6151576C3E7AEC535395B989D34C1B9C" Guid="{EEB33773-9162-4BB6-A6E8-DE7988FA2916}">
+                    <Component Id="cmp6151576C3E7AEC535395B989D34C1B9C" Guid="{46FA9E02-1F86-4E2B-A7EB-0A909F619A23}">
                         <File Id="fil384EB9C3BFEE9D6A6472A71ADCAB517A" KeyPath="yes" Source="$(var.MakoDir)\mako\pygen.pyc" />
                     </Component>
-                    <Component Id="cmpE569B702C4464FC7BD2D5ADADF4DCF7C" Guid="{A778BAB9-1D74-4B4F-B2BA-8C1C1ED03AB9}">
+                    <Component Id="cmpE569B702C4464FC7BD2D5ADADF4DCF7C" Guid="{470724DA-50ED-4F99-913A-FBB5188A9737}">
                         <File Id="filCE42E85906E755F508CC0C9EDAE7A696" KeyPath="yes" Source="$(var.MakoDir)\mako\pyparser.py" />
                     </Component>
-                    <Component Id="cmpA0CFF1ABD562BB31A9CAFC7C4434B647" Guid="{9129007E-1849-4704-B0B4-85E698FCF650}">
+                    <Component Id="cmpA0CFF1ABD562BB31A9CAFC7C4434B647" Guid="{515334BC-CEF6-4DA2-88B9-DE7A178F7893}">
                         <File Id="fil9F430A5A7518E5D0CD7AF7A601ECB900" KeyPath="yes" Source="$(var.MakoDir)\mako\pyparser.pyc" />
                     </Component>
-                    <Component Id="cmp6418697A8FB9EF68264A522CD3B58A61" Guid="{991A4A84-28E5-4BFB-8B7E-5CEA23615094}">
+                    <Component Id="cmp6418697A8FB9EF68264A522CD3B58A61" Guid="{9EF03FA9-7030-4CBA-97F7-634FE06D636B}">
                         <File Id="fil004DCC083FCCB81208781C3CEBE41FEF" KeyPath="yes" Source="$(var.MakoDir)\mako\runtime.py" />
                     </Component>
-                    <Component Id="cmp1B476CD895834B6CFCFCBF988D59E0FA" Guid="{3C018785-4497-461F-9741-49A29F0139E9}">
+                    <Component Id="cmp1B476CD895834B6CFCFCBF988D59E0FA" Guid="{D4A709AD-464A-436C-9956-A805741B5C2F}">
                         <File Id="fil0C45FC886A46633FCF64F92AE8BFCD91" KeyPath="yes" Source="$(var.MakoDir)\mako\runtime.pyc" />
                     </Component>
-                    <Component Id="cmp296AEA342CC0FAB3F38D9DFE34B5A2C5" Guid="{D3F4FE80-8987-4F50-BC02-CEBF84579010}">
+                    <Component Id="cmp296AEA342CC0FAB3F38D9DFE34B5A2C5" Guid="{1E032BEA-1929-413D-8B5F-B02513D05DF9}">
                         <File Id="fil60B2901B88B0BE5F4C37C66B35455BBD" KeyPath="yes" Source="$(var.MakoDir)\mako\template.py" />
                     </Component>
-                    <Component Id="cmp23E919F541BE8EB1420EC94832DBC7BE" Guid="{3BA89A7A-DBD0-42E7-81BD-146F4352F875}">
+                    <Component Id="cmp23E919F541BE8EB1420EC94832DBC7BE" Guid="{55187918-E1C3-48C2-99C5-543BC2AA3DC6}">
                         <File Id="fil64F401AE9742A504D0A1409BD97F8D90" KeyPath="yes" Source="$(var.MakoDir)\mako\template.pyc" />
                     </Component>
-                    <Component Id="cmpE2C04D97E826F20B2EAFE51A7044416E" Guid="{3FAA31E2-90FF-4577-91FF-577F880A78B1}">
+                    <Component Id="cmpE2C04D97E826F20B2EAFE51A7044416E" Guid="{75E83ADB-A492-4DE6-BC04-97C03A65ADB8}">
                         <File Id="filBC3283512E3C4FE9DB81DCF1B515A4CD" KeyPath="yes" Source="$(var.MakoDir)\mako\util.py" />
                     </Component>
-                    <Component Id="cmpAB4B4DFA1FF6831247A1E1BD67A86B37" Guid="{E4EDD52A-F41A-4BB6-93D3-3ED541F1A623}">
+                    <Component Id="cmpAB4B4DFA1FF6831247A1E1BD67A86B37" Guid="{381690A1-010A-4E1B-868C-B13FD450C464}">
                         <File Id="fil33A6C71640F0E277DC90409C48DF0A38" KeyPath="yes" Source="$(var.MakoDir)\mako\util.pyc" />
                     </Component>
-                    <Component Id="cmp82AB093F54BBFB3F0DB6D3EA82C0FFCF" Guid="{6ECF85B8-74B7-492B-8516-A36DD3FB500D}">
+                    <Component Id="cmp82AB093F54BBFB3F0DB6D3EA82C0FFCF" Guid="{82EE71D9-0654-4794-A515-A4817D4F74AE}">
                         <File Id="fil5DBD753AABB57F1AD1D1EF5E545C5C1C" KeyPath="yes" Source="$(var.MakoDir)\mako\_ast_util.py" />
                     </Component>
-                    <Component Id="cmpDBA7DE81D2CFA53735747CF4BE01EBD7" Guid="{D6707F8E-83A3-474E-A931-341C7F3B1CC3}">
+                    <Component Id="cmpDBA7DE81D2CFA53735747CF4BE01EBD7" Guid="{525A2623-3C88-4FEC-837A-767D40C91A66}">
                         <File Id="fil7B0BB365278315156528E8C2D9381A3A" KeyPath="yes" Source="$(var.MakoDir)\mako\_ast_util.pyc" />
                     </Component>
-                    <Component Id="cmp372A475C42B064D02CFFBB3B9EE9AA1D" Guid="{D9A5C0E2-1F6B-47AB-9B35-60B7DBD6E36C}">
+                    <Component Id="cmp372A475C42B064D02CFFBB3B9EE9AA1D" Guid="{234F319C-9BE9-4F7B-9ED8-C0D286129E89}">
                         <File Id="fil7BA3C3A2AF9485B09FAF1581AD0524AB" KeyPath="yes" Source="$(var.MakoDir)\mako\__init__.py" />
                     </Component>
-                    <Component Id="cmp9D2D6427065A90CCAA4007854235EF36" Guid="{07B869D9-0FAE-433A-8E69-D46532D8CAC4}">
+                    <Component Id="cmp9D2D6427065A90CCAA4007854235EF36" Guid="{7566CD98-46E0-4045-8CF5-46AFC01BBA85}">
                         <File Id="fil1265AE682F5B9207F4EC88B1522F6EBC" KeyPath="yes" Source="$(var.MakoDir)\mako\__init__.pyc" />
                     </Component>
                     <Directory Id="dir6199DD0A4D2F9EC72474516D9FAF6D38" Name="ext">
-                        <Component Id="cmpC9C743CD8D508003322BA696DFAABB7E" Guid="{FAEDC204-CBD7-4837-B71D-BD81B88CA4A9}">
+                        <Component Id="cmpC9C743CD8D508003322BA696DFAABB7E" Guid="{0A6F3E17-7B6C-4E21-83C3-C961D6D87F0F}">
                             <File Id="fil16E7CF53ACE9A314D64214E3D247A67E" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\autohandler.py" />
                         </Component>
-                        <Component Id="cmp649214C33E08CAFFFA1088BE4682404F" Guid="{20DD9F12-137A-4752-B8CF-261282D9C347}">
+                        <Component Id="cmp649214C33E08CAFFFA1088BE4682404F" Guid="{4AB5452D-DFDF-431B-832F-40A205A2E740}">
                             <File Id="fil1F83499942B050375E0DC24AECD4A862" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\autohandler.pyc" />
                         </Component>
-                        <Component Id="cmp2E8CE304EF75D24560E4573212301D95" Guid="{0A6B44E0-0857-4E17-9D90-0DA04F8C5070}">
+                        <Component Id="cmp2E8CE304EF75D24560E4573212301D95" Guid="{1F5CE598-1C13-4139-BB6F-78C78B368DA5}">
                             <File Id="fil66388C232E54245AE0FB403EDCABA022" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\babelplugin.py" />
                         </Component>
-                        <Component Id="cmpBA72F55E034AF4B5A861758022B29D22" Guid="{0C9B8ED9-FFA9-45A9-B005-DB23A11962C1}">
+                        <Component Id="cmpBA72F55E034AF4B5A861758022B29D22" Guid="{B5B609C6-07B2-4FC7-8642-BE7EDC2BA823}">
                             <File Id="filFA93171F103FD73F9E67B50368A3F386" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\babelplugin.pyc" />
                         </Component>
-                        <Component Id="cmpC2BFC7B95904635DAAACAFC55F5BD085" Guid="{339A4023-3372-4047-BDEF-993766C595A4}">
+                        <Component Id="cmpC2BFC7B95904635DAAACAFC55F5BD085" Guid="{848F1CFC-02C6-4B58-85C4-FD92A22E1778}">
                             <File Id="fil54AF1BCD54BF57C6A30235A258DBF977" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\preprocessors.py" />
                         </Component>
-                        <Component Id="cmp4448F7A0BCA5F75274C6CBF346BDE463" Guid="{3CED572E-C3C6-422F-8FB1-7055484D2D60}">
+                        <Component Id="cmp4448F7A0BCA5F75274C6CBF346BDE463" Guid="{A58FF63E-FA00-49AA-B0BE-8B48089EA3FC}">
                             <File Id="fil8071F8658BE46B0A54C649E26CF61C3D" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\preprocessors.pyc" />
                         </Component>
-                        <Component Id="cmpE8A7BB33B5113D7C03C784D1AF5B317B" Guid="{8506B08A-9D93-4C74-AC4B-0871C622460A}">
+                        <Component Id="cmpE8A7BB33B5113D7C03C784D1AF5B317B" Guid="{87073456-1958-474F-89D2-E7CC4D4F716C}">
                             <File Id="fil5750D4A2109AF50552048018E6171CF1" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\pygmentplugin.py" />
                         </Component>
-                        <Component Id="cmp5E47C3FC1260E8D4DBB232A177C0E220" Guid="{7A1E7A2C-A516-4418-B401-0904EC5308E4}">
+                        <Component Id="cmp5E47C3FC1260E8D4DBB232A177C0E220" Guid="{F8448EC9-5627-4EFF-B2B0-281A77793BC1}">
                             <File Id="fil6060DCE966EED560C5722CA1C0E24D4F" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\pygmentplugin.pyc" />
                         </Component>
-                        <Component Id="cmp02137FA528E7282325E60EA589148AB1" Guid="{3860D26A-B526-4604-87EE-0835750E543A}">
+                        <Component Id="cmp02137FA528E7282325E60EA589148AB1" Guid="{8913C8C4-D3B1-4BA8-B28F-19A8CDE8BC1D}">
                             <File Id="filC9ADEC47A3FEBA863374D53641AC42A3" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\turbogears.py" />
                         </Component>
-                        <Component Id="cmp5AFF14C71C2C8097A78F5B1E046F6DB8" Guid="{6722542E-6200-47BB-B996-2B075C786403}">
+                        <Component Id="cmp5AFF14C71C2C8097A78F5B1E046F6DB8" Guid="{D898A000-C05B-4A29-9FE2-AA419B720FCF}">
                             <File Id="fil46087CD599522145F59ADDF8D98810E1" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\turbogears.pyc" />
                         </Component>
-                        <Component Id="cmpF80D2853AC67019C2E96E82B5D8A8EF7" Guid="{37143983-981D-4F82-9C21-AA8116FE9703}">
+                        <Component Id="cmpF80D2853AC67019C2E96E82B5D8A8EF7" Guid="{257EA0CC-F458-4DD0-8F79-BE6E69A0A4A5}">
                             <File Id="fil17F4E0FC57E2298E2F4F536E17592A5E" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\__init__.py" />
                         </Component>
-                        <Component Id="cmp0EF94A242D58C8915ADD2B626C3EBC2D" Guid="{64B05EA2-3A9B-453A-8EE9-900F98FC1B12}">
+                        <Component Id="cmp0EF94A242D58C8915ADD2B626C3EBC2D" Guid="{5D3514A8-A061-488D-A6E9-49232B279E3C}">
                             <File Id="fil516E333A93666B7B2B728767C543251B" KeyPath="yes" Source="$(var.MakoDir)\mako\ext\__init__.pyc" />
                         </Component>
                     </Directory>
