@@ -6,7 +6,7 @@ foo: bar
 
 # Overview
 
-The [Apps for BitTorrent SDK](/) is a collection of tools, libraries and
+The [Apps for BitTorrent SDK](/apps-sdk) is a collection of tools, libraries and
 documentation to make the process of creating, authoring and testing apps as
 easy as possible.
 
