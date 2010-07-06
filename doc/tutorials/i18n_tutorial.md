@@ -43,14 +43,13 @@ app; test the code in a browser using `apps serve` and in the uTorrent
 client using `apps package`
 
 The first thing to is update our project and correctly format the code we
-already have. We'll be using an extension of the bt obejct which supports 
-dynamic loading of new language files within a .btapp. Run the following to 
-add it to your project:
+already have. We'll be using an extension of the bt object which supports 
+dynamic loading of new language files within a .btapp. The necessary file 
+(gettext.js) should already be included in your packages/apps-sdk directory.
 
-    % apps add --file=http://...gettext.js
-
-Format all of the strings in index.js so that gettext can parse them; enclose
-strings in `bt.Gettext.gettext("string")`.
+Format all of the strings in index.js so that gettext can parse them; we'll 
+be referring to our gettext object as b_gt, so enclose strings in 
+`b_gt.gettext("string")`.
 
 - Before
 
@@ -59,7 +58,7 @@ strings in `bt.Gettext.gettext("string")`.
 
 - After
 
-    $("<button class='play'>"+bt.Gettext.gettext("Play")+"</button>").appendTo(
+    $("<button class='play'>"+b_gt.gettext("Play")+"</button>").appendTo(
         container).click(function() {
 
 There are only three translatable strings in index.js right now; two
@@ -71,16 +70,18 @@ First, add a display container to the top of your `html/index.html` file:
 
     <div id="lang"><span id="current"></span><span id="other"></span></div>
 
-Create an object containing your language options at the top of `index.js`:
+Create an object containing your language options at the top of `index.js`, 
+as well as a global variable for the gettext object:
 
 	var languages = {"fr":"French", "en":"English", "ja":"Japanese"};
+	var b_gt;
 	
 All of the language-specific links, text, etc. will be generated from 
-this list, so you can easily add a new language without changing the following 
-code.
+the list of languages, so you can easily add a new language without changing 
+the following code.
 
 Generate the links for each language by adding the following to 
-`$(document).ready()`:
+the top of `$(document).ready()`:
 
   var link_template = ["link", {"class":"lang", "rel":"gettext", "href":"lang/"+"{{l}}"+"/"+"{{l}}"+".po", "lang":"{{l}}"}];
   $.each(languages, function(i, item){
@@ -91,14 +92,15 @@ We'll have to reorganize the language container every time a new language is
 chosen to show the options in the right language, of course. This function 
 will handle printing out all of the options:
 
-function render_languagebar(b){
+function render_languagebar(){
 	$("#other").html("");
 	$.each(languages, function(i, item){
-		if(i==b.lang){
-			var langstr = b.gettext(item);
-			$("#current").html(b.gettext("Current language: %s", langstr));
-		}else $("#other").append(" <a class=\"lang\" href=# name=\""+i+"\">"+b.gettext(item)+"</a> ");
+		if(i==b_gt.lang){
+			var langstr = b_gt.gettext(item);
+			$("#current").html(b_gt.gettext("Current language: %s", langstr));
+		}else $("#other").append(" <a class=\"lang\" href=# name=\""+i+"\">"+b_gt.gettext(item)+"</a> ");
 	});
+	$("#notification").text(b_gt.gettext($("#notification").text()));
 }
 
 Note that, at the time we call this function, we want to have set the current
@@ -107,11 +109,11 @@ language so that the labels evaluate correctly.
 We'll set the language any time we click a link with the 'lang' class. Add
 this code at the end of `$(document).ready()`:
 
-  var b = new bt.Gettext();
-  render_languagebar(b);
+  b_gt = new bt.Gettext();
+  render_languagebar();
   $("a.lang").live('click', function(){
-	  b.lang = $(this).attr("name");
-	  render_languagebar(b);
+	  b_gt.lang = $(this).attr("name");
+	  render_languagebar();
   });
 
 The `.live()` function ensures that this code is attached to any new links we
