@@ -15,3 +15,10 @@ packages/*
 .gitignore
 setup.py
 testapp/*
+apps.egg-info/*
+_layouts/*
+build/*
+_site/*
+loader/*
+.gitmodules
+build.bash

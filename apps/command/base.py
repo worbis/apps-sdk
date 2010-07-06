@@ -69,6 +69,10 @@ class Command(object):
         keys = [ 'name', 'version' ] + filter(
             lambda x: x[:3] == 'bt:' and not x[3:] in self.btapp_excludes,
             self.project.metadata.keys())
+        try:
+            os.makedirs(os.path.join(self.project.path, 'build'))
+        except OSError:
+            pass
         btapp = open(os.path.join(self.project.path, 'build', 'btapp'), 'wb')
         for i in keys:
             btapp.write('%s:%s\n' % (i.split(':')[-1],
