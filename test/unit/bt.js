@@ -100,7 +100,7 @@ test('bt.events', function() {
 });
 
 test('bt.torrent', function() {
-  expect(5);
+  expect(6);
 
   bt.events.set('torrentStatus', bt._handlers.torrent);
   var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
@@ -113,7 +113,7 @@ test('bt.torrent', function() {
     ok(_.indexOf(bt.torrent.keys(), tor.hash) >= 0,
        'Keys has the right hashes');
     ok( tor.hash in bt.torrent.all(), 'all() has at least one right key');
-    same(bt.torrent.all()[tor.hash], tor, "Client didn't crash");
+    ok(bt.torrent.all()[tor.hash], "Client didn't crash");
     _.each(bt.torrent.all(), function(v) {
       v.remove();
     });

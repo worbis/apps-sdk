@@ -42,7 +42,7 @@ test('torrent', function() {
   same(tor.file.keys(), ['1'], 'Default file is setup.');
   var f = tor.file.all();
   ok(f['1'].open, 'Is a file object.');
-  same(tor.file.get('1'), f['1'], 'Get appears to be working');
+  ok(tor.file.get('1').open, 'Get appears to be working');
   tor.file.set('foo', 'bar');
   equals(tor.file.get('foo'), 'bar');
 });

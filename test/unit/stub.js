@@ -77,7 +77,7 @@ test('stub.torrent', function() {
   same(stub.torrent.keys(), _.keys(stub.torrent.all()), 'Same thing');
   ok(stub.torrent.keys()[0].length == 40, 'Hashes for keys');
   var k = stub.torrent.keys()[0];
-  same(stub.torrent.get(k), stub.torrent.all()[k], 'Same thing');
+  ok(stub.torrent.get(k), 'Get works');
 });
 
 test('stub.resource', function() {
