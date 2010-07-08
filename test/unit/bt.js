@@ -130,13 +130,16 @@ test('bt.torrent', function() {
 });
 
 test('bt.torrent.file', function() {
-  expect(1);
+  expect(2);
 
   var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
   bt.add.torrent(url, function(resp) {
     var tor = _.values(bt.torrent.all())[0];
     console.log(tor);
-    ok(_.values(tor.file.all())[0].torrent, "Client didn't crash");
+    var file = _.values(tor.file.all())[0];
+    ok(file.torrent, "Client didn't crash");
+    equals(tor.properties.get('name'), file.torrent.properties.get('name'),
+           'Parent is the right object');
     tor.remove();
     start();
   });
