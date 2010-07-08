@@ -127,6 +127,13 @@ test('bt.torrent', function() {
   stop();
 });
 
+test('bt.torrent.file', function() {
+  expect(1);
+
+  var tor = _.values(bt.torrent.all())[0];
+  ok(_.values(tor.file.all())[0].torrent);
+});
+
 test('bt.resource', function() {
   expect(1);
 
