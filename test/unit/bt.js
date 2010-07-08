@@ -66,7 +66,7 @@ test('bt.add.rss_filter', function() {
 });
 
 test('bt.stash', function() {
-  expect(16);
+  expect(18);
 
   if (btapp.stash._clear)
     btapp.stash._clear();
@@ -77,7 +77,8 @@ test('bt.stash', function() {
                lastmodified: "",
                productcode: "",
                addcount: 4,
-               productcode: ""
+               productcode: "",
+               path: ""
             };
   _.each(objs, function(v, k) {
     bt.stash.set(k, v);
@@ -117,6 +118,7 @@ test('bt.torrent', function() {
     _.each(bt.torrent.all(), function(v) {
       v.remove();
     });
+    start();
     bt.add.torrent(magnet, function(resp) {
       var tor = bt.torrent.get(magnet);
       equals(tor.properties.get('download_url'), magnet,
@@ -130,8 +132,15 @@ test('bt.torrent', function() {
 test('bt.torrent.file', function() {
   expect(1);
 
-  var tor = _.values(bt.torrent.all())[0];
-  ok(_.values(tor.file.all())[0].torrent);
+  var url = 'http://vodo.net/media/torrents/Pioneer.One.S01E01.720p.x264-VODO.torrent';
+  bt.add.torrent(url, function(resp) {
+    var tor = _.values(bt.torrent.all())[0];
+    console.log(tor);
+    ok(_.values(tor.file.all())[0].torrent, "Client didn't crash");
+    tor.remove();
+    start();
+  });
+  stop();
 });
 
 test('bt.resource', function() {
