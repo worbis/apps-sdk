@@ -7,7 +7,7 @@ title: Tool Installation Howto
 
 ### Normal
 
-To install on Windows, run the [tools installer](/apps-sdk/client/apps-sdk-installer.msi).
+To install on Windows, run the [tools installer](/client/apps-sdk-installer.msi).
 
 ### Contribution
 
