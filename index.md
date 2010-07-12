@@ -27,8 +27,8 @@ To see the other ways that you can install the SDK tools, check out the
 <div style="text-align: center;">
 <object width="400" height="300"><param name="allowfullscreen" value="true" />
   <param name="allowscriptaccess" value="always" />
-  <param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=13276521&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" />
-  <embed src="http://vimeo.com/moogaloop.swf?clip_id=13276521&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="300"></embed>
+  <param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=13277576&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" />
+  <embed src="http://vimeo.com/moogaloop.swf?clip_id=13277576&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=&amp;fullscreen=1" type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" width="400" height="300"></embed>
 </object>
 </div>
 
